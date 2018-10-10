@@ -1,0 +1,72 @@
+/* 公共样式 */
+
+body {
+  font-family: 'Microsoft YaHei'
+}
+
+.ivu-layout-content {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.ivu-row-flex .ivu-col {
+  text-align: center;
+}
+
+
+@media (min-width:576px) {
+  .ivu-layout-content {
+    max-width: 540px
+  }
+}
+
+@media (min-width: 768px) {
+  .ivu-layout-content {
+    max-width: 720px
+  }
+}
+
+@media (min-width: 992px) {
+  .ivu-layout-content {
+    max-width: 960px
+  }
+}
+
+@media (min-width:1200px) {
+  .ivu-layout-content {
+    max-width: 1140px
+  }
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track-piece {
+  background-color: #ebebeb;
+}
+
+::-webkit-scrollbar-thumb {
+  transition: background-color 0.5s;
+}
+
+::-webkit-scrollbar-thumb:vertical {
+  transition: background-color 0.5s;
+  height: 32px;
+  background-color: #a9a9a9;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  transition: background-color 0.5s;
+  height: 32px;
+  background-color: #888;
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+  width: 32px;
+  background-color: #a9a9a9;
+}

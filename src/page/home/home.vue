@@ -63,13 +63,15 @@
         </Card>
       </Content>
     </section>
-    <Content class="domain">
-      <h2>全网版图</h2>
-      <div class="shape"></div>
-      <Card :style="{marginTop:'5vh'}">
-        <div id="myChart" :style="{width: '100%', height: '60vh'}"></div>
-      </Card>
-    </Content>
+    <section id="demain">
+      <Content class="domain">
+        <h2>全网版图</h2>
+        <div class="shape"></div>
+        <Card :style="{marginTop:'5vh'}">
+          <div id="myChart" :style="{width: '100%', height: '60vh'}"></div>
+        </Card>
+      </Content>
+    </section>
     <section id="introduce">
       <Content class="introduce">
         <h2>领先的矿池服务平台</h2>

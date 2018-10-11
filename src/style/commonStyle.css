@@ -4,8 +4,23 @@ body {
   font-family: 'Microsoft YaHei'
 }
 
+[v-clock] {
+  display: none;
+}
+
 .ivu-layout {
   background: white
+}
+
+.ivu-input {
+  color: white;
+  position: relative;
+  left: 10px;
+  right: 0;
+  background-color: #626262;
+  border: transparent;
+  border-radius: 5rem;
+  padding: 1rem;
 }
 
 .ivu-layout-content {
@@ -23,6 +38,14 @@ body {
 .details {
   font-size: 1.5rem;
   color: #FFD8DC;
+}
+
+.shape {
+  margin-top: 1rem;
+  height: 5px;
+  border-radius: 5px;
+  width: 100px;
+  background: #24d39b;
 }
 
 @media (min-width:576px) {

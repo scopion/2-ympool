@@ -17,7 +17,7 @@
           <div class="shape"></div>
         </div>
         <Content class="search">
-          <Input class="input" v-model="value14" :style="{width:'50%'}" placeholder="输入钱包地址......" size="large" autofocus number clearable/>
+          <Input class="input" v-model="searchInput" :style="{width:'50%'}" placeholder="输入钱包地址......" size="large" autofocus search number clearable/>
         </Content>
         <Card class="data" :style="{width: '55vw'}">
           <Row type="flex" justify="space-around">
@@ -25,39 +25,39 @@
             <div class="dataTiem-1">
             </div>
             <p>在线矿工</p>
-            <p class="details">277</p>
+            <p class="details">{{poolinfo.miners}}</p>
             </Col>
             <Col span="8">
             <div class="dataTiem-2">
             </div>
             <p>矿池算力</p>
-            <p class="details">277</p>
+            <p class="details">{{poolinfo.hr1}}</p>
             </Col>
             <Col span="8">
             <div class="dataTiem-3">
             </div>
             <p>全网算力</p>
-            <p class="details">277</p>
+            <p class="details">{{poolinfo.hr2}} <b>TH/s</b></p>
             </Col>
           </Row>
-          <Row type="flex" justify="space-around" :style="{paddingTop: '2vh'}">
+          <Row type="flex" justify="space-around" :style="{paddingTop: '4vh'}">
             <Col span="8">
             <div class="dataTiem-4">
             </div>
             <p>当前区块</p>
-            <p class="details">277</p>
+            <p class="details">{{poolinfo.blocks}}</p>
             </Col>
             <Col span="8">
             <div class="dataTiem-5">
             </div>
             <p>全网难度</p>
-            <p class="details">277</p>
+            <p class="details">{{poolinfo.difficult}}</p>
             </Col>
             <Col span="8">
             <div class="dataTiem-6">
             </div>
             <p>24小时收益</p>
-            <p class="details">277</p>
+            <p class="details">{{poolinfo.estReward}} <b>MH/s</b></p>
             </Col>
           </Row>
         </Card>
@@ -115,8 +115,10 @@ import Footer from '../../components/footer/footer.vue' //公共尾
 export default {
   data() {
     return {
-      value14: '',
-      value15: ''
+      searchInput: '',
+      value15: '',
+      poolinfo: {},
+      poolinfo: {},
     }
   },
   components: {
@@ -124,12 +126,16 @@ export default {
     Footer: Footer
   },
   methods: {
+    init() { //初始化
+      this.drawLine(); //绘制曲线
+      this.getPoolInfo() //矿池信息
+      this.poolratechart() //全网版图
+    },
     drawLine() {
       // 基于准备好的dom，初始化echarts实例
       let myChart = this.$echarts.init(document.getElementById('myChart'))
       // 绘制图表
       myChart.setOption({
-
         xAxis: {
           type: 'category',
           data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
@@ -144,6 +150,22 @@ export default {
         }]
       });
     },
+    async getPoolInfo() {
+      var res = await this.axios.post(this.api.poolinfo, JSON.stringify({
+        token: "asd",
+        pool: "uu",
+      }))
+      this.poolinfo = res.data
+      console.log(this.poolinfo, "矿池信息");
+    },
+    async poolratechart() {
+      var res = await this.axios.post(this.api.poolratechart, JSON.stringify({
+        token: "asd",
+        pool: "uu",
+      }))
+      this.poolratechart = res.data
+      console.log(this.poolratechart, "全网版图");
+    },
   },
   computed: {
     formatNumber() {
@@ -157,8 +179,11 @@ export default {
     }
   },
   mounted() { // 组件初始化后执行
-    this.drawLine();
-  }
+    this.init()
+    console.log(this.getPoolInfo());
+  },
+  created() {},
+  beforeUpdate() {}
 }
 </script>
 <style lang='less' scoped>

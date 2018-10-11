@@ -37,32 +37,51 @@
         <div class="earnings">
           <Row type="flex" justify="center">
             <Col class="icon" :span="4">
-            <p>24小时收益</br>(ETH)</p>
-            <p class="details">24小时收益</p>
+            <p class="title">24小时收益</br>(ETH)</p>
+            <p class="details">0</p>
             </Col>
             <Col class="icon" :span="4">
-            <p>待支付</br>(ETH)</p>
-            <p class="details">待支付</p>
+            <p class="title">待支付</br>(ETH)</p>
+            <p class="details">0</p>
             </Col>
             <Col class="icon" :span="4">
-            <p>总支付</br>(ETH)</p>
-            <p class="details">总支付</p>
+            <p class="title">总支付</br>(ETH)</p>
+            <p class="details">0</p>
             </Col>
             <Col class="icon" :span="4">
-            <p>余额</br>(ETH)</p>
-            <p class="details">余额</p>
+            <p class="title">余额</br>(ETH)</p>
+            <p class="details">0</p>
             </Col>
           </Row>
         </div>
       </Content>
     </section>
-    <section id="">
+    <section id="domain">
       <Content class="domain">
-        <h2>全网版图</h2>
+        <h2>收益概况图</h2>
         <div class="shape"></div>
         <Card :style="{marginTop:'5vh'}">
           <div id="myChart" :style="{width: '100%', height: '60vh'}"></div>
         </Card>
+      </Content>
+    </section>
+    <section id="mill">
+      <Content class="mill">
+        <Tabs value="name1">
+          <TabPane label="离线矿机" name="name1">
+            <Table :columns="columns5" :data="data5"></Table>
+          </TabPane>
+          <TabPane label="活跃矿机" name="name2">
+            <Table :columns="columns5" :data="data5"></Table>
+          </TabPane>
+        </Tabs>
+      </Content>
+    </section>
+    <section id="payRecord">
+      <Content class="payRecord">
+        <h2>支付记录</h2>
+        <div class="shape"></div>
+        <Table :columns="columns5" :data="data5"></Table>
       </Content>
     </section>
   </Layout>
@@ -83,6 +102,7 @@ import {
 } from 'vue-awesome-swiper'
 import Header from '../../components/header/header.vue'
 import Footer from '../../components/footer/footer.vue'
+import Table from '../../components/table/table.vue'
 export default {
   data() {
     return {
@@ -98,14 +118,82 @@ export default {
           stopOnLastSlide: false,
           disableOnInteraction: false,
         },
-      }
+      },
+      columns5: [{
+          title: 'Date',
+          key: 'date',
+          sortable: true
+        },
+        {
+          title: 'Name',
+          key: 'name'
+        },
+        {
+          title: 'Age',
+          key: 'age',
+          sortable: true
+        },
+        {
+          title: 'Address',
+          key: 'address'
+        }
+      ],
+      data5: [{
+          name: 'John Brown',
+          age: 18,
+          address: 'New York No. 1 Lake Park',
+          date: '2016-10-03'
+        },
+        {
+          name: 'Jim Green',
+          age: 24,
+          address: 'London No. 1 Lake Park',
+          date: '2016-10-01'
+        },
+        {
+          name: 'Joe Black',
+          age: 30,
+          address: 'Sydney No. 1 Lake Park',
+          date: '2016-10-02'
+        },
+        {
+          name: 'Jon Snow',
+          age: 26,
+          address: 'Ottawa No. 2 Lake Park',
+          date: '2016-10-04'
+        }
+      ]
     }
   },
   components: {
     Header: Header,
-    Footer: Footer
+    Footer: Footer,
+    Table: Table
+  },
+  methods: {
+    drawLine() {
+      // 基于准备好的dom，初始化echarts实例
+      let myChart = this.$echarts.init(document.getElementById('myChart'))
+      // 绘制图表
+      myChart.setOption({
+
+        xAxis: {
+          type: 'category',
+          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        },
+        yAxis: {
+          type: 'value'
+        },
+        series: [{
+          data: [820, 932, 901, 934, 1290, 1330, 1320],
+          type: 'line',
+          smooth: true
+        }]
+      });
+    },
   },
   mounted() {
+    this.drawLine();
     console.log(this.$route.params)
     this.commonFunction.login()
   },

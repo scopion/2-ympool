@@ -71,7 +71,7 @@
       <router-link :to="{ name: 'search', params: {} }" exact>矿池收益</router-link>
       </MenuItem>
       <MenuItem name="3">
-      <router-link :to="{ name: 'text', params: {} }" exact>帮助</router-link>
+      <router-link :to="{ name: 'text', params: {} }" exact>挖矿帮助</router-link>
       </MenuItem>
       <!-- <MenuItem name="4">
       <router-link :to="{ name: 'search', params: {} }" exact>关于我们</router-link>

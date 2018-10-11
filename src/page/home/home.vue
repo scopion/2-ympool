@@ -196,13 +196,13 @@ export default {
           data: this.map2,
           type: 'line',
           areaStyle: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                  offset: 0,
-                  color: 'rgb(255, 158, 68)'
-              }, {
-                  offset: 1,
-                  color: 'rgb(255, 70, 131)'
-              }])
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+              offset: 0,
+              color: 'rgb(255, 158, 68)'
+            }, {
+              offset: 1,
+              color: 'rgb(255, 70, 131)'
+            }])
           },
         }]
       });
@@ -222,6 +222,11 @@ export default {
   },
   mounted() { // 组件初始化后执行
     this.init()
+    this.$router.push({
+      name: 'search',
+      params: {
+      }
+    });
     console.log(this.getPoolInfo());
   },
   created() {},

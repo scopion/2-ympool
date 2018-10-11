@@ -23,6 +23,43 @@ body {
   padding: 1rem;
 }
 
+.ivu-tabs-nav {
+  margin-top: 1rem;
+  padding: 1rem 0;
+  font-size: 2rem;
+  float: none;
+}
+
+/* .ivu-tabs-nav-scroll {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+ */
+.ivu-tabs-tab-active {
+  color: #24d39b;
+}
+
+.ivu-tabs-nav .ivu-tabs-tab:hover {
+  color: #24d39b;
+}
+
+.ivu-tabs-nav-container:focus .ivu-tabs-tab-focused, .ivu-tabs-nav .ivu-tabs-tab-active {
+  color: #24d39b;
+}
+
+.ivu-tabs-bar {
+  border: transparent;
+}
+
+.ivu-tabs-ink-bar {
+  height: 5px;
+  border-radius: 5px;
+  width: 100px;
+  left: 0vw;
+  background-color: #24d39b
+}
+
 .ivu-layout-content {
   width: 100%;
   padding-right: 15px;

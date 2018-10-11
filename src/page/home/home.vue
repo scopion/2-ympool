@@ -119,6 +119,8 @@ export default {
       value15: '',
       poolinfo: {},
       poolinfo: {},
+      map1: [],
+      map2: []
     }
   },
   components: {
@@ -127,28 +129,8 @@ export default {
   },
   methods: {
     init() { //初始化
-      this.drawLine(); //绘制曲线
-      this.getPoolInfo() //矿池信息
+      this.getPoolInfo() //矿池信息 绘制曲线
       this.poolratechart() //全网版图
-    },
-    drawLine() {
-      // 基于准备好的dom，初始化echarts实例
-      let myChart = this.$echarts.init(document.getElementById('myChart'))
-      // 绘制图表
-      myChart.setOption({
-        xAxis: {
-          type: 'category',
-          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-        },
-        yAxis: {
-          type: 'value'
-        },
-        series: [{
-          data: [820, 932, 901, 934, 1290, 1330, 1320],
-          type: 'line',
-          smooth: true
-        }]
-      });
     },
     async getPoolInfo() {
       var res = await this.axios.post(this.api.poolinfo, JSON.stringify({
@@ -164,6 +146,66 @@ export default {
         pool: "uu",
       }))
       this.poolratechart = res.data
+      this.map1 = this.poolratechart.map(function(item) {
+        return item.time
+      })
+
+      this.map2 = this.poolratechart.map(function(item) {
+        return item.hashrate
+      })
+      // 基于准备好的dom，初始化echarts实例
+      let myChart = this.$echarts.init(document.getElementById('myChart'))
+      // 绘制图表
+      myChart.setOption({
+        xAxis: {
+          type: 'category',
+          boundaryGap: true,
+          data: this.map1,
+        },
+        yAxis: {
+          type: 'value'
+        },
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'cross',
+            animation: false,
+            label: {
+              backgroundColor: '#ccc',
+              borderColor: '#aaa',
+              borderWidth: 1,
+              shadowBlur: 0,
+              shadowOffsetX: 0,
+              shadowOffsetY: 0,
+              textStyle: {
+                color: '#222'
+              }
+            }
+          },
+          formatter: function(params) {
+            return params[0].name + '<br />' + params[0].value;
+          }
+        },
+        grid: {
+          left: '0%',
+          right: '0%',
+          bottom: '0%',
+          containLabel: true
+        },
+        series: [{
+          data: this.map2,
+          type: 'line',
+          areaStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                  offset: 0,
+                  color: 'rgb(255, 158, 68)'
+              }, {
+                  offset: 1,
+                  color: 'rgb(255, 70, 131)'
+              }])
+          },
+        }]
+      });
       console.log(this.poolratechart, "全网版图");
     },
   },

@@ -2,28 +2,22 @@
 <div class="layout">
   <Layout>
     <Header></Header>
-    <Content :style="{padding: '0 50px'}">
-      <Card>
-        <div style="min-height: 200px;">
-          Content
-        </div>
-      </Card>
-    </Content>
-    <Footer class="layout-footer-center">2011-2016 &copy; TalkingData</Footer>
+    <section id="main">
+      <Content :style="{padding: '0 50px'}">
+        <Card>
+          <div style="min-height: 200px;">
+          </div>
+        </Card>
+      </Content>
+    </section>
   </Layout>
-  <swiper :options="swiperOption" class="swiper-box">
-    <swiper-slide class="swiper-item"><img src="http://img.hb.aicdn.com/043e6a83a298ae612bd6bc33c259632d8502bc8f1161b-fyZNqN_fw658"></swiper-slide>
-    <swiper-slide class="swiper-item"><img src="http://img.hb.aicdn.com/043e6a83a298ae612bd6bc33c259632d8502bc8f1161b-fyZNqN_fw658"></swiper-slide>
-    <swiper-slide class="swiper-item"><img src="http://img.hb.aicdn.com/043e6a83a298ae612bd6bc33c259632d8502bc8f1161b-fyZNqN_fw658"></swiper-slide>
-    <swiper-slide class="swiper-item"><img src="http://img.hb.aicdn.com/043e6a83a298ae612bd6bc33c259632d8502bc8f1161b-fyZNqN_fw658"></swiper-slide>
-    <swiper-slide class="swiper-item"><img src="http://img.hb.aicdn.com/043e6a83a298ae612bd6bc33c259632d8502bc8f1161b-fyZNqN_fw658"></swiper-slide>
-    <swiper-slide class="swiper-item"><img src="http://img.hb.aicdn.com/043e6a83a298ae612bd6bc33c259632d8502bc8f1161b-fyZNqN_fw658"></swiper-slide>
-    <swiper-slide class="swiper-item"><img src="http://img.hb.aicdn.com/043e6a83a298ae612bd6bc33c259632d8502bc8f1161b-fyZNqN_fw658"></swiper-slide>
+  <!-- <swiper :options="swiperOption" class="swiper-box">
     <swiper-slide class="swiper-item"><img src="http://img.hb.aicdn.com/043e6a83a298ae612bd6bc33c259632d8502bc8f1161b-fyZNqN_fw658"></swiper-slide>
     <swiper-slide class="swiper-item"><img src="http://img.hb.aicdn.com/043e6a83a298ae612bd6bc33c259632d8502bc8f1161b-fyZNqN_fw658"></swiper-slide>
     <swiper-slide class="swiper-item"><img src="http://img.hb.aicdn.com/043e6a83a298ae612bd6bc33c259632d8502bc8f1161b-fyZNqN_fw658"></swiper-slide>
     <div class="swiper-pagination" slot="pagination"></div>
-  </swiper>
+  </swiper> -->
+  <Footer></Footer>
 </div>
 </template>
 
@@ -33,6 +27,7 @@ import {
   swiperSlide
 } from 'vue-awesome-swiper'
 import Header from '../../components/header/header.vue'
+import Footer from '../../components/footer/footer.vue'
 export default {
   data() {
     return {
@@ -52,7 +47,8 @@ export default {
     }
   },
   components: {
-    Header: Header
+    Header: Header,
+    Footer: Footer
   },
   mounted() {
     console.log(this.$route.params)
@@ -88,5 +84,6 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less" scoped>
+@import '../../style/search.less';
 </style>

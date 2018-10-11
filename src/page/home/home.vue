@@ -2,7 +2,7 @@
 <div class="layout">
   <Layout>
     <Header></Header>
-    <section>
+    <section id="main">
       <Content class="background">
         <div class="mianTitle">
           <Row>
@@ -17,9 +17,9 @@
           <div class="shape"></div>
         </div>
         <Content class="search">
-          <Input class="input" v-model="value14" placeholder="输入钱包地址......" size="large" autofocus number search clearable/>
+          <Input class="input" v-model="value14" :style="{width:'50%'}" placeholder="输入钱包地址......" size="large" autofocus number clearable/>
         </Content>
-        <Content class="data">
+        <Card class="data" :style="{width: '55vw'}">
           <Row type="flex" justify="space-around">
             <Col span="8">
             <div class="dataTiem-1">
@@ -40,7 +40,7 @@
             <p class="details">277</p>
             </Col>
           </Row>
-          <Row type="flex" justify="space-around">
+          <Row type="flex" justify="space-around" :style="{paddingTop: '2vh'}">
             <Col span="8">
             <div class="dataTiem-4">
             </div>
@@ -60,7 +60,7 @@
             <p class="details">277</p>
             </Col>
           </Row>
-        </Content>
+        </Card>
       </Content>
     </section>
     <Content class="domain">
@@ -159,6 +159,6 @@ export default {
   }
 }
 </script>
-<style lang='less'>
+<style lang='less' scoped>
 @import "../../style/home.less";
 </style>

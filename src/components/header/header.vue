@@ -68,13 +68,13 @@
       <router-link :to="{ name: 'home', params: {} }" exact>首页</router-link>
       </MenuItem>
       <MenuItem name="2">
-      <router-link :to="{ name: 'details', params: {} }" exact>矿池收益</router-link>
+      <router-link :to="{ name: 'search', params: {} }" exact>矿池收益</router-link>
       </MenuItem>
       <MenuItem name="3">
       <router-link :to="{ name: 'text', params: {} }" exact>帮助</router-link>
       </MenuItem>
       <!-- <MenuItem name="4">
-      <router-link :to="{ name: 'details', params: {} }" exact>关于我们</router-link>
+      <router-link :to="{ name: 'search', params: {} }" exact>关于我们</router-link>
       <Icon type="ios-paper"></Icon>
       </MenuItem> -->
     </div>

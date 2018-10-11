@@ -17,6 +17,7 @@
         }
     }
     .layout-logo {
+        cursor: pointer;
         width: 150px;
         height: 50px;
         background: url("../../images/logo@2x.png") no-repeat;
@@ -61,7 +62,7 @@
 <Header>
   <Content>
     <Menu mode="horizontal" :theme="theme" :active-name="activemenu">
-      <div class="layout-logo" @click.native="">
+      <div class="layout-logo" @click="backHome()">
       </div>
       <div class="layout-nav">
         <MenuItem name="1">
@@ -92,7 +93,16 @@ export default {
       activemenu: 1 // 高亮
     }
   },
-  methods: {},
+  methods: {
+    backHome: function() {
+      this.$router.push({
+        name: 'home',
+        params: {
+
+        }
+      })
+    }
+  },
   mounted() { // 组件初始化后执行
   }
 }

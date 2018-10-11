@@ -7,7 +7,7 @@
         <div class="banner" style="min-height: 200px;">
         </div>
         <div class="machine">
-          <Row type="flex" justify="center">
+          <Row type="flex" justify="space-around">
             <Col :span="4">
             <div class="icon-1">
             </div>
@@ -54,6 +54,7 @@
             </Col>
           </Row>
         </div>
+        <p class="adress">0x7bB96A6e212F6094BA24f471A392025403BED0AE</p>
       </Content>
     </section>
     <section id="domain">

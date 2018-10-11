@@ -4,7 +4,7 @@
     <Header></Header>
     <section id="main">
       <Content class="background">
-        <div class="mianTitle">
+        <div class="mianTitle" :style="{lineHeight:'5rem'}">
           <Row>
             <Col span="24">
             <h1>焱猫矿池服务平台</h1></Col>
@@ -222,11 +222,11 @@ export default {
   },
   mounted() { // 组件初始化后执行
     this.init()
-    this.$router.push({
-      name: 'search',
-      params: {
-      }
-    });
+    // this.$router.push({
+    //   name: 'search',
+    //   params: {
+    //   }
+    // });
     console.log(this.getPoolInfo());
   },
   created() {},

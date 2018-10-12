@@ -22,7 +22,7 @@
           <div class="searchBar"><span @click="search()"></span>
           </div>
         </Content>
-        <Card class="data" :style="{width: '55vw'}">
+        <Card class="data" shadow>
           <Row type="flex" justify="space-around">
             <Col span="8">
             <div class="dataTiem-1">

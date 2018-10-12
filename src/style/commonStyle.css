@@ -66,8 +66,8 @@ body {
 }
 
 .details {
-  font-size: 1.5rem;
-  color: #FFD8DC;
+  font-size: 1rem!important;
+  color: #FFD8DC!important;
 }
 
 .shape {

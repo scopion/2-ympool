@@ -34,7 +34,7 @@ export default {}
     background-image: url("../../images/footer.png");
     background-repeat: no-repeat;
     background-size:  auto;
-    background-position: center -30%;
+    background-position: center -10%;
     text-align: center;
     color: white;
     .layout-footer-center {
@@ -50,12 +50,12 @@ export default {}
           color: white
         }
         img {
-            margin: 2rem 0;
+            margin: 1rem 0;
             vertical-align: middle;
             width: 15rem;
         }
         .copyright {
-            margin: 6rem 0 0;
+            margin: 2rem 0 0;
         }
     }
 }

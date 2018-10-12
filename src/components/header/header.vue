@@ -19,12 +19,13 @@
     .layout-logo {
         cursor: pointer;
         width: 150px;
-        height: 50px;
-        background: url("../../images/logo@2x.png") no-repeat;
+        height: 100%;
+        line-height: 1rem;
+        vertical-align: middle;
+        background: url("/static/img/logo@2x.db0b552.png") no-repeat center;
         background-size: contain;
         float: left;
         position: relative;
-        top: 2vh;
         left: 20px;
     }
 }

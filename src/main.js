@@ -6,12 +6,16 @@
   import router from './router'
   import axios from 'axios'
   import VueAxios from 'vue-axios'
+  // 兼容处理
+  import 'babel-polyfill'
+  import 'url-search-params-polyfill'
   /*全局引入*/
   import iView from 'iview';
   import echarts from 'echarts'
   import VueAwesomeSwiper from 'vue-awesome-swiper';
   import api from './api/api.js';
   import commonFunction from './commonFunction/commonFunction.js'; //引入公共方法
+  import global_ from './components/tool/global'
   Vue.prototype.commonFunction = commonFunction; //引入公共方法&修改VUE原型方法
   Vue.prototype.api = api; //引入公共方法&修改VUE原型方法
   Vue.prototype.$axios = axios
@@ -21,6 +25,7 @@
   import './style/commonStyle.css' //公共样式
   Vue.config.productionTip = false
   Vue.prototype.$echarts = echarts
+  Vue.prototype.GLOBAL = global_ //全局变量
 
 
   router.beforeEach((to, from, next) => {

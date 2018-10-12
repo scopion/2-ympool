@@ -50,6 +50,24 @@
   .search {
     text-align: center;
     margin: 5rem 0;
+
+    .searchBar {
+      // position: absolute;
+      height: 2rem;
+      position: relative;
+
+      span {
+        height: 1.6rem;
+        width: 1.6rem;
+        top: -2rem;
+        right: 17rem;
+        position: absolute;
+        display: inline-block;
+        background: url("../images/search.png") no-repeat;
+        background-size: 100%;
+        z-index: 1000;
+      }
+    }
   }
 
   .data {
@@ -121,7 +139,7 @@
 }
 
 .domain {
-  padding: 0;
+  margin-top: 2rem;
   text-align: center;
 
   h2 {
@@ -134,8 +152,22 @@
     width: 4rem;
   }
 
+  .domainIcon {
+    text-align: right;
+
+    span {
+      width: 1.5rem;
+      height: 1.5rem;
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0 .5rem;
+      background: url("../images/Ellipse.png");
+      background-size: 100%;
+    }
+  }
+
   #myChart {
-    margin-top: 5rem;
+    margin-top: 1rem;
   }
 }
 

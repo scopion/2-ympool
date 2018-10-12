@@ -49,8 +49,8 @@
     <Header></Header>
     <Content :style="{padding: '0 50px'}">
       <Card>
-        <div style="min-height: 200px;">
-          Content
+        <div style="min-height: 200px;padding:5rem">
+          <h1>这是备用页面</h1>
         </div>
       </Card>
     </Content>

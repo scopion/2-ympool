@@ -17,7 +17,10 @@
           <div class="shape"></div>
         </div>
         <Content class="search">
-          <Input class="input" v-model="searchInput" :style="{width:'50%'}" placeholder="输入钱包地址......" size="large" autofocus search number clearable/>
+          <Input class="input" v-model="searchInput" @on-change="inputChange($event)" @on-enter="search()" :style="{width:'50%'}" placeholder="输入钱包地址......" size="large" autofocus>
+          </Input>
+          <div class="searchBar"><span @click="search()"></span>
+          </div>
         </Content>
         <Card class="data" :style="{width: '55vw'}">
           <Row type="flex" justify="space-around">
@@ -63,15 +66,18 @@
         </Card>
       </Content>
     </section>
-    <section id="demain">
+    <!-- <section id="demain">
       <Content class="domain">
         <h2>全网版图</h2>
         <div class="shape"></div>
-        <Card :style="{marginTop:'5vh'}">
+        <Card shadow>
+          <div class="domainIcon">
+            <span></span>ethereum (Mhash/s)
+          </div>
           <div id="myChart" :style="{width: '100%', height: '60vh'}"></div>
         </Card>
       </Content>
-    </section>
+    </section> -->
     <section id="introduce">
       <Content class="introduce">
         <h2>领先的矿池服务平台</h2>
@@ -115,6 +121,7 @@ import Footer from '../../components/footer/footer.vue' //公共尾
 export default {
   data() {
     return {
+      pool: this.GLOBAL.pool,
       searchInput: '',
       value15: '',
       poolinfo: {},
@@ -130,83 +137,75 @@ export default {
   methods: {
     init() { //初始化
       this.getPoolInfo() //矿池信息 绘制曲线
-      this.poolratechart() //全网版图
+      // this.poolratechart() //全网版图
     },
-    async getPoolInfo() {
-      var res = await this.axios.post(this.api.poolinfo, JSON.stringify({
-        token: "asd",
-        pool: "uu",
-      }))
-      this.poolinfo = res.data
-      console.log(this.poolinfo, "矿池信息");
+    inputChange(e) {
+      console.log(e.target.value);
+      console.log(this.searchInput)
     },
-    async poolratechart() {
-      var res = await this.axios.post(this.api.poolratechart, JSON.stringify({
+    async search() { //查询
+      if (this.searchInput.length == 42) {
+        let res = await this.axios.post(this.api.userinfo, JSON.stringify({
+          token: "asd",
+          pool: this.pool,
+          address: this.searchInput
+        }))
+        console.log(res)
+        this.GLOBAL.userAddress = this.searchInput
+        this.$router.push({
+          name: 'search',
+          params: res.data.data
+        })
+      } else {
+        this.$Message.error({
+          content: "钱包地址格式错误!",
+          duration: 1,
+          closable: true
+        });
+        this.searchInput = ''
+      }
+    },
+    async getPoolInfo() { //获取矿池信息
+      let res = await this.axios.post(this.api.poolinfo, JSON.stringify({
         token: "asd",
-        pool: "uu",
+        pool: this.pool,
       }))
-      this.poolratechart = res.data
-      this.map1 = this.poolratechart.map(function(item) {
-        return item.time
-      })
-
-      this.map2 = this.poolratechart.map(function(item) {
-        return item.hashrate
-      })
-      // 基于准备好的dom，初始化echarts实例
-      let myChart = this.$echarts.init(document.getElementById('myChart'))
-      // 绘制图表
-      myChart.setOption({
-        xAxis: {
-          type: 'category',
-          boundaryGap: true,
-          data: this.map1,
-        },
-        yAxis: {
-          type: 'value'
-        },
-        tooltip: {
-          trigger: 'axis',
-          axisPointer: {
-            type: 'cross',
-            animation: false,
-            label: {
-              backgroundColor: '#ccc',
-              borderColor: '#aaa',
-              borderWidth: 1,
-              shadowBlur: 0,
-              shadowOffsetX: 0,
-              shadowOffsetY: 0,
-              textStyle: {
-                color: '#222'
-              }
-            }
-          },
-          formatter: function(params) {
-            return params[0].name + '<br />' + params[0].value;
-          }
-        },
-        grid: {
-          left: '0%',
-          right: '0%',
-          bottom: '0%',
-          containLabel: true
-        },
-        series: [{
-          data: this.map2,
-          type: 'line',
-          areaStyle: {
-            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-              offset: 0,
-              color: 'rgb(255, 158, 68)'
-            }, {
-              offset: 1,
-              color: 'rgb(255, 70, 131)'
-            }])
-          },
-        }]
-      });
-      console.log(this.poolratechart, "全网版图");
+      if (res.data.code == "2000") {
+        this.poolinfo = res.data.data
+        console.log(this.poolinfo, "矿池信息");
+      } else {
+        this.$Message.error({
+          content: "数据请求失败!",
+          duration: 1,
+          closable: true
+        });
+      }
+    },
+    async poolratechart() { //获取全网版块信息
+      let res = await this.axios.post(this.api.poolratechart, JSON.stringify({
+        token: "asd",
+        pool: this.pool,
+      }))
+      if (res.data.code == "2000") {
+        console.log(res)
+        this.poolratechart = res.data.data
+        this.map1 = this.poolratechart.map(function(item) {
+          return item.time
+        })
+        this.map2 = this.poolratechart.map(function(item) {
+          return item.hashrate
+        })
+        // 基于准备好的dom，初始化echarts实例
+        let myChart = this.$echarts.init(document.getElementById('myChart'))
+        myChart.setOption(this.commonFunction.map(this.map1, this.map2))
+        console.log(this.poolratechart, "全网版图");
+      } else {
+        this.$Message.error({
+          content: "数据请求失败!",
+          duration: 1,
+          closable: true
+        });
+      }
     },
   },
   computed: {
@@ -222,12 +221,6 @@ export default {
   },
   mounted() { // 组件初始化后执行
     this.init()
-    // this.$router.push({
-    //   name: 'search',
-    //   params: {
-    //   }
-    // });
-    console.log(this.getPoolInfo());
   },
   created() {},
   beforeUpdate() {}

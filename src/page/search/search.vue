@@ -12,25 +12,25 @@
             <div class="icon-1">
             </div>
             <p class="title">矿机数量</p>
-            <p class="details">123123</p>
+            <p class="details">{{userinfo.online + userinfo.offline}}</p>
             </Col>
             <Col :span="4">
             <div class="icon-2">
             </div>
             <p class="title">在线机器</p>
-            <p class="details">123123</p>
+            <p class="details">{{userinfo.online}}</p>
             </Col>
             <Col :span="4">
             <div class="icon-3">
             </div>
             <p class="title">离线机器</p>
-            <p class="details">123123</p>
+            <p class="details">{{userinfo.offline}}</p>
             </Col>
             <Col :span="4">
             <div class="icon-4">
             </div>
             <p class="title">算力</p>
-            <p class="details">123123</p>
+            <p class="details">{{userinfo.hr1}}</p>
             </Col>
           </Row>
         </div>
@@ -38,26 +38,26 @@
           <Row type="flex" justify="center">
             <Col class="icon" :span="4">
             <p class="title">24小时收益</br>(ETH)</p>
-            <p class="details">0</p>
+            <p class="details">{{userinfo.balance24}}</p>
             </Col>
             <Col class="icon" :span="4">
             <p class="title">待支付</br>(ETH)</p>
-            <p class="details">0</p>
+            <p class="details">{{userinfo.hr1}}</p>
             </Col>
             <Col class="icon" :span="4">
             <p class="title">总支付</br>(ETH)</p>
-            <p class="details">0</p>
+            <p class="details">{{userinfo.paid}}</p>
             </Col>
             <Col class="icon" :span="4">
             <p class="title">余额</br>(ETH)</p>
-            <p class="details">0</p>
+            <p class="details">{{userinfo.balance}}</p>
             </Col>
           </Row>
         </div>
-        <p class="adress">0x7bB96A6e212F6094BA24f471A392025403BED0AE</p>
+        <p class="adress">{{this.GLOBAL.userAddress}}</p>
       </Content>
     </section>
-    <section id="domain">
+    <!-- <section id="domain">
       <Content class="domain">
         <h2>收益概况图</h2>
         <div class="shape"></div>
@@ -65,7 +65,7 @@
           <div id="myChart" :style="{width: '100%', height: '60vh'}"></div>
         </Card>
       </Content>
-    </section>
+    </section> -->
     <section id="mill">
       <Content class="mill">
         <Tabs value="name1">
@@ -107,6 +107,7 @@ import Table from '../../components/table/table.vue'
 export default {
   data() {
     return {
+      userinfo: {},
       swiperOption: {
         spaceBetween: 30,
         mousewheel: true,
@@ -177,7 +178,6 @@ export default {
       let myChart = this.$echarts.init(document.getElementById('myChart'))
       // 绘制图表
       myChart.setOption({
-
         xAxis: {
           type: 'category',
           data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
@@ -194,9 +194,10 @@ export default {
     },
   },
   mounted() {
-    this.drawLine();
-    console.log(this.$route.params)
-    this.commonFunction.login()
+    // this.drawLine();
+    this.userinfo = this.$route.params
+    console.log(this.userinfo)
+    console.log(this.GLOBAL.userAddress)
   },
   // props: [],
   // propsData: {},

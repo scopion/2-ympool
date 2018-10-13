@@ -3,6 +3,7 @@ import Router from 'vue-router'
 const home = r => require.ensure([], () => r(require('../page/home/home')), 'home')
 const search = r => require.ensure([], () => r(require('../page/search/search')), 'search')
 const text = r => require.ensure([], () => r(require('../page/text/text')), 'text')
+const notFound = r => require.ensure([], () => r(require('../page/notFound/notFound')), 'notFound')
 
 Vue.use(Router)
 
@@ -34,6 +35,18 @@ export default new Router({
       meta: {
         title: '帮助-焱猫矿池',
       }
+    },
+    {
+      path: '/notFound',
+      name: 'notFound',
+      component: notFound,
+      meta: {
+        title: '页面不存在-焱猫矿池',
+      }
+    },
+    {
+      path: "*",
+      redirect: '/notFound'
     },
   ]
 })

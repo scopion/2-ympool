@@ -221,6 +221,7 @@ export default {
   },
   mounted() { // 组件初始化后执行
     this.init()
+    console.log(this.$md5('holle'));
   },
   created() {},
   beforeUpdate() {}

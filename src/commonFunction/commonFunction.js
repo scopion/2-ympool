@@ -1,8 +1,15 @@
+import Vue from 'vue'
+import iView from 'iview';
+
+
 export default {
   login: function() {
     console.log(111)
   },
   search: function() {
+
+  },
+  msg: function() {
 
   },
   map: function(a, b) {

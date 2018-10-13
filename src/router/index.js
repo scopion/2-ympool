@@ -7,6 +7,7 @@ const text = r => require.ensure([], () => r(require('../page/text/text')), 'tex
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     //首页展示
     {

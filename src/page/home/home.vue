@@ -1,7 +1,7 @@
 <template>
 <div class="layout">
   <Layout>
-    <Header></Header>
+    <Header :name="name"></Header>
     <section id="main">
       <Content class="background">
         <div class="mianTitle" :style="{lineHeight:'5rem'}">
@@ -121,7 +121,8 @@ import Footer from '../../components/footer/footer.vue' //公共尾
 export default {
   data() {
     return {
-      pool: this.GLOBAL.pool,
+      name: 'home',
+      pool: this.GLOBAL.pool, //矿池代号
       searchInput: '',
       value15: '',
       poolinfo: {},
@@ -136,7 +137,11 @@ export default {
   },
   methods: {
     init() { //初始化
-      this.getPoolInfo() //矿池信息 绘制曲线
+      this.getPoolInfo()
+      setInterval(() => {
+        this.getPoolInfo() //矿池信息 绘制曲线
+        console.log("已经刷新")
+      }, 3000)
       // this.poolratechart() //全网版图
     },
     inputChange(e) {
@@ -144,17 +149,12 @@ export default {
       console.log(this.searchInput)
     },
     async search() { //查询
-      if (this.searchInput.length == 42) {
-        let res = await this.axios.post(this.api.userinfo, JSON.stringify({
-          token: "asd",
-          pool: this.pool,
-          address: this.searchInput
-        }))
-        console.log(res)
-        this.GLOBAL.userAddress = this.searchInput
+      if (this.searchInput.length == 42) { //判断钱包格式
+        sessionStorage.setItem("user", this.searchInput)
+        this.GLOBAL.userAddress = sessionStorage.getItem("user")
         this.$router.push({
           name: 'search',
-          params: res.data.data
+          params: '',
         })
       } else {
         this.$Message.error({

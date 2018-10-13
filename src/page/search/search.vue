@@ -1,7 +1,7 @@
 <template>
 <div class="layout">
   <Layout>
-    <Header></Header>
+    <Header :name="name"></Header>
     <section id="main">
       <Content :style="{padding: '0 50px'}">
         <div class="banner" style="min-height: 200px;">
@@ -107,6 +107,8 @@ import Table from '../../components/table/table.vue'
 export default {
   data() {
     return {
+      name: 'search',
+      pool: this.GLOBAL.pool, //矿池代号
       userinfo: {},
       swiperOption: {
         spaceBetween: 30,
@@ -192,12 +194,20 @@ export default {
         }]
       });
     },
+    async getUserInfo() {
+      this.GLOBAL.userAddress = sessionStorage.getItem("user")
+      let res = await this.axios.post(this.api.userinfo, JSON.stringify({
+        token: "asd",
+        pool: this.pool,
+        address: this.GLOBAL.userAddress
+      }))
+      console.log(res)
+      this.userinfo = res.data.data
+    }
   },
   mounted() {
-    // this.drawLine();
-    this.userinfo = this.$route.params
-    console.log(this.userinfo)
-    console.log(this.GLOBAL.userAddress)
+    // this.drawLine()
+    this.getUserInfo()
   },
   // props: [],
   // propsData: {},

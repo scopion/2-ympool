@@ -60,12 +60,12 @@
 
 
 <template>
-<Header>
+<Header :name="name">
   <Content>
     <Menu mode="horizontal" :theme="theme" :active-name="activemenu">
       <div class="layout-logo" @click="backHome()">
       </div>
-      <div class="layout-nav">
+      <div class="layout-nav" v-show="name != 'search'">
         <MenuItem name="1">
         <router-link :to="{ name: 'home', params: {} }" exact>首页</router-link>
         </MenuItem>
@@ -89,22 +89,21 @@
 export default {
   data() {
     return {
-      name: '',
       theme: 'dark',
       activemenu: 1 // 高亮
     }
   },
+  props: ["name"],
   methods: {
     backHome: function() {
       this.$router.push({
         name: 'home',
-        params: {
-
-        }
+        params: {}
       })
     }
   },
   mounted() { // 组件初始化后执行
+    console.log(this.name);
   }
 }
 </script>

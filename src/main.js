@@ -33,7 +33,15 @@
     if (to.meta.title) {
       document.title = to.meta.title;
     }
+    // if (sessionStorage.getItem("user")) {
+    //   return next();
+    // } else {
+    //   return next({
+    //     path: "/home"
+    //   });
+    // }
     next();
+    console.log(123)
   })
 
   /* eslint-disable no-new */

@@ -32,6 +32,13 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    line-height: 5rem;
+    margin-top: 5rem;
+
+    h1 {
+      color: white;
+      font-size: 4rem;
+    }
 
     p {
       font-weight: 900;
@@ -43,6 +50,7 @@
 
   .search {
     text-align: center;
+    padding: 0 10rem;
     margin: 5rem 0;
 
     .searchBar {
@@ -54,7 +62,7 @@
         height: 1.6rem;
         width: 1.6rem;
         top: -2rem;
-        right: 17rem;
+        right: 1rem;
         position: absolute;
         display: inline-block;
         background: url("../images/search.png") no-repeat;
@@ -247,36 +255,51 @@
   }
 }
 /* MOBILE */
-@media (min-width:320px) {
-  .background .mianTitle {
-    margin-top: 5vh;
+@media (max-width:520px) {
+  #main {
+    background-size: cover;
+    height: 45rem;
+    min-height: 45rem;
   }
 
-  h1 {
-    color: white;
-    font-size: 2rem;
+  #introduce {
+    height: 45rem;
+    min-height: 45rem;
+
+    h1 {
+      font-size: 1.2rem;
+      bottom: 2rem;
+    }
+
+    .code-row-bg {
+      margin-top: 3rem;
+    }
+  }
+
+  .background {
+    .mianTitle {
+      line-height: 3rem;
+      margin-top: 2rem;
+
+      h1 {
+        font-size: 2rem;
+      }
+    }
+
+    .search {
+      margin: 2rem 0 0;
+      padding: 0 2rem;
+    }
+
+    .data {
+      padding-top: 2rem;
+    }
   }
 }
 /* MOBILE */
 /* PC */
-@media (min-width: 768px) {
-  .background .mianTitle {
-    margin-top: 7vh;
-  }
-}
-@media (min-width: 992px) {
-  .ivu-layout-content {
-    max-width: 960px;
-  }
-}
-@media (min-width:1200px) {
-  .ivu-layout-content {
-    max-width: 1140px;
-  }
-
-  h1 {
-    color: white;
-    font-size: 4rem;
-  }
-}
+@media (min-width:320px) {}
+@media (min-width: 768px) {}
+@media (min-width: 992px) {}
+@media (min-width:1200px) {}
 /* PC */

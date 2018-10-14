@@ -209,36 +209,10 @@ export default {
     // this.drawLine()
     this.getUserInfo()
   },
-  // props: [],
-  // propsData: {},
-  // computed: {},
-  // methods: {},
-  // watch: {},
-  // el() {},
-  // template: '',
-  // render() {},
-  // beforeCreate() {},
-  // created() {},
-  // beforeMount() {},
-  // mounted() {},
-  // beforeUpdate() {},
-  // updated() {},
-  // activated() {},
-  // deactivated() {},
-  // beforeDestroy() {},
-  // destroyed() {},
-  // directives: {},
-  // filters: {},
-  // components: {},
-  // parent: null,
-  // mixins: [],
-  // name: '',
-  // extends: {},
-  // delimiters: ['{{', '}}'],
-  // functional: false
 }
 </script>
 
 <style lang="less" scoped>
-@import '../../style/search.less';
+@import "../../style/commonStyle.css";
+@import "../../style/search.less";
 </style>

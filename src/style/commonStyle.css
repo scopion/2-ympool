@@ -15,18 +15,17 @@ body {
 .ivu-input {
   color: white;
   position: relative;
-  left: 10px;
-  right: 0;
   background-color: #626262;
   border-radius: 5rem;
   padding: 1rem;
+  margin-bottom: 1rem;
 }
 
 .ivu-tabs-nav {
   display: inline-block;
   padding: 1rem 0;
   font-size: 2rem;
-  float: inherit;
+  float: right;
 }
 
 .ivu-tabs-tab-active {
@@ -78,6 +77,36 @@ body {
   background: #24d39b;
 }
 
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track-piece {
+  background-color: #ebebeb;
+}
+
+::-webkit-scrollbar-thumb {
+  transition: background-color 0.5s;
+}
+
+::-webkit-scrollbar-thumb:vertical {
+  transition: background-color 0.5s;
+  height: 32px;
+  background-color: #a9a9a9;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  transition: background-color 0.5s;
+  height: 32px;
+  background-color: #888;
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+  width: 32px;
+  background-color: #a9a9a9;
+}
+
 /* MOBILE */
 
 @media (min-width:576px) {
@@ -109,33 +138,3 @@ body {
 }
 
 /* PC */
-
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-
-::-webkit-scrollbar-track-piece {
-  background-color: #ebebeb;
-}
-
-::-webkit-scrollbar-thumb {
-  transition: background-color 0.5s;
-}
-
-::-webkit-scrollbar-thumb:vertical {
-  transition: background-color 0.5s;
-  height: 32px;
-  background-color: #a9a9a9;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  transition: background-color 0.5s;
-  height: 32px;
-  background-color: #888;
-}
-
-::-webkit-scrollbar-thumb:horizontal {
-  width: 32px;
-  background-color: #a9a9a9;
-}

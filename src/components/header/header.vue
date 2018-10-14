@@ -11,7 +11,7 @@
         min-height: 10vh;
     }
     .layout-nav {
-        height: auto;
+        height: 100%;
         .ivu-menu-item {
             top: 1.5vh;
         }
@@ -22,7 +22,7 @@
         height: 100%;
         line-height: 1rem;
         vertical-align: middle;
-        background: url("/static/img/logo@2x.db0b552.png") no-repeat center;
+        background: url("../../images/logo@2x.png") no-repeat center;
         background-size: contain;
         float: left;
         position: relative;
@@ -56,6 +56,32 @@
 .router-link-active {
     color: #24d39b!important;
 }
+
+/* MOBILE */
+@media (min-width:320px) {
+    .ivu-layout-header {
+        padding: 0;
+
+        .layout-logo {
+            width: 120px;
+        }
+
+        .layout-nav {
+            width: 140px;
+            float: right;
+            margin: 0;
+            .ivu-menu-item {
+                padding: 0 10px;
+            }
+        }
+    }
+}
+/* MOBILE */
+/* PC */
+@media (min-width: 768px) {}
+@media (min-width: 992px) {}
+@media (min-width:1200px) {}
+/* PC */
 </style>
 
 

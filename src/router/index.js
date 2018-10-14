@@ -8,7 +8,7 @@ const notFound = r => require.ensure([], () => r(require('../page/notFound/notFo
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
+  mode: 'hash',
   routes: [
     //首页展示
     {
@@ -44,9 +44,9 @@ export default new Router({
         title: '页面不存在-焱猫矿池',
       }
     },
-    {
-      path: "*",
-      redirect: '/notFound'
-    },
+    // {
+    //   path: "*",
+    //   redirect: '/notFound'
+    // },
   ]
 })

@@ -4,7 +4,7 @@
     <Header :name="name"></Header>
     <section id="main">
       <Content class="background">
-        <div class="mianTitle" :style="{lineHeight:'5rem'}">
+        <div class="mianTitle">
           <Row>
             <Col span="24">
             <h1>焱猫矿池服务平台</h1></Col>
@@ -17,10 +17,11 @@
           <div class="shape"></div>
         </div>
         <Content class="search">
-          <Input class="input" v-model="searchInput" @on-change="inputChange($event)" @on-enter="search()" :style="{width:'50%'}" placeholder="输入钱包地址......" size="large" autofocus>
+          <Input class="input" v-model="searchInput" @on-change="inputChange($event)" @on-enter="search()" placeholder="输入钱包地址......" size="large" autofocus >
           </Input>
-          <div class="searchBar"><span @click="search()"></span>
-          </div>
+          <Button type="primary" shape="circle" icon="ios-search" @click="search()">查询</Button>
+          <!--           <div class="searchBar"><span @click="search()"></span>
+</div> -->
         </Content>
         <Card class="data" shadow>
           <Row type="flex" justify="space-around">
@@ -83,25 +84,25 @@
         <h2>领先的矿池服务平台</h2>
         <div class="shape"></div>
         <Row type="flex" justify="space-between" class="code-row-bg">
-          <Col span="4">
+          <Col :sm="4" :md="6" :lg="6">
           <div class="introduce-1">
           </div>
           <p>用户视角</p>
           <p>稳定服务,解决用户需求</p>
           </Col>
-          <Col span="4">
+          <Col :sm="4" :md="6" :lg="6">
           <div class="introduce-2">
           </div>
           <p>小金库</p>
           <p>收益及时到您钱包里</p>
           </Col>
-          <Col span="4">
+          <Col :sm="4" :md="6" :lg="6">
           <div class="introduce-3">
           </div>
           <p>轻松支付</p>
           <p>每日结算,便捷式支付</p>
           </Col>
-          <Col span="4">
+          <Col :sm="4" :md="6" :lg="6">
           <div class="introduce-4">
           </div>
           <p>安全监控</p>
@@ -228,5 +229,6 @@ export default {
 }
 </script>
 <style lang='less' scoped>
+@import "../../style/commonStyle.css";
 @import "../../style/home.less";
 </style>

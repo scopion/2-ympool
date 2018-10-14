@@ -7,16 +7,16 @@
       <h1>欢迎来到焱猫矿池，一起挖矿吧！</h1>
       <div class="copyright">
         <Row>
-          <Col span="8" offset="8"></Col>
-          <Col span="8"></Col>
+          <Col :sm="{ span: 4, offset: 1 }" :md="{ span: 4, offset: 1 }" :lg="{ span: 6, offset: 8 }"></Col>
+          <Col :sm="{ span: 4, offset: 1 }" :md="{ span: 4, offset: 1 }" :lg="{ span: 6, offset: 8 }"></Col>
         </Row>
         <Row>
-          <Col span="8" offset="8">02018 -版权所有</Col>
-          <Col span="8">焱猫矿池@ 2018 ympool.com</Col>
+          <Col :sm="{ span: 4, offset: 1 }" :md="{ span: 4, offset: 1 }" :lg="{ span: 6, offset: 8 }">02018 -版权所有</Col>
+          <Col :sm="{ span: 4, offset: 1 }" :md="{ span: 4, offset: 1 }" :lg="{ span: 6, offset: 0 }">焱猫矿池@ 2018 ympool.com</Col>
         </Row>
         <Row>
-          <Col span="8" offset="8">电脑版|本站使用焱猫矿池搭建|管理登录</Col>
-          <Col span="8">扫码关注焱猫矿池公众号</Col>
+          <Col :sm="{ span: 4, offset: 1 }" :md="{ span: 4, offset: 1 }" :lg="{ span: 6, offset: 8 }">电脑版|本站使用焱猫矿池搭建|管理登录</Col>
+          <Col :sm="{ span: 4, offset: 1 }" :md="{ span: 4, offset: 1 }" :lg="{ span: 6, offset: 0 }">扫码关注焱猫矿池公众号</Col>
         </Row>
       </div>
     </Footer>

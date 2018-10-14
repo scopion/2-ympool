@@ -31,6 +31,9 @@
         position: relative;
         left: 20px;
     }
+    .mobileMenu {
+        text-align: right;
+    }
 }
 
 .layout {
@@ -61,7 +64,7 @@
 }
 
 /* MOBILE */
-@media (min-width:320px) {
+@media (max-width:520px) {
     .ivu-layout-header {
         padding: 0;
 
@@ -77,10 +80,15 @@
                 padding: 0 10px;
             }
         }
+        .ivu-layout-sider-zero-width-trigger {
+            top: 12px;
+            background: red;
+        }
     }
 }
 /* MOBILE */
 /* PC */
+@media (min-width:320px) {}
 @media (min-width: 768px) {}
 @media (min-width: 992px) {}
 @media (min-width:1200px) {}
@@ -91,31 +99,10 @@
 <template>
 <Header :name="name">
   <Content>
-    <!--     <Sider breakpoint="md" collapsible :collapsed-width="100" v-model="isCollapsed">
-  <Menu mode="horizontal" :theme="theme" :active-name="activemenu">
-    <div class="layout-logo" @click="backHome()">
-    </div>
-    <div class="layout-nav" v-show="name != 'search'">
-      <MenuItem name="1">
-      <router-link :to="{ name: 'home', params: {} }" exact>首页</router-link>
-      </MenuItem>
-      <MenuItem name="2">
-      <router-link :to="{ name: 'text', params: {} }" exact>矿池收益</router-link>
-      </MenuItem>
-      <MenuItem name="3">
-      <router-link :to="{ name: '', params: {} }" exact>挖矿帮助</router-link>
-      </MenuItem>
-      <MenuItem name="4">
-    <router-link :to="{ name: 'search', params: {} }" exact>关于我们</router-link>
-    <Icon type="ios-paper"></Icon>
-    </MenuItem>
-    </div>
-  </Menu>
-</Sider> -->
     <Menu mode="horizontal" :theme="theme" :active-name="activemenu">
       <div class="layout-logo" @click="backHome()">
       </div>
-      <div class="layout-nav" v-show="name != 'search'">
+      <div class="layout-nav" v-show="name != 'search'" v-if="clintWidth>520">
         <MenuItem name="1">
         <router-link :to="{ name: 'home', params: {} }" exact>首页</router-link>
         </MenuItem>
@@ -130,6 +117,14 @@
       <Icon type="ios-paper"></Icon>
       </MenuItem> -->
       </div>
+      <div class="mobileMenu" v-else>
+        <Button @click="value = true" type="primary">菜单</Button>
+      </div>
+      <Drawer title="Basic Drawer" :closable="false" v-model="value">
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+      </Drawer>
     </Menu>
   </Content>
 </Header>
@@ -139,9 +134,10 @@
 export default {
   data() {
     return {
+      value: false,
       theme: 'dark',
       activemenu: 1, // 高亮
-      isCollapsed: false,
+      isCollapsed: true,
       clintWidth: document.body.clientWidth
     }
   },

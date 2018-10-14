@@ -33,7 +33,7 @@ export default {}
     background: #000;
     background-image: url("../../images/footer.png");
     background-repeat: no-repeat;
-    background-size:  auto;
+    background-size: auto;
     background-position: center -10%;
     text-align: center;
     color: white;
@@ -46,8 +46,9 @@ export default {}
             background: white;
             border-radius: 1rem;
         }
-        h1,.copyright {
-          color: white
+        .copyright,
+        h1 {
+            color: white;
         }
         img {
             margin: 1rem 0;
@@ -59,4 +60,23 @@ export default {}
         }
     }
 }
+
+/* MOBILE */
+@media (max-width:520px) {
+    #footer {
+        .layout-footer-center {
+            .white {
+                width: 15rem;
+                height: 0.2rem;
+            }
+            img {
+                width: 10rem;
+            }
+            h1 {
+                font-size: 1rem;
+            }
+        }
+    }
+}
+/* MOBILE */
 </style>

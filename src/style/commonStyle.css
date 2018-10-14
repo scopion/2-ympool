@@ -64,11 +64,6 @@ body {
   text-align: center;
 }
 
-.details {
-  font-size: 1rem !important;
-  color: #FFD8DC !important;
-}
-
 .shape {
   margin-top: 1rem;
   height: 5px;

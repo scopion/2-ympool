@@ -44,7 +44,7 @@
             <p class="details">{{poolinfo.hr2}} <b>TH/s</b></p>
             </Col>
           </Row>
-          <Row type="flex" justify="space-around" :style="{paddingTop: '4vh'}">
+          <Row type="flex" justify="space-around">
             <Col span="8">
             <div class="dataItem dataItem-4">
             </div>
@@ -198,7 +198,7 @@ export default {
         })
         // 基于准备好的dom，初始化echarts实例
         let myChart = this.$echarts.init(document.getElementById('myChart'))
-        myChart.setOption(this.commonFunction.map(this.map1, this.map2))
+        myChart.setOption(this.common.map(this.map1, this.map2))
         console.log(this.poolratechart, "全网版图");
       } else {
         this.$Message.error({
@@ -222,6 +222,8 @@ export default {
   },
   mounted() { // 组件初始化后执行
     this.init()
+    this.common.msg()
+    this.$Message.error(this.common.msg(1, 1, true));
     console.log(this.$md5('holle'));
   },
   created() {},

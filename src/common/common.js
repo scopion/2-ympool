@@ -1,16 +1,21 @@
 import Vue from 'vue'
 import iView from 'iview';
-
+import 'iview/dist/styles/iview.css';
+Vue.use(iView)
 
 export default {
-  login: function() {
+  login() {
     console.log(111)
   },
-  search: function() {
+  search() {
 
   },
-  msg: function() {
-
+  msg(a, b, c) {
+    return {
+      content: a,
+      duration: b,
+      closable: c
+    }
   },
   map: function(a, b) {
     // 绘制图表

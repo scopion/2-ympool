@@ -89,6 +89,13 @@
             background: red;
         }
     }
+
+    .ivu-drawer-body {
+        .ivu-menu-item {
+            font-size: 1rem;
+            padding: 0 10px;
+        }
+    }
 }
 /* MOBILE */
 /* PC */
@@ -103,43 +110,22 @@
 <template>
 <Header :name="name">
   <Content>
-    <Menu mode="horizontal" :theme="theme" :active-name="activemenu">
+    <Menu mode="horizontal" :theme="theme" :active-name="activemenu" @on-select="select()">
       <div class="layout-logo" @click="backHome()">
       </div>
       <div class="layout-nav" v-show="name != 'search'" v-if="clintWidth>520">
-        <MenuItem name="1">
-        <router-link :to="{ name: 'home', params: {} }" exact>首页</router-link>
+        <MenuItem name="index" v-for="(item,index) in pages" :key="item.name">
+        <router-link :to="{ name: item.path, params: {} }" exact>{{item.name}}</router-link>
         </MenuItem>
-        <MenuItem name="2">
-        <router-link :to="{ name: 'text', params: {} }" exact>矿池收益</router-link>
-        </MenuItem>
-        <!-- <MenuItem name="3">
-        <router-link :to="{ name: '', params: {} }" exact>挖矿帮助</router-link>
-        </MenuItem> -->
-        <!-- <MenuItem name="4">
-      <router-link :to="{ name: 'search', params: {} }" exact>关于我们</router-link>
-      <Icon type="ios-paper"></Icon>
-      </MenuItem> -->
       </div>
       <div class="mobileMenu" v-else>
         <Button @click="value = true" type="primary">菜单</Button>
       </div>
-      <Drawer title="焱猫矿池" :closable="false" v-model="value" width="200">
-        <Menu :theme="light" active-name="1">
-          <MenuGroup title="内容管理">
-            <MenuItem name="1">
-            <Icon type="md-document" /> 文章管理
-            </MenuItem>
-            <MenuItem name="2">
-            <Icon type="md-chatbubbles" /> 评论管理
-            </MenuItem>
-          </MenuGroup>
-          <MenuGroup title="统计分析">
-            <MenuItem name="3">
-            <Icon type="md-heart" /> 用户留存
-            </MenuItem>
-            <MenuItem name="4">
-            <Icon type="md-leaf" /> 流失用户
+      <Drawer :closable="false" v-model="value" width="200">
+        <Menu :active-name="activemenu" @on-select="select()">
+          <MenuGroup>
+            <MenuItem name="index" :to="item.path" v-for="(item,index) in pages" exact> {{item.name}}
+            <Divider />
             </MenuItem>
           </MenuGroup>
         </Menu>
@@ -157,7 +143,14 @@ export default {
       theme: 'dark',
       activemenu: 1, // 高亮
       isCollapsed: true,
-      clintWidth: document.body.clientWidth
+      clintWidth: document.body.clientWidth,
+      pages: [{
+        path: 'home',
+        name: '首页'
+      }, {
+        path: 'text',
+        name: '矿池收益'
+      }]
     }
   },
   props: ["name"],
@@ -167,6 +160,9 @@ export default {
         name: 'home',
         params: {}
       })
+    },
+    select(val) {
+      console.log(val);
     }
   },
   computed: {

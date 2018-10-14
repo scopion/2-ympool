@@ -3,6 +3,9 @@
     background: #000;
     height: 10vh;
     line-height: 10vh;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
     .ivu-menu-dark {
         background: #000;
     }
@@ -88,6 +91,27 @@
 <template>
 <Header :name="name">
   <Content>
+    <!--     <Sider breakpoint="md" collapsible :collapsed-width="100" v-model="isCollapsed">
+  <Menu mode="horizontal" :theme="theme" :active-name="activemenu">
+    <div class="layout-logo" @click="backHome()">
+    </div>
+    <div class="layout-nav" v-show="name != 'search'">
+      <MenuItem name="1">
+      <router-link :to="{ name: 'home', params: {} }" exact>首页</router-link>
+      </MenuItem>
+      <MenuItem name="2">
+      <router-link :to="{ name: 'text', params: {} }" exact>矿池收益</router-link>
+      </MenuItem>
+      <MenuItem name="3">
+      <router-link :to="{ name: '', params: {} }" exact>挖矿帮助</router-link>
+      </MenuItem>
+      <MenuItem name="4">
+    <router-link :to="{ name: 'search', params: {} }" exact>关于我们</router-link>
+    <Icon type="ios-paper"></Icon>
+    </MenuItem>
+    </div>
+  </Menu>
+</Sider> -->
     <Menu mode="horizontal" :theme="theme" :active-name="activemenu">
       <div class="layout-logo" @click="backHome()">
       </div>
@@ -116,7 +140,9 @@ export default {
   data() {
     return {
       theme: 'dark',
-      activemenu: 1 // 高亮
+      activemenu: 1, // 高亮
+      isCollapsed: false,
+      clintWidth: document.body.clientWidth
     }
   },
   props: ["name"],
@@ -128,8 +154,29 @@ export default {
       })
     }
   },
+  computed: {
+    menuitemClasses: function() {
+      return [
+        'menu-item',
+        this.isCollapsed ? 'collapsed-menu' : ''
+      ]
+    }
+  },
+  watch: {
+    clintWidth(val, oldval) {
+      console.log(val, oldval)
+    }
+  },
   mounted() { // 组件初始化后执行
     console.log(this.name);
+    console.log(this.clintWidth);
+    const that = this
+    window.onresize = () => {
+      return (() => {
+        window.screenWidth = document.body.clientWidth
+        that.clintWidth = window.screenWidth
+      })()
+    }
   }
 }
 </script>

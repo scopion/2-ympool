@@ -17,7 +17,7 @@
           <div class="shape"></div>
         </div>
         <Content class="search">
-          <Input class="input" v-model="searchInput" @on-change="inputChange($event)" @on-enter="search()" placeholder="输入钱包地址......" size="large" autofocus >
+          <Input class="input" v-model="searchInput" @on-change="inputChange($event)" @on-enter="search()" placeholder="输入钱包地址......" size="large" autofocus>
           </Input>
           <Button type="primary" shape="circle" icon="ios-search" @click="search()">查询</Button>
           <!--           <div class="searchBar"><span @click="search()"></span>
@@ -26,19 +26,19 @@
         <Card class="data" shadow>
           <Row type="flex" justify="space-around">
             <Col span="8">
-            <div class="dataTiem-1">
+            <div class="dataItem dataItem-1">
             </div>
             <p>在线矿工</p>
             <p class="details">{{poolinfo.miners}}</p>
             </Col>
             <Col span="8">
-            <div class="dataTiem-2">
+            <div class="dataItem dataItem-2">
             </div>
             <p>矿池算力</p>
             <p class="details">{{poolinfo.hr1}}</p>
             </Col>
             <Col span="8">
-            <div class="dataTiem-3">
+            <div class="dataItem dataItem-3">
             </div>
             <p>全网算力</p>
             <p class="details">{{poolinfo.hr2}} <b>TH/s</b></p>
@@ -46,19 +46,19 @@
           </Row>
           <Row type="flex" justify="space-around" :style="{paddingTop: '4vh'}">
             <Col span="8">
-            <div class="dataTiem-4">
+            <div class="dataItem dataItem-4">
             </div>
             <p>当前区块</p>
             <p class="details">{{poolinfo.blocks}}</p>
             </Col>
             <Col span="8">
-            <div class="dataTiem-5">
+            <div class="dataItem dataItem-5">
             </div>
             <p>全网难度</p>
             <p class="details">{{poolinfo.difficult}}</p>
             </Col>
             <Col span="8">
-            <div class="dataTiem-6">
+            <div class="dataItem dataItem-6">
             </div>
             <p>24小时收益</p>
             <p class="details">{{poolinfo.estReward}} <b>MH/s</b></p>
@@ -85,25 +85,25 @@
         <div class="shape"></div>
         <Row type="flex" justify="space-between" class="code-row-bg">
           <Col :sm="4" :md="6" :lg="6">
-          <div class="introduce-1">
+          <div class="introduceItem introduce-1">
           </div>
           <p>用户视角</p>
           <p>稳定服务,解决用户需求</p>
           </Col>
           <Col :sm="4" :md="6" :lg="6">
-          <div class="introduce-2">
+          <div class="introduceItem introduce-2">
           </div>
           <p>小金库</p>
           <p>收益及时到您钱包里</p>
           </Col>
           <Col :sm="4" :md="6" :lg="6">
-          <div class="introduce-3">
+          <div class="introduceItem introduce-3">
           </div>
           <p>轻松支付</p>
           <p>每日结算,便捷式支付</p>
           </Col>
           <Col :sm="4" :md="6" :lg="6">
-          <div class="introduce-4">
+          <div class="introduceItem introduce-4">
           </div>
           <p>安全监控</p>
           <p>监控账户状态,防止攻克</p>

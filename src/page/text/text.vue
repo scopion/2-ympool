@@ -46,7 +46,7 @@
 <template>
 <div class="layout">
   <Layout>
-    <Header></Header>
+    <Header :name="name"></Header>
     <Content :style="{padding: '0 50px'}">
       <Card>
         <div style="min-height: 200px;padding:5rem">
@@ -54,20 +54,22 @@
         </div>
       </Card>
     </Content>
-    <Footer class="layout-footer-center">2011-2016 &copy; TalkingData</Footer>
+    <Footer></Footer>
   </Layout>
 </div>
 </template>
 <script>
-import Header from '../../components/header/header.vue'
+import Header from '../../components/header/header.vue' //公共头
+import Footer from '../../components/footer/footer.vue' //公共尾
 export default {
   data() {
     return {
-      name: 'home',
+      name: 'text',
     }
   },
   components: {
-    Header: Header
+    Header: Header,
+    Footer: Footer
   },
   methods: {},
   mounted() { // 组件初始化后执行

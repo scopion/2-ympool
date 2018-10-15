@@ -22,62 +22,105 @@
           <!--           <div class="searchBar"><span @click="search()"></span>
 </div> -->
         </Content>
-        <Card class="data" shadow>
+        <Card class="data" shadow v-show="clintWidth>520">
           <Row type="flex" justify="space-around">
-            <Col span="8">
+            <Col :span="4">
+            <p class="details">在线矿工</p>
             <div class="dataItem dataItem-1">
             </div>
-            <p>在线矿工</p>
-            <p class="details">{{poolinfo.miners}}</p>
+            <p>{{poolinfo.miners}}</p>
             </Col>
-            <Col span="8">
+            <Col :span="4">
+            <p class="details">矿池算力</p>
             <div class="dataItem dataItem-2">
             </div>
-            <p>矿池算力</p>
-            <p class="details">{{poolinfo.hr1}}</p>
+            <p>{{poolinfo.hr1 }}</p>
             </Col>
-            <Col span="8">
+            <Col :span="4">
+            <p class="details">全网算力 TH/s</p>
             <div class="dataItem dataItem-3">
             </div>
-            <p>全网算力</p>
-            <p class="details">{{poolinfo.hr2}} <b>TH/s</b></p>
+            <p>{{poolinfo.hr2 | fixed(2)}}</p>
+            </Col>
+            <Col :span="4">
+            <p class="details">当前区块</p>
+            <div class="dataItem dataItem-4">
+            </div>
+            <p>{{poolinfo.blocks}}</p>
+            </Col>
+            <Col :span="4">
+            <p class="details">全网难度</p>
+            <div class="dataItem dataItem-5">
+            </div>
+            <p>{{poolinfo.difficult}}</p>
+            </Col>
+            <Col :span="4">
+            <p class="details">24小时收益 MH/s</p>
+            <div class="dataItem dataItem-6">
+            </div>
+            <p>{{poolinfo.estReward | fixed(10) }}</p>
+            </Col>
+          </Row>
+        </Card>
+
+        <Card class="data" shadow v-show="clintWidth<520">
+          <Row type="flex" justify="space-around">
+            <Col :span="4">
+            <p class="details">在线矿工</p>
+            <div class="dataItem dataItem-1">
+            </div>
+            <p>{{poolinfo.miners}}</p>
+            </Col>
+            <Col :span="4">
+            <p class="details">矿池算力</p>
+            <div class="dataItem dataItem-2">
+            </div>
+            <p>{{poolinfo.hr1 }}</p>
             </Col>
           </Row>
           <Row type="flex" justify="space-around">
-            <Col span="8">
+            <Col :span="4">
+            <p class="details">全网算力 TH/s</p>
+            <div class="dataItem dataItem-3">
+            </div>
+            <p>{{poolinfo.hr2 | fixed(2)}}</p>
+            </Col>
+            <Col :span="4">
+            <p class="details">当前区块</p>
             <div class="dataItem dataItem-4">
             </div>
-            <p>当前区块</p>
-            <p class="details">{{poolinfo.blocks}}</p>
+            <p>{{poolinfo.blocks}}</p>
             </Col>
-            <Col span="8">
+          </Row>
+          <Row type="flex" justify="space-around">
+            <Col :span="4">
+            <p class="details">全网难度</p>
             <div class="dataItem dataItem-5">
             </div>
-            <p>全网难度</p>
-            <p class="details">{{poolinfo.difficult}}</p>
+            <p>{{poolinfo.difficult}}</p>
             </Col>
-            <Col span="8">
+            <Col :span="4">
+            <p class="details">24小时收益 MH/s</p>
             <div class="dataItem dataItem-6">
             </div>
-            <p>24小时收益</p>
-            <p class="details">{{poolinfo.estReward}} <b>MH/s</b></p>
+            <p>{{poolinfo.estReward | fixed(10) }}</p>
             </Col>
           </Row>
         </Card>
       </Content>
     </section>
-    <!-- <section id="demain">
-      <Content class="domain">
-        <h2>全网版图</h2>
-        <div class="shape"></div>
-        <Card shadow>
-          <div class="domainIcon">
-            <span></span>ethereum (Mhash/s)
-          </div>
-          <div id="myChart" :style="{width: '100%', height: '60vh'}"></div>
-        </Card>
-      </Content>
-    </section> -->
+    <!--     <section id="demain">
+  <Content class="domain">
+    <h2>全网版图</h2>
+    <div class="shape"></div>
+    <Card shadow>
+      <div class="domainIcon">
+        <span></span>ethereum (Mhash/s)
+      </div>
+      <div id="myChart" :style="{width: '100%', height: '60vh'}"></div>
+    </Card>
+  </Content>
+</section> -->
     <section id="introduce">
       <Content class="introduce">
         <h2>领先的矿池服务平台</h2>
@@ -123,9 +166,9 @@ export default {
     return {
       name: 'home',
       pool: this.GLOBAL.pool, //矿池代号
+      clintWidth: document.body.clientWidth,
       searchInput: '',
       value15: '',
-      poolinfo: {},
       poolinfo: {},
       map1: [],
       map2: [],
@@ -217,6 +260,11 @@ export default {
         return str.replace(re, ',');
       }
       return parseNumber(this.value15);
+    }
+  },
+  filters: {
+    fixed: function(a, b) {
+      return a.toFixed(b)
     }
   },
   mounted() { // 组件初始化后执行

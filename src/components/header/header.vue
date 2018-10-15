@@ -29,7 +29,7 @@
         background-size: contain;
         float: left;
         position: relative;
-        left: 20px;
+        left: 0;
     }
     .mobileMenu {
         text-align: right;
@@ -37,6 +37,12 @@
         display: flex;
         align-items: center;
         height: 100%;
+        .ivu-btn-primary {
+            background: url("../../images/menu.png") no-repeat center;
+            background-size: contain;
+            border: transparent;
+            padding: 0.8rem;
+        }
     }
 }
 
@@ -57,14 +63,24 @@
 .ivu-menu-item a {
     transition: all 0.3s;
     color: white;
+    display: inline-block;
+    width: 100%;
 }
 
 .ivu-menu-item a:hover {
     color: #24d39b;
 }
 
-.router-link-active {
-    color: #24d39b!important;
+a.router-link-active {
+    color: #24d39b;
+}
+
+.ivu-drawer-body {
+    padding: 16px 16px 16px 0!important !important;
+    .active {
+        color: #2d8cf0;
+        background: #e2f5ff;
+    }
 }
 
 /* MOBILE */
@@ -90,12 +106,18 @@
         }
     }
 
-    .ivu-drawer-body {
-        .ivu-menu-item {
-            font-size: 1rem;
-            padding: 0 10px;
+    .ivu-drawer {
+        .ivu-drawer-body {
+            .ivu-menu-item {
+                font-size: 1rem;
+                padding: 20px;
+                a {
+                    color: #515a6e;
+                }
+            }
         }
     }
+
 }
 /* MOBILE */
 /* PC */
@@ -119,13 +141,12 @@
         </MenuItem>
       </div>
       <div class="mobileMenu" v-else>
-        <Button @click="value = true" type="primary">菜单</Button>
+        <Button @click="value = true" type="primary"></Button>
       </div>
       <Drawer :closable="false" v-model="value">
         <Menu :active-name="activemenu" @on-select="select()">
           <MenuGroup>
-            <MenuItem name="index" v-for="(item,index) in pages" :key="item.name">
-            <Divider />
+            <MenuItem name="index" v-for="(item,index) in pages" :key="item.name" :class="item.path==name?'active':''" v-if="name.length">
             <router-link :to="{ name: item.path, params: {} }" exact>{{item.name}}</router-link>
             </MenuItem>
           </MenuGroup>
@@ -140,7 +161,7 @@
 export default {
   data() {
     return {
-      value: false, 
+      value: false,
       theme: 'dark',
       activemenu: 1, // 高亮
       isCollapsed: true,

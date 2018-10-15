@@ -26,8 +26,7 @@ module.exports = {
       config.build.assetsPublicPath : config.dev.assetsPublicPath
   },
   resolve: {
-    extensions: ['', '.js', '.vue', '.less', '.css', '.scss'],
-    fallback: [path.join(__dirname, '../node_modules')],
+    extensions: ['*', '.js', '.vue', '.less', '.css', '.scss'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),

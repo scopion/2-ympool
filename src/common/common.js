@@ -10,6 +10,16 @@ export default {
   search() {
 
   },
+  formatDate(timestamp) { //时间戳格式化
+    let data = new Date(timestamp * 1000)
+    const Y = data.getFullYear() + '-';
+    const M = (data.getMonth() + 1 < 10 ? '0' + (data.getMonth() + 1) : data.getMonth() + 1) + '-';
+    const D = data.getDay() + ' ';
+    const h = data.getHours() + ':';
+    const m = data.getMinutes() + ':'
+    const s = data.getSeconds()
+    return Y + M + D + h + m + s
+  },
   msg(a, b, c) {
     return {
       content: a,

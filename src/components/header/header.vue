@@ -121,10 +121,10 @@
       <div class="mobileMenu" v-else>
         <Button @click="value = true" type="primary">菜单</Button>
       </div>
-      <Drawer :closable="false" v-model="value" width="200">
+      <Drawer :closable="false" v-model="value">
         <Menu :active-name="activemenu" @on-select="select()">
           <MenuGroup>
-            <MenuItem name="index" :to="item.path" v-for="(item,index) in pages" exact> {{item.name}}
+            <MenuItem name="index" :to="item.path" v-for="(item,index) in pages" :key="item.name" exact> {{item.name}}
             <Divider />
             </MenuItem>
           </MenuGroup>

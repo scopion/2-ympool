@@ -1,3 +1,7 @@
+
+<style lang="less" scoped>
+@import "../../style/search.less";
+</style>
 <template>
 <div class="layout">
   <Layout>
@@ -54,7 +58,7 @@
             </Col>
           </Row>
         </div>
-        <p class="adress">{{this.GLOBAL.userAddress}}</p>
+        <p class="adress">钱包地址: {{this.GLOBAL.userAddress}}</p>
       </Content>
     </section>
     <!-- <section id="domain">
@@ -69,11 +73,11 @@
     <section id="mill">
       <Content class="mill">
         <Tabs value="name1">
-          <TabPane label="离线矿机" name="name1">
-            <Table :columns="columns5" :data="data5"></Table>
+          <TabPane label="活跃矿机" name="name1">
+            <Table :columns="columns" :data="OfflineDataTables" v-if="dataTables.length"></Table>
           </TabPane>
-          <TabPane label="活跃矿机" name="name2">
-            <Table :columns="columns5" :data="data5"></Table>
+          <TabPane label="离线矿机" name="name2">
+            <Table :columns="columns" :data="OnlineDataTables" v-if="dataTables.length"></Table>
           </TabPane>
         </Tabs>
       </Content>
@@ -82,7 +86,7 @@
       <Content class="payRecord">
         <h2>支付记录</h2>
         <div class="shape"></div>
-        <Table :columns="columns5" :data="data5"></Table>
+        <Table :columns="columns" :data="dataTables" v-if="dataTables.length"></Table>
       </Content>
     </section>
   </Layout>
@@ -123,50 +127,30 @@ export default {
           disableOnInteraction: false,
         },
       },
-      columns5: [{
-          title: 'Date',
+      columns: [{
+          title: '矿机',
           key: 'date',
-          sortable: true
         },
         {
-          title: 'Name',
+          title: '当前算力',
           key: 'name'
         },
         {
-          title: 'Age',
+          title: '本地算力/24小时',
           key: 'age',
-          sortable: true
         },
         {
-          title: 'Address',
+          title: '拒绝率',
           key: 'address'
-        }
+        },
+        {
+          title: '最后更新',
+          key: 'address'
+        },
       ],
-      data5: [{
-          name: 'John Brown',
-          age: 18,
-          address: 'New York No. 1 Lake Park',
-          date: '2016-10-03'
-        },
-        {
-          name: 'Jim Green',
-          age: 24,
-          address: 'London No. 1 Lake Park',
-          date: '2016-10-01'
-        },
-        {
-          name: 'Joe Black',
-          age: 30,
-          address: 'Sydney No. 1 Lake Park',
-          date: '2016-10-02'
-        },
-        {
-          name: 'Jon Snow',
-          age: 26,
-          address: 'Ottawa No. 2 Lake Park',
-          date: '2016-10-04'
-        }
-      ]
+      dataTables: [],
+      OnlineDataTables: [], //在线矿机
+      OfflineDataTables: [], //离线矿机
     }
   },
   components: {
@@ -201,18 +185,32 @@ export default {
         pool: this.pool,
         address: this.GLOBAL.userAddress
       }))
-      console.log(res)
       this.userinfo = res.data.data
+      console.log(this.userinfo, 'userinfo')
+      let datas = []
+      for (let key in this.userinfo.workers) {
+        this.userinfo.workers[key].mill = key
+        datas.push(this.userinfo.workers[key])
+      }
+      datas.map((item) => {
+        console.log(item)
+        if (item.isOnline == 1) {
+          this.OnlineDataTables.push(item)
+        } else {
+          this.OfflineDataTables.push(item)
+        }
+      })
+      this.dataTables = datas //矿机列表
+      console.log(this.dataTables, '矿机列表')
+      console.log(this.OnlineDataTables, '在线列表')
+      console.log(this.OfflineDataTables, '离线列表')
     }
   },
+  beforeMount() {},
   mounted() {
     // this.drawLine()
     this.getUserInfo()
+
   },
 }
 </script>
-
-<style lang="less" scoped>
-@import "../../style/commonStyle.css";
-@import "../../style/search.less";
-</style>

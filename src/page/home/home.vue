@@ -17,9 +17,8 @@
           <div class="shape"></div>
         </div>
         <Content class="search">
-          <Input class="input" v-model="searchInput" @on-change="inputChange($event)" @on-enter="search()" placeholder="输入钱包地址......" size="large" autofocus>
+          <Input class="input" v-model="searchInput" search @on-change="inputChange($event)" @on-search="search()" placeholder="输入钱包地址......" size="large" autofocus>
           </Input>
-          <Button type="primary" shape="circle" icon="ios-search" @click="search()">查询</Button>
           <!--           <div class="searchBar"><span @click="search()"></span>
 </div> -->
         </Content>
@@ -129,7 +128,7 @@ export default {
       poolinfo: {},
       poolinfo: {},
       map1: [],
-      map2: []
+      map2: [],
     }
   },
   components: {
@@ -231,6 +230,5 @@ export default {
 }
 </script>
 <style lang='less' scoped>
-@import "../../style/commonStyle.css";
 @import "../../style/home.less";
 </style>

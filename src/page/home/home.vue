@@ -66,44 +66,44 @@
         <Card class="data" shadow v-show="clintWidth<520">
           <Row type="flex" justify="space-around">
             <Col :span="4">
-            <p class="details">在线矿工</p>
             <div class="dataItem dataItem-1">
             </div>
             <p>{{poolinfo.miners}}</p>
+            <p class="details">在线矿工</p>
             </Col>
             <Col :span="4">
-            <p class="details">矿池算力</p>
             <div class="dataItem dataItem-2">
             </div>
             <p>{{poolinfo.hr1 }}</p>
+            <p class="details">矿池算力</p>
             </Col>
           </Row>
           <Row type="flex" justify="space-around">
             <Col :span="4">
-            <p class="details">全网算力 TH/s</p>
             <div class="dataItem dataItem-3">
             </div>
             <p>{{poolinfo.hr2 | fixed(2)}}</p>
+            <p class="details">全网算力 TH/s</p>
             </Col>
             <Col :span="4">
-            <p class="details">当前区块</p>
             <div class="dataItem dataItem-4">
             </div>
             <p>{{poolinfo.blocks}}</p>
+            <p class="details">当前区块</p>
             </Col>
           </Row>
           <Row type="flex" justify="space-around">
             <Col :span="4">
-            <p class="details">全网难度</p>
             <div class="dataItem dataItem-5">
             </div>
             <p>{{poolinfo.difficult}}</p>
+            <p class="details">全网难度</p>
             </Col>
             <Col :span="4">
-            <p class="details">24小时收益 MH/s</p>
             <div class="dataItem dataItem-6">
             </div>
             <p>{{poolinfo.estReward | fixed(10) }}</p>
+            <p class="details">24小时收益 MH/s</p>
             </Col>
           </Row>
         </Card>
@@ -183,8 +183,7 @@ export default {
       this.getPoolInfo()
       setInterval(() => {
         this.getPoolInfo() //矿池信息 绘制曲线
-        console.log("已经刷新")
-      }, 3000)
+      }, 1000)
       // this.poolratechart() //全网版图
     },
     inputChange(e) {

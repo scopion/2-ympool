@@ -21,37 +21,31 @@
     .machine {
       margin: 1rem 0;
 
-      .icon-1 {
+      .icon {
         margin: 0 auto;
         height: 2.5rem;
         width: 2.5rem;
+      }
+
+      .icon-1 {
         background: url("../images/icon-1.png") no-repeat;
         background-size: contain;
         background-position: center center;
       }
 
       .icon-2 {
-        margin: 0 auto;
-        height: 2.5rem;
-        width: 2.5rem;
         background: url("../images/icon-2.png") no-repeat;
         background-size: contain;
         background-position: center center;
       }
 
       .icon-3 {
-        margin: 0 auto;
-        height: 2.5rem;
-        width: 2.5rem;
         background: url("../images/icon-3.png") no-repeat;
         background-size: contain;
         background-position: center center;
       }
 
       .icon-4 {
-        margin: 0 auto;
-        height: 2.5rem;
-        width: 2.5rem;
         background: url("../images/icon-4.png") no-repeat;
         background-size: contain;
         background-position: center center;
@@ -138,10 +132,10 @@
       }
 
       .machine {
-        margin-top: 5rem;
+        margin-top: 4rem;
 
         .ivu-row-flex {
-          justify-content: space-between;
+          justify-content: center;
 
           .ivu-col {
             display: flex;
@@ -154,6 +148,20 @@
             justify-content: center;
             box-shadow: rgb(59, 156, 255,) 0 0 15px inset;
             background: #000000;
+
+            .icon {
+              width: 2rem;
+              height: 2rem;
+            }
+
+            .title {
+              font-size: 1rem;
+              margin: .2rem 0;
+            }
+
+            .details {
+              font-size: 14px;
+            }
           }
         }
       }
@@ -170,13 +178,15 @@
 
           .title {
             color: white;
+            font-size: 0.5rem;
           }
         }
       }
 
       .adress {
         font-weight: 900;
-        font-size: 1px;
+        font-size: 12px;
+        margin: 2rem 0 0;
         // margin: -15rem 0;
       }
     }

@@ -14,7 +14,7 @@
         <div class="machine">
           <Row type="flex" justify="space-around">
             <Col :sm="4" :md="6" :lg="6" v-for="(item,index) in machine">
-            <div :class="item.icon"></div>
+            <div class="icon" :class="item.icon"></div>
             <p class="title">{{item.name}}</p>
             <p class="details">{{item.value}}</p>
             </Col>

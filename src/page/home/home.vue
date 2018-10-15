@@ -222,7 +222,7 @@ export default {
   mounted() { // 组件初始化后执行
     this.init()
     this.common.msg()
-    this.$Message.error(this.common.msg(1, 1, true));
+    // this.$Message.error(this.common.msg(1, 1, true));
     console.log(this.$md5('holle'));
   },
   created() {},

@@ -1,4 +1,3 @@
-
 .title {
   color: white;
   font-size: 1.2rem;
@@ -16,70 +15,75 @@
   min-height: 50rem;
   margin-top: 10vh;
 
-  .machine {
-    margin: 1rem 0;
+  .ivu-layout-content {
+    padding: 4rem;
 
-    .icon-1 {
-      margin: 0 auto;
-      height: 2.5rem;
-      width: 2.5rem;
-      background: url("../images/icon-1.png") no-repeat;
-      background-size: contain;
-      background-position: center center;
+    .machine {
+      margin: 1rem 0;
+
+      .icon-1 {
+        margin: 0 auto;
+        height: 2.5rem;
+        width: 2.5rem;
+        background: url("../images/icon-1.png") no-repeat;
+        background-size: contain;
+        background-position: center center;
+      }
+
+      .icon-2 {
+        margin: 0 auto;
+        height: 2.5rem;
+        width: 2.5rem;
+        background: url("../images/icon-2.png") no-repeat;
+        background-size: contain;
+        background-position: center center;
+      }
+
+      .icon-3 {
+        margin: 0 auto;
+        height: 2.5rem;
+        width: 2.5rem;
+        background: url("../images/icon-3.png") no-repeat;
+        background-size: contain;
+        background-position: center center;
+      }
+
+      .icon-4 {
+        margin: 0 auto;
+        height: 2.5rem;
+        width: 2.5rem;
+        background: url("../images/icon-4.png") no-repeat;
+        background-size: contain;
+        background-position: center center;
+      }
     }
 
-    .icon-2 {
-      margin: 0 auto;
-      height: 2.5rem;
-      width: 2.5rem;
-      background: url("../images/icon-2.png") no-repeat;
-      background-size: contain;
-      background-position: center center;
+    .earnings {
+      .icon {
+        padding-top: 2rem;
+        height: 10rem;
+        width: 14rem;
+        background: url("../images/iconBackground.png") no-repeat;
+        background-size: contain;
+        background-position: center center;
+      }
     }
 
-    .icon-3 {
-      margin: 0 auto;
-      height: 2.5rem;
-      width: 2.5rem;
-      background: url("../images/icon-3.png") no-repeat;
-      background-size: contain;
-      background-position: center center;
+    .adress {
+      text-align: center;
+      color: white;
+      font-size: 2rem;
+      margin: 1rem 0;
     }
 
-    .icon-4 {
-      margin: 0 auto;
-      height: 2.5rem;
-      width: 2.5rem;
-      background: url("../images/icon-4.png") no-repeat;
+    .banner {
+      height: 22rem;
+      min-height: 20rem;
+      background: url("../images/mainBanner.png") no-repeat;
       background-size: contain;
       background-position: center center;
+      margin-top: 5vh;
     }
-  }
-
-  .earnings {
-    .icon {
-      padding-top: 2rem;
-      height: 10rem;
-      width: 14rem;
-      background: url("../images/iconBackground.png") no-repeat;
-      background-size: contain;
-      background-position: center center;
-    }
-  }
-
-  .adress {
-    text-align: center;
-    color: white;
-    font-size: 2rem;
-    margin: 1rem 0;
-  }
-
-  .banner {
-    height: 22rem;
-    background: url("../images/mainBanner.png") no-repeat;
-    background-size: contain;
-    background-position: center center;
-    margin-top: 5vh;
   }
 }
 
@@ -117,3 +121,89 @@
     background-color: #24d39b!important;
   }
 }
+/* MOBILE */
+@media (max-width:520px) {
+  #main {
+    margin-bottom: 30rem;
+    height: 15rem;
+    min-height: 15rem;
+
+    .ivu-layout-content {
+      padding: 0;
+
+      .banner {
+        height: 8rem;
+        min-height: 8rem;
+        margin-top: 2vh;
+      }
+
+      .machine {
+        margin-top: 5rem;
+
+        .ivu-row-flex {
+          justify-content: space-between;
+
+          .ivu-col {
+            display: flex;
+            width: 8rem;
+            height: 8rem;
+            margin: 1rem;
+            border-radius: 0.5rem;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: rgb(59, 156, 255,) 0 0 15px inset;
+            background: #000000;
+          }
+        }
+      }
+
+      .earnings {
+        justify-content: space-between;
+        background: #000;
+
+        .icon {
+          background: none;
+          padding-top: 0;
+          height: 4rem;
+          width: 5rem;
+
+          .title {
+            color: white;
+          }
+        }
+      }
+
+      .adress {
+        font-weight: 900;
+        font-size: 1px;
+        // margin: -15rem 0;
+      }
+    }
+  }
+
+  #mill,
+  #payRecord {
+    text-align: center;
+    margin: 3vh 0;
+
+    h2 {
+      color: red;
+      font-size: 1rem;
+      font-weight: normal;
+    }
+
+    .shape {
+      height: 2px;
+      margin: 0.5rem auto;
+      width: 2rem;
+    }
+  }
+}
+/* MOBILE */
+/* PC */
+@media (min-width:320px) {}
+@media (min-width: 768px) {}
+@media (min-width: 992px) {}
+@media (min-width:1200px) {}
+/* PC */

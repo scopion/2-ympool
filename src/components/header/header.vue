@@ -124,8 +124,9 @@
       <Drawer :closable="false" v-model="value">
         <Menu :active-name="activemenu" @on-select="select()">
           <MenuGroup>
-            <MenuItem name="index" :to="item.path" v-for="(item,index) in pages" :key="item.name" exact> {{item.name}}
+            <MenuItem name="index" v-for="(item,index) in pages" :key="item.name">
             <Divider />
+            <router-link :to="{ name: item.path, params: {} }" exact>{{item.name}}</router-link>
             </MenuItem>
           </MenuGroup>
         </Menu>
@@ -139,7 +140,7 @@
 export default {
   data() {
     return {
-      value: false,
+      value: false, 
       theme: 'dark',
       activemenu: 1, // 高亮
       isCollapsed: true,

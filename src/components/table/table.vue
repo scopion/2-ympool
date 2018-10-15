@@ -1,6 +1,6 @@
 <template>
 <div class="">
-  <Table :data="tableData" highlight-row size="large" :columns="tableColumns" stripe border></Table>
+  <Table :data="tableData" highlight-row size="large" :columns="tableColumns" stripe border ellipsis></Table>
   <div style="margin: 10px;overflow: hidden">
     <div style="float: right;">
       <Page :total="100" :current="1" @on-change="changePage"></Page>

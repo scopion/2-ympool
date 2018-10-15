@@ -4,61 +4,31 @@
 </style>
 <template>
 <div class="layout">
+  <Header :name="name"></Header>
   <Layout>
-    <Header :name="name"></Header>
     <section id="main">
-      <Content :style="{padding: '0 50px'}">
-        <div class="banner" style="min-height: 200px;">
+      <Content>
+        <div class="banner">
         </div>
+        <p class="adress" v-show="clintWidth<520">钱包地址: {{this.GLOBAL.userAddress}}</p>
         <div class="machine">
           <Row type="flex" justify="space-around">
-            <Col :span="4">
-            <div class="icon-1">
-            </div>
-            <p class="title">矿机数量</p>
-            <p class="details">{{userinfo.online + userinfo.offline}}</p>
-            </Col>
-            <Col :span="4">
-            <div class="icon-2">
-            </div>
-            <p class="title">在线机器</p>
-            <p class="details">{{userinfo.online}}</p>
-            </Col>
-            <Col :span="4">
-            <div class="icon-3">
-            </div>
-            <p class="title">离线机器</p>
-            <p class="details">{{userinfo.offline}}</p>
-            </Col>
-            <Col :span="4">
-            <div class="icon-4">
-            </div>
-            <p class="title">算力</p>
-            <p class="details">{{userinfo.hr1}}</p>
+            <Col :sm="4" :md="6" :lg="6" v-for="(item,index) in machine">
+            <div :class="item.icon"></div>
+            <p class="title">{{item.name}}</p>
+            <p class="details">{{item.value}}</p>
             </Col>
           </Row>
         </div>
         <div class="earnings">
-          <Row type="flex" justify="center">
-            <Col class="icon" :span="4">
-            <p class="title">24小时收益</br>(ETH)</p>
-            <p class="details">{{userinfo.balance24}}</p>
-            </Col>
-            <Col class="icon" :span="4">
-            <p class="title">待支付</br>(ETH)</p>
-            <p class="details">{{userinfo.hr1}}</p>
-            </Col>
-            <Col class="icon" :span="4">
-            <p class="title">总支付</br>(ETH)</p>
-            <p class="details">{{userinfo.paid}}</p>
-            </Col>
-            <Col class="icon" :span="4">
-            <p class="title">余额</br>(ETH)</p>
-            <p class="details">{{userinfo.balance}}</p>
+          <Row type="flex" justify="center" v-if="earnings.length">
+            <Col class="icon" :sm="4" :md="6" :lg="6" v-for="(item,index) in earnings">
+            <p class="title">{{item.name}}</br>(ETH)</p>
+            <p class="details">{{item.value}}</p>
             </Col>
           </Row>
         </div>
-        <p class="adress">钱包地址: {{this.GLOBAL.userAddress}}</p>
+        <p class="adress" v-show="clintWidth>520">钱包地址: {{this.GLOBAL.userAddress}}</p>
       </Content>
     </section>
     <!-- <section id="domain">
@@ -74,10 +44,10 @@
       <Content class="mill">
         <Tabs value="name1">
           <TabPane label="活跃矿机" name="name1">
-            <Table :columns="columns" :data="OfflineDataTables" v-if="dataTables.length"></Table>
+            <Table :columns="columnsMills" :data="OnlineDataTables" v-if="dataTables.length"></Table>
           </TabPane>
           <TabPane label="离线矿机" name="name2">
-            <Table :columns="columns" :data="OnlineDataTables" v-if="dataTables.length"></Table>
+            <Table :columns="columnsMills" :data="OfflineDataTables" v-if="dataTables.length"></Table>
           </TabPane>
         </Tabs>
       </Content>
@@ -86,7 +56,7 @@
       <Content class="payRecord">
         <h2>支付记录</h2>
         <div class="shape"></div>
-        <Table :columns="columns" :data="dataTables" v-if="dataTables.length"></Table>
+        <!-- <Table :columns="columnsPayments" :data="payments" v-if="dataTables.length"></Table> -->
       </Content>
     </section>
   </Layout>
@@ -113,7 +83,46 @@ export default {
     return {
       name: 'search',
       pool: this.GLOBAL.pool, //矿池代号
+      clintWidth: document.body.clientWidth,
       userinfo: {},
+      machine: [{
+          name: '矿机数量',
+          icon: 'icon-1',
+          value: ''
+        },
+        {
+          name: '在线机器',
+          icon: 'icon-2',
+          value: ''
+        },
+        {
+          name: '离线机器',
+          icon: 'icon-3',
+          value: ''
+        },
+        {
+          name: '算力',
+          icon: 'icon-4',
+          value: ''
+        },
+      ],
+      earnings: [{
+          name: '24小时收益',
+          value: ''
+        },
+        {
+          name: '待支付',
+          value: ''
+        },
+        {
+          name: '总支付',
+          value: ''
+        },
+        {
+          name: '余额',
+          value: ''
+        },
+      ],
       swiperOption: {
         spaceBetween: 30,
         mousewheel: true,
@@ -127,7 +136,7 @@ export default {
           disableOnInteraction: false,
         },
       },
-      columns: [{
+      columnsMills: [{
           title: '矿机',
           key: 'date',
         },
@@ -148,9 +157,27 @@ export default {
           key: 'address'
         },
       ],
+      columnsPayments: [{
+          title: '时间',
+          // key: 'date',
+        },
+        {
+          title: '总量',
+          // key: 'name'
+        },
+        {
+          title: '交易',
+          // key: 'age',
+        },
+        {
+          title: '状态',
+          // key: 'address'
+        },
+      ],
       dataTables: [],
       OnlineDataTables: [], //在线矿机
       OfflineDataTables: [], //离线矿机
+      payments: [], //支付记录
     }
   },
   components: {
@@ -186,6 +213,14 @@ export default {
         address: this.GLOBAL.userAddress
       }))
       this.userinfo = res.data.data
+      this.earnings[0].value = this.userinfo.balance24
+      this.earnings[1].value = this.userinfo.hr1
+      this.earnings[2].value = this.userinfo.paid
+      this.earnings[3].value = this.userinfo.balance
+      this.machine[0].value = this.userinfo.online + this.userinfo.offline
+      this.machine[1].value = this.userinfo.online
+      this.machine[2].value = this.userinfo.offline
+      this.machine[3].value = this.userinfo.hr1
       console.log(this.userinfo, 'userinfo')
       let datas = []
       for (let key in this.userinfo.workers) {
@@ -210,7 +245,6 @@ export default {
   mounted() {
     // this.drawLine()
     this.getUserInfo()
-
   },
 }
 </script>

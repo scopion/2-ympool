@@ -27,7 +27,7 @@ export default {
           width: 230,
           render: (h, params) => {
             console.log(params.row, 'params.row');
-            return h('div', params.row.hr1);
+            return h('div', params.row.hr1s);
           }
         },
         // {
@@ -84,7 +84,7 @@ export default {
           width: 230,
           render: (h, params) => {
             console.log(params.row, 'params.row');
-            return h('div', params.row.hr2);
+            return h('div', params.row.hr2s);
           }
         },
         {

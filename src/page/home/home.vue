@@ -37,10 +37,10 @@
             <p>{{poolinfo.hr1 }}</p>
             </Col>
             <Col :span="4">
-            <p class="details">全网算力 TH/s</p>
+            <p class="details">全网算力 </p>
             <div class="dataItem dataItem-3">
             </div>
-            <p>{{poolinfo.hr2 | fixed(2)}}</p>
+            <p>{{poolinfo.hr2 | fixed(2)}} <b>TH</b> </p>
             </Col>
             <Col :span="4">
             <p class="details">当前区块</p>
@@ -55,7 +55,7 @@
             <p>{{poolinfo.difficult}}</p>
             </Col>
             <Col :span="4">
-            <p class="details">24小时收益 MH/s</p>
+            <p class="details">24小时收益 </p>
             <div class="dataItem dataItem-6">
             </div>
             <p>{{poolinfo.estReward | fixed(10) }}</p>

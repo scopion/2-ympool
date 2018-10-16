@@ -135,7 +135,7 @@ a.router-link-active {
     <Menu mode="horizontal" :theme="theme" :active-name="activemenu" @on-select="select()">
       <div class="layout-logo" @click="backHome()">
       </div>
-      <div class="layout-nav" v-show="name != 'search'" v-if="clintWidth>520">
+      <div class="layout-nav" v-if="clintWidth>520">
         <MenuItem name="index" v-for="(item,index) in pages" :key="item.name">
         <router-link :to="{ name: item.path, params: {} }" exact>{{item.name}}</router-link>
         </MenuItem>

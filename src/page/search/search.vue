@@ -138,11 +138,11 @@ export default {
         },
         {
           title: '当前算力',
-          key: 'name'
+          key: 'hr1s'
         },
         {
-          title: '本地算力/24小时',
-          key: 'hr2',
+          title: '24H 平均算力',
+          key: 'hr2s',
         },
         {
           title: '拒绝率',

@@ -22,7 +22,7 @@
   //css
   import 'iview/dist/styles/iview.css';
   import 'swiper/dist/css/swiper.css'; //这里注意具体看使用的版本是否需要引入样式，以及具体位置。
-  require('!style-loader!css-loader!less-loader!./style/commonStyle.less')
+  require('!style-loader!css-loader!less-loader!./style/global/global.less')
   Vue.prototype.$md5 = md5
   Vue.prototype.common = common; //引入公共方法&修改VUE原型方法
   Vue.prototype.api = api; //引入公共方法&修改VUE原型方法

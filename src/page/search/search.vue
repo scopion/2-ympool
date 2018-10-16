@@ -1,7 +1,3 @@
-
-<style lang="less" scoped>
-@import "../../style/search.less";
-</style>
 <template>
 <div class="layout">
   <Header :name="name"></Header>
@@ -13,7 +9,7 @@
         <p class="adress" v-show="clintWidth<520">钱包地址: {{this.GLOBAL.userAddress}}</p>
         <div class="machine">
           <Row type="flex" justify="space-around">
-            <Col :sm="4" :md="6" :lg="6" v-for="(item,index) in machine">
+            <Col :sm="4" :md="6" :lg="6" v-for="(item,index) in machine" :key="item.name">
             <div class="icon" :class="item.icon"></div>
             <p class="title">{{item.name}}</p>
             <p class="details">{{item.value}}</p>
@@ -22,7 +18,7 @@
         </div>
         <div class="earnings">
           <Row type="flex" justify="center" v-if="earnings.length">
-            <Col class="icon" :sm="4" :md="6" :lg="6" v-for="(item,index) in earnings">
+            <Col class="icon" :sm="4" :md="6" :lg="6" v-for="(item,index) in earnings" :key="item.name">
             <p class="title">{{item.name}}</br>(ETH)</p>
             <p class="details">{{item.value}}</p>
             </Col>
@@ -56,7 +52,7 @@
       <Content class="payRecord">
         <h2>支付记录</h2>
         <div class="shape"></div>
-        <!-- <Table :columns="columnsPayments" :data="payments" v-if="dataTables.length"></Table> -->
+        <Table :columns="columnsPayments" :data="payments" v-if="dataTables.length"></Table>
       </Content>
     </section>
   </Layout>
@@ -111,7 +107,7 @@ export default {
           value: ''
         },
         {
-          name: '待支付',
+          name: '总收益',
           value: ''
         },
         {
@@ -138,7 +134,7 @@ export default {
       },
       columnsMills: [{
           title: '矿机',
-          key: 'date',
+          key: 'mill',
         },
         {
           title: '当前算力',
@@ -146,33 +142,37 @@ export default {
         },
         {
           title: '本地算力/24小时',
-          key: 'age',
+          key: 'hr2',
         },
         {
           title: '拒绝率',
-          key: 'address'
+          key: 'rejects'
         },
         {
           title: '最后更新',
-          key: 'address'
+          key: 'lastShare'
         },
       ],
       columnsPayments: [{
+          title: '序号',
+          key: 'address'
+        }, {
           title: '时间',
-          // key: 'date',
+          key: 'mill',
         },
         {
           title: '总量',
-          // key: 'name'
+          key: 'name'
         },
         {
           title: '交易',
-          // key: 'age',
+          key: 'age',
         },
         {
           title: '状态',
-          // key: 'address'
+          key: 'address'
         },
+
       ],
       dataTables: [],
       OnlineDataTables: [], //在线矿机
@@ -213,8 +213,9 @@ export default {
         address: this.GLOBAL.userAddress
       }))
       this.userinfo = res.data.data
+      this.payments = res.data.data.payments
       this.earnings[0].value = this.userinfo.balance24
-      this.earnings[1].value = this.userinfo.hr1
+      this.earnings[1].value = (this.userinfo.paid + this.userinfo.balance)
       this.earnings[2].value = this.userinfo.paid
       this.earnings[3].value = this.userinfo.balance
       this.machine[0].value = this.userinfo.online + this.userinfo.offline
@@ -248,3 +249,7 @@ export default {
   },
 }
 </script>
+
+<style lang="less" scoped>
+@import "../../style/search/search.less";
+</style>

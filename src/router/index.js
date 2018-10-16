@@ -2,7 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 const home = r => require.ensure([], () => r(require('../page/home/home')), 'home')
 const search = r => require.ensure([], () => r(require('../page/search/search')), 'search')
-const text = r => require.ensure([], () => r(require('../page/text/text')), 'text')
+const help = r => require.ensure([], () => r(require('../page/help/help')), 'help')
+const about = r => require.ensure([], () => r(require('../page/about/about')), 'about')
 const notFound = r => require.ensure([], () => r(require('../page/notFound/notFound')), 'notFound')
 
 Vue.use(Router)
@@ -29,11 +30,19 @@ export default new Router({
       }
     },
     {
-      path: '/text',
-      name: 'text',
-      component: text,
+      path: '/help',
+      name: 'help',
+      component: help,
       meta: {
         title: '帮助-焱猫矿池',
+      }
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: about,
+      meta: {
+        title: '关于我们-焱猫矿池',
       }
     },
     {

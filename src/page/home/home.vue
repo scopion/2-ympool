@@ -263,7 +263,7 @@ export default {
   },
   filters: {
     fixed: function(a, b) {
-      return a.toFixed(b)
+      return Number(a).toFixed(b)
     }
   },
   mounted() { // 组件初始化后执行
@@ -277,5 +277,5 @@ export default {
 }
 </script>
 <style lang='less' scoped>
-@import "../../style/home.less";
+@import "../../style/home/home.less";
 </style>

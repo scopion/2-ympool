@@ -15,14 +15,14 @@ export default {
       tableData: this.data,
       tableColumns: [{
           title: this.columns[0].title,
-          key: 'mill',
+          key: this.columns[0].key,
           align: 'center',
           width: 230,
           fixed: 'left',
         },
         {
           title: this.columns[1].title,
-          key: 'hr1',
+          key: this.columns[1].key,
           align: 'center',
           width: 230,
           render: (h, params) => {
@@ -79,7 +79,7 @@ export default {
         // },
         {
           title: this.columns[2].title,
-          key: 'hr2',
+          key: this.columns[2].key,
           align: 'center',
           width: 230,
           render: (h, params) => {
@@ -89,7 +89,7 @@ export default {
         },
         {
           title: this.columns[3].title,
-          key: 'rejects',
+          key: this.columns[3].key,
           align: 'center',
           width: 230,
           render: (h, params) => {
@@ -98,7 +98,7 @@ export default {
         },
         {
           title: this.columns[4].title,
-          key: 'lastShare',
+          key: this.columns[4].key,
           align: 'center',
           width: 230,
           render: (h, params) => {

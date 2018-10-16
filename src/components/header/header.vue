@@ -170,8 +170,11 @@ export default {
         path: 'home',
         name: '首页'
       }, {
-        path: 'text',
-        name: '矿池收益'
+        path: 'help',
+        name: '挖矿帮助'
+      }, {
+        path: 'about',
+        name: '关于我们'
       }]
     }
   },

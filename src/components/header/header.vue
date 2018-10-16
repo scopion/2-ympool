@@ -1,4 +1,5 @@
 <style lang="less" scoped>
+@img: '../../images';
 .ivu-layout-header {
     background: #000;
     height: 10vh;
@@ -16,20 +17,25 @@
     .layout-nav {
         height: 100%;
         .ivu-menu-item {
-            top: 1.5vh;
+            // top: 1.5vh;
         }
     }
     .layout-logo {
         cursor: pointer;
+        transition: all 0.3s;
         width: 150px;
         height: 100%;
         line-height: 1rem;
         vertical-align: middle;
-        background: url("../../images/logo@2x.png") no-repeat center;
+        background: url("@{img}/logo@2x.png") no-repeat center;
         background-size: contain;
         float: left;
         position: relative;
         left: 0;
+    }
+
+    .layout-logo:hover {
+        transform: scale(1.05);
     }
     .mobileMenu {
         text-align: right;
@@ -38,7 +44,7 @@
         align-items: center;
         height: 100%;
         .ivu-btn-primary {
-            background: url("../../images/menu.png") no-repeat center;
+            background: url("@{img}/menu.png") no-repeat center;
             background-size: contain;
             border: transparent;
             padding: 0.8rem;
@@ -53,28 +59,33 @@
 }
 
 .layout-nav {
-    width: 300px;
-    margin: 0 20px 0 auto;
+    width: 350px;
+    float: right;
+    display: flex;
+    align-items: center;
 }
 
 .layout-footer-center {
     text-align: center;
 }
-.ivu-menu-item a {
+a.ivu-menu-item {
     transition: all 0.3s;
+    text-align: center;
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
+    height: 2rem;
+    justify-content: center;
+    position: relative;
+    color: white!important;
+}
+.pcActive {
     color: white;
-    display: inline-block;
-    width: 100%;
+    border-radius: 5px;
+    background: #01113e;
+    border: 1px solid #294ced;
 }
-
-.ivu-menu-item a:hover {
-    color: #24d39b;
-}
-
-a.router-link-active {
-    color: #24d39b;
-}
-
+.ivu-menu-item a:hover {}
 .ivu-drawer-body {
     padding: 16px 16px 16px 0!important !important;
     .active {
@@ -93,7 +104,7 @@ a.router-link-active {
         }
 
         .layout-nav {
-            width: 140px;
+            width: 180px;
             float: right;
             margin: 0;
             .ivu-menu-item {
@@ -136,8 +147,7 @@ a.router-link-active {
       <div class="layout-logo" @click="backHome()">
       </div>
       <div class="layout-nav" v-if="clintWidth>520">
-        <MenuItem name="index" v-for="(item,index) in pages" :key="item.name">
-        <router-link :to="{ name: item.path, params: {} }" exact>{{item.name}}</router-link>
+        <MenuItem name="index" v-for="(item,index) in pages" :to="{ name: item.path, params: {} }" :key="item.name" :class="item.path==name?'pcActive':''">{{item.name}}
         </MenuItem>
       </div>
       <div class="mobileMenu" v-else>

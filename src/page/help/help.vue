@@ -1,16 +1,54 @@
-<style lang="less" scoped>
-</style>
 <template>
 <div class="layout">
   <Layout>
     <Header :name="name"></Header>
-    <Content :style="{padding: '0 50px'}">
-      <Card>
-        <div style="min-height: 200px;padding:5rem">
-          <h1>帮助页面</h1>
+    <section id="help">
+      <Content>
+        <div class="layout">
+          <Layout>
+            <Layout>
+              <Sider>
+                <Menu active-name="1-2" theme="light" width="auto" :open-names="['1']">
+                  <Submenu name="1">
+                    <template slot="title">
+                                        <Icon type="ios-navigate"></Icon>
+                                        Item 1
+                                    </template>
+                    <MenuItem name="1-1">Option 1</MenuItem>
+                    <MenuItem name="1-2">Option 2</MenuItem>
+                    <MenuItem name="1-3">Option 3</MenuItem>
+                  </Submenu>
+                  <Submenu name="2">
+                    <template slot="title">
+                                        <Icon type="ios-keypad"></Icon>
+                                        Item 2
+                                    </template>
+                    <MenuItem name="2-1">Option 1</MenuItem>
+                    <MenuItem name="2-2">Option 2</MenuItem>
+                  </Submenu>
+                  <Submenu name="3">
+                    <template slot="title">
+                                        <Icon type="ios-analytics"></Icon>
+                                        Item 3
+                                    </template>
+                    <MenuItem name="3-1">Option 1</MenuItem>
+                    <MenuItem name="3-2">Option 2</MenuItem>
+                  </Submenu>
+                </Menu>
+              </Sider>
+              <Layout>
+                <Content>
+                  <Divider orientation="left">Left Text</Divider>
+                  <Divider orientation="left">Left Text</Divider>
+                  <Divider orientation="left">Left Text</Divider>
+                  <Divider orientation="left">Left Text</Divider>
+                </Content>
+              </Layout>
+            </Layout>
+          </Layout>
         </div>
-      </Card>
-    </Content>
+      </Content>
+    </section>
     <Footer></Footer>
   </Layout>
 </div>
@@ -21,7 +59,7 @@ import Footer from '../../components/footer/footer.vue' //公共尾
 export default {
   data() {
     return {
-      name: 'text',
+      name: 'help',
     }
   },
   components: {
@@ -60,3 +98,7 @@ export default {
   // functional: false
 }
 </script>
+
+<style lang="less" scoped>
+@import "../../style/help/help.less";
+</style>

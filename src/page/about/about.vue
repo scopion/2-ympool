@@ -21,7 +21,7 @@ import Footer from '../../components/footer/footer.vue' //公共尾
 export default {
   data() {
     return {
-      name: 'text',
+      name: 'about',
     }
   },
   components: {

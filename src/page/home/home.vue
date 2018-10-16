@@ -183,7 +183,7 @@ export default {
       this.getPoolInfo()
       setInterval(() => {
         this.getPoolInfo() //矿池信息 绘制曲线
-      }, 1000)
+      }, 5000)
       // this.poolratechart() //全网版图
     },
     inputChange(e) {

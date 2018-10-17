@@ -22,7 +22,7 @@
           <!--           <div class="searchBar"><span @click="search()"></span>
 </div> -->
         </Content>
-        <Card class="data" shadow v-show="clintWidth>520">
+        <Card class="data" dis-hover v-show="clintWidth>520">
           <Row type="flex" justify="space-around">
             <Col :span="4">
             <p class="details">在线矿工</p>
@@ -63,7 +63,7 @@
           </Row>
         </Card>
 
-        <Card class="data" shadow v-show="clintWidth<520">
+        <Card class="data" dis-hover v-show="clintWidth<520">
           <Row type="flex" justify="space-around">
             <Col :span="4">
             <div class="dataItem dataItem-1">

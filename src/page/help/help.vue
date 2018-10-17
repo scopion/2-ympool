@@ -8,7 +8,7 @@
           <Layout>
             <Layout>
               <Sider>
-                <Menu :theme="theme3" active-name="1" width="auto">
+                <Menu theme="light" active-name="1" width="auto">
                   <MenuGroup>
                     <MenuItem name="1">
                     <Icon type="md-document" /> ETH挖矿教程

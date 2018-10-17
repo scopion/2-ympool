@@ -46,6 +46,21 @@
         </content>
       </Content>
     </section>
+    <section id="text">
+      <Content>
+        <Row>
+          <Col span="10">
+          <p>我们是焱猫矿池，我们创造高效的矿池服务平台。</p>
+          <h1> About us</h1>
+          <!-- <div>
+            123
+          </div> -->
+          </Col>
+          <Col span="14"> 专注区块链多年，焱猫矿池是家兼具视野、创新动力、全国领先的矿池服务平 台。稳定/高效/收益高是我们是3大特点。目前已为国内优秀
+          </Col>
+        </Row>
+      </Content>
+    </section>
     <section id="introduce">
       <Content class="introduce">
         <h2>领先的矿池服务平台</h2>

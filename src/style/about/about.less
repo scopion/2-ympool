@@ -45,7 +45,7 @@
     }
 
     p {
-      font-weight: 900;
+      font-weight: 100;
       letter-spacing: 2px;
       font-size: 1rem;
       color: white;
@@ -113,7 +113,8 @@
         background-position: center;
         background-repeat: no-repeat;
         background-size: contain;
-        border-radius: .5rem;
+        border-radius: 0.5rem;
+
         p {
           color: #515a6e;
         }
@@ -160,36 +161,32 @@
   }
 }
 
-.domain {
-  margin-top: 2rem;
-  text-align: center;
+#text {
+  background: url("@{img}/dot.png");
+  background-position: center;
+  background-size: 50%;
+  background-repeat:  space;
+  padding: 5rem 0;
 
-  h2 {
-    font-size: 2rem;
-    font-weight: normal;
-  }
+  .ivu-layout-content {
+    .ivu-row {
+      display: flex;
+      .ivu-col:first-of-type {
+        p {
+          color: #0D4BDE;
+          font-size: 1rem;
+        }
 
-  .shape {
-    margin: 1rem auto;
-    width: 4rem;
-  }
+        h1 {
+          font-size: 4rem;
+          color: #000;
+        }
+      }
 
-  .domainIcon {
-    text-align: right;
-
-    span {
-      width: 1.5rem;
-      height: 1.5rem;
-      display: inline-block;
-      vertical-align: middle;
-      margin: 0 0.5rem;
-      background: url("@{img}/Ellipse.png");
-      background-size: 100%;
+      .ivu-col:last-of-type {
+        font-size: 1.5rem;
+      }
     }
-  }
-
-  #myChart {
-    margin-top: 1rem;
   }
 }
 

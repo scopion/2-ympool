@@ -8,40 +8,39 @@
           <Layout>
             <Layout>
               <Sider>
-                <Menu active-name="1-2" theme="light" width="auto" :open-names="['1']">
-                  <Submenu name="1">
-                    <template slot="title">
-                                        <Icon type="ios-navigate"></Icon>
-                                        Item 1
-                                    </template>
-                    <MenuItem name="1-1">Option 1</MenuItem>
-                    <MenuItem name="1-2">Option 2</MenuItem>
-                    <MenuItem name="1-3">Option 3</MenuItem>
-                  </Submenu>
-                  <Submenu name="2">
-                    <template slot="title">
-                                        <Icon type="ios-keypad"></Icon>
-                                        Item 2
-                                    </template>
-                    <MenuItem name="2-1">Option 1</MenuItem>
-                    <MenuItem name="2-2">Option 2</MenuItem>
-                  </Submenu>
-                  <Submenu name="3">
-                    <template slot="title">
-                                        <Icon type="ios-analytics"></Icon>
-                                        Item 3
-                                    </template>
-                    <MenuItem name="3-1">Option 1</MenuItem>
-                    <MenuItem name="3-2">Option 2</MenuItem>
-                  </Submenu>
+                <Menu :theme="theme3" active-name="1" width="auto">
+                  <MenuGroup>
+                    <MenuItem name="1">
+                    <Icon type="md-document" /> ETH挖矿教程
+                    </MenuItem>
+                    <MenuItem name="2">
+                    <Icon type="md-chatbubbles" /> 如何查看收益
+                    </MenuItem>
+                    <MenuItem name="3">
+                    <Icon type="md-heart" /> 如何获取钱包地址
+                    </MenuItem>
+                    <MenuItem name="4">
+                    <Icon type="md-leaf" /> 什么是挖矿软件
+                    </MenuItem>
+                    <MenuItem name="5">
+                    <Icon type="md-leaf" /> 什么是算力
+                    </MenuItem>
+                    <MenuItem name="6">
+                    <Icon type="md-leaf" /> 新手教程
+                    </MenuItem>
+                  </MenuGroup>
                 </Menu>
               </Sider>
-              <Layout>
+              <Layout class="content">
                 <Content>
-                  <Divider orientation="left">Left Text</Divider>
-                  <Divider orientation="left">Left Text</Divider>
-                  <Divider orientation="left">Left Text</Divider>
-                  <Divider orientation="left">Left Text</Divider>
+                  <Divider orientation="center">ETH挖矿教程</Divider>
+                  <Content class="text">
+                    1.生成钱包地址</br>
+                    2.下载挖矿软件</br>
+                    3.连接矿池</br>
+                    4.查看矿机状态和收益</br>
+                    5.常见问题</br>
+                  </Content>
                 </Content>
               </Layout>
             </Layout>

@@ -55,10 +55,10 @@
             <p>{{poolinfo.difficult}}</p>
             </Col>
             <Col :span="4">
-            <p class="details">24小时收益 </p>
+            <p class="details">24H百兆收益</p>
             <div class="dataItem dataItem-6">
             </div>
-            <p>{{poolinfo.estReward | fixed(10) }}</p>
+            <p>{{poolinfo.estReward | fixed(4) }}</p>
             </Col>
           </Row>
         </Card>
@@ -102,8 +102,8 @@
             <Col :span="4">
             <div class="dataItem dataItem-6">
             </div>
-            <p>{{poolinfo.estReward | fixed(10) }}</p>
-            <p class="details">24小时收益 MH/s</p>
+            <p>{{poolinfo.estReward | fixed(4) }}</p>
+            <p class="details">24H百兆收益</p>
             </Col>
           </Row>
         </Card>
@@ -192,11 +192,11 @@ export default {
     },
     async search() { //查询
       if (this.searchInput.length == 42) { //判断钱包格式
-        sessionStorage.setItem("user", this.searchInput)
-        this.GLOBAL.userAddress = sessionStorage.getItem("user")
+        let query = this.searchInput
+        this.GLOBAL.userAddress = query
         this.$router.push({
           name: 'search',
-          params: '',
+          query: query,
         })
       } else {
         this.$Message.error({

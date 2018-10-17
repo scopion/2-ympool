@@ -8,7 +8,7 @@
         </div>
         <p class="adress" v-show="clintWidth<520">钱包地址: {{this.GLOBAL.userAddress}}</p>
         <div class="machine">
-          <Row type="flex" justify="space-around">
+          <Row type="flex" justify="center" v-if="machine.length">
             <Col :sm="4" :md="6" :lg="6" v-for="(item,index) in machine" :key="item.name">
             <div class="icon" :class="item.icon"></div>
             <p class="title">{{item.name}}</p>
@@ -38,12 +38,12 @@
     </section> -->
     <section id="mill">
       <Content class="mill">
-        <Tabs value="name1">
-          <TabPane label="活跃矿机" name="name1">
-            <Table :columns="columnsMills" :data="OnlineDataTables" v-if="dataTables.length"></Table>
+        <Tabs value="name1" v-if="dataTables">
+          <TabPane :label="'在线矿机' +  '(' + OnlineDataTables.length + ')' " name="name1">
+            <Table :columns="columnsMills" size="small" :data="OnlineDataTables" v-if="dataTables.length"></Table>
           </TabPane>
-          <TabPane label="离线矿机" name="name2">
-            <Table :columns="columnsMills" :data="OfflineDataTables" v-if="dataTables.length"></Table>
+          <TabPane :label="'离线矿机' + '(' + OfflineDataTables.length + ')'  " name="name2">
+            <Table :columns="columnsMills" size="small" :data="OfflineDataTables" v-if="dataTables.length"></Table>
           </TabPane>
         </Tabs>
       </Content>
@@ -52,7 +52,7 @@
       <Content class="payRecord">
         <h2>支付记录</h2>
         <div class="shape"></div>
-        <Table :columns="columnsPayments" :data="payments" v-if="dataTables.length"></Table>
+        <Table :columns="columnsPayments" size="small" :data="payments" v-if="dataTables.length"></Table>
       </Content>
     </section>
   </Layout>
@@ -87,20 +87,20 @@ export default {
           value: ''
         },
         {
-          name: '在线机器',
-          icon: 'icon-2',
-          value: ''
-        },
-        {
-          name: '离线机器',
-          icon: 'icon-3',
-          value: ''
-        },
-        {
           name: '算力',
           icon: 'icon-4',
           value: ''
         },
+        // {
+        //   name: '在线矿机',
+        //   icon: 'icon-4',
+        //   value: ''
+        // },
+        // {
+        //   name: '离线矿机',
+        //   icon: 'icon-4',
+        //   value: ''
+        // },
       ],
       earnings: [{
           name: '24小时收益',
@@ -172,7 +172,6 @@ export default {
           title: '状态',
           key: 'address'
         },
-
       ],
       dataTables: [],
       OnlineDataTables: [], //在线矿机
@@ -206,13 +205,13 @@ export default {
       });
     },
     async getUserInfo() {
-      this.GLOBAL.userAddress = sessionStorage.getItem("user")
       let res = await this.axios.post(this.api.userinfo, JSON.stringify({
         token: "asd",
         pool: this.pool,
         address: this.GLOBAL.userAddress
       }))
       this.userinfo = res.data.data
+      console.log(this.userinfo, 'userinfo')
       this.payments = res.data.data.payments
       this.earnings[0].value = this.userinfo.balance24
       this.earnings[1].value = (this.userinfo.paid + this.userinfo.balance)
@@ -220,32 +219,35 @@ export default {
       this.earnings[3].value = this.userinfo.balance
       this.machine[0].value = this.userinfo.online + this.userinfo.offline
       this.machine[1].value = this.userinfo.online
-      this.machine[2].value = this.userinfo.offline
-      this.machine[3].value = this.userinfo.hr1
-      console.log(this.userinfo, 'userinfo')
+      // this.machine[2].value = this.userinfo.offline
+      // this.machine[3].value = this.userinfo.hr1
       let datas = []
       for (let key in this.userinfo.workers) {
         this.userinfo.workers[key].mill = key
         datas.push(this.userinfo.workers[key])
       }
       datas.map((item) => {
-        console.log(item)
         if (item.isOnline == 1) {
           this.OnlineDataTables.push(item)
         } else {
           this.OfflineDataTables.push(item)
         }
       })
+
       this.dataTables = datas //矿机列表
       console.log(this.dataTables, '矿机列表')
       console.log(this.OnlineDataTables, '在线列表')
       console.log(this.OfflineDataTables, '离线列表')
     }
   },
+  greated() {
+
+  },
   beforeMount() {},
   mounted() {
     // this.drawLine()
     this.getUserInfo()
+    console.log(this.$route.query);
   },
 }
 </script>

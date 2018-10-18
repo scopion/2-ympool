@@ -3,7 +3,7 @@
   <Table :data="tableData" highlight-row size="small" :columns="tableColumns" stripe border ellipsis></Table>
   <div style="margin: 10px;overflow: hidden">
     <div style="float: right;">
-      <Page :total="100" :current="1" @on-change="changePage"></Page>
+      <Page :total="tableData.length" :current="current" @on-change="changePage"></Page>
     </div>
   </div>
 </div>
@@ -60,11 +60,11 @@ export default {
       ]
     }
   },
-  props: ['columns', 'data'],
+  props: ['columns', 'data', 'current'],
   methods: {
     changePage(val) {
       //获取数据
-      this.$emit('con','傻逼弄东西')
+      this.$emit('chengepage', '选择了第' + val + '页')
       this.tableData = this.data;
       console.log(this.data);
       console.log(val);

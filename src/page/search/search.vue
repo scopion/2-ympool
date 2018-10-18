@@ -40,10 +40,10 @@
       <Content class="mill">
         <Tabs value="name1" v-if="dataTables">
           <TabPane :label="'在线矿机' +  '(' + OnlineDataTables.length + ')' " name="name1">
-            <Table :columns="columnsMills" size="small" :data="OnlineDataTables" v-if="dataTables.length"></Table>
+            <Table :columns="columnsMills" size="small" :data="OnlineDataTables" v-if="dataTables.length" @chengepage="chengepage" :current="current"></Table>
           </TabPane>
           <TabPane :label="'离线矿机' + '(' + OfflineDataTables.length + ')'  " name="name2">
-            <Table :columns="columnsMills" size="small" :data="OfflineDataTables" v-if="dataTables.length" @con="haha"></Table>
+            <Table :columns="columnsMills" size="small" :data="OfflineDataTables" v-if="dataTables.length" @chengepage="chengepage" :current="current"></Table>
           </TabPane>
         </Tabs>
       </Content>
@@ -52,7 +52,7 @@
       <Content class="payRecord">
         <h2>支付记录</h2>
         <div class="shape"></div>
-        <Table :columns="columnsPayments" size="small" :data="payments" v-if="dataTables.length"></Table>
+        <Table :columns="columnsPayments" size="small" :data="payments" v-if="dataTables.length" @chengepage="chengepage" :current="current"></Table>
       </Content>
     </section>
   </Layout>
@@ -177,6 +177,7 @@ export default {
       OnlineDataTables: [], //在线矿机
       OfflineDataTables: [], //离线矿机
       payments: [], //支付记录
+      current: 1,
     }
   },
   components: {
@@ -233,15 +234,21 @@ export default {
       console.log(this.OfflineDataTables, '离线列表')
     },
     checkData(val) {
+      let OnlineData = [];
+      let OfflineData = [];
       val.map((item) => {
         if (item.isOnline == 1) {
-          this.OnlineDataTables.push(item)
+          OnlineData.push(item)
         } else {
-          this.OfflineDataTables.push(item)
+          OfflineData.push(item)
         }
       })
+      for (var i = 0; i < 10; i++) {
+        this.OnlineDataTables.push(OnlineData[i])
+        this.OfflineDataTables.push(OfflineData[i])
+      }
     },
-    haha(a) {
+    chengepage(a) {
       this.name = a
       alert(this.name)
     }

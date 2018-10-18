@@ -14,10 +14,11 @@ export default {
     let data = new Date(timestamp * 1000)
     const Y = data.getFullYear() + '-';
     const M = (data.getMonth() + 1 < 10 ? '0' + (data.getMonth() + 1) : data.getMonth() + 1) + '-';
-    const D = data.getDay() + ' ';
+    const D = data.getDate() + ' ';
     const h = data.getHours() + ':';
     const m = data.getMinutes() + ':'
     const s = data.getSeconds()
+    console.log(Y, M, D, h, m, s);
     return Y + M + D + h + m + s
   },
   msg(a, b, c) {

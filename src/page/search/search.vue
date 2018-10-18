@@ -47,9 +47,6 @@
               </div>
             </div>
           </TabPane>
-          <!-- <TabPane :label="'离线矿机' + '(' + OfflineDataTables.length + ')'  " name="name2">
-            <Table :columns="columnsMills" size="small" :data="OfflineDataTables" v-if="dataTables.length" @chengepage="chengepage" :current="current" :total="OfflineData.length"></Table>
-          </TabPane> -->
           <TabPane :label="'离线矿机' +  '(' + OfflineData.length + ')' " name="name2">
             <Table :columns="columnsMills" size="small" :data="OfflineDataTables" v-if="dataTables.length"></Table>
             <div style="margin: 10px;overflow: hidden">
@@ -105,7 +102,7 @@ export default {
           value: ''
         },
         {
-          name: '算力',
+          name: '当前算力',
           icon: 'icon-4',
           value: ''
         },
@@ -242,7 +239,7 @@ export default {
       this.earnings[2].value = this.userinfo.paid
       this.earnings[3].value = this.userinfo.balance
       this.machine[0].value = this.userinfo.online + this.userinfo.offline
-      this.machine[1].value = this.userinfo.online
+      this.machine[1].value = this.userinfo.hr1
       for (let key in this.userinfo.workers) {
         this.userinfo.workers[key].mill = key
         this.dataTables.push(this.userinfo.workers[key])
@@ -289,7 +286,6 @@ export default {
 
     },
     current2: function() {
-      this.checkData2(this.current2)
       this.checkDataMax(this.payments, this.payments, this.current2)
     }
   },

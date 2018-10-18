@@ -34,7 +34,7 @@
             <p class="details">矿池算力</p>
             <div class="dataItem dataItem-2">
             </div>
-            <p>{{poolinfo.hr1 }}</p>
+            <p>{{poolinfo.hr1}}</p>
             </Col>
             <Col :span="4">
             <p class="details">全网算力 </p>
@@ -74,7 +74,7 @@
             <Col :span="4">
             <div class="dataItem dataItem-2">
             </div>
-            <p>{{poolinfo.hr1 }}</p>
+            <p>{{poolinfo.hr1}}</p>
             <p class="details">矿池算力</p>
             </Col>
           </Row>

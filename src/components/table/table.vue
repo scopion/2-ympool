@@ -1,12 +1,13 @@
 <template>
 <div>
-  <Table :data="tableData" highlight-row size="small" :columns="data[0].address? paymentColumns:tableColumns" stripe border ellipsis></Table>
+  <Table :data="tableData" :loading="loading" highlight-row size="small" :columns="data[0].address? paymentColumns:tableColumns" stripe border ellipsis></Table>
 </div>
 </template>
 <script>
 export default {
   data() {
     return {
+      loading: true,
       tableData: this.data,
       tableColumns: [{
           title: this.columns[0].title,
@@ -122,6 +123,9 @@ export default {
   },
   created() {},
   mounted() {
+    if (this.data) {
+      this.loading = false
+    }
     console.log(this.data);
     console.log(this.columns);
   }

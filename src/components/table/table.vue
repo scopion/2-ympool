@@ -1,11 +1,6 @@
 <template>
-<div class="">
-  <Table :data="tableData" highlight-row size="small" :columns="tableColumns" stripe border ellipsis></Table>
-  <div style="margin: 10px;overflow: hidden">
-    <div style="float: right;">
-      <Page :total="tableData.length" :current="current" @on-change="changePage"></Page>
-    </div>
-  </div>
+<div>
+  <Table :data="tableData" highlight-row size="small" :columns="data[0].address? paymentColumns:tableColumns" stripe border ellipsis></Table>
 </div>
 </template>
 <script>
@@ -57,14 +52,66 @@ export default {
             return h('div', this.common.formatDate(params.row.lastShare));
           }
         }
+      ],
+      paymentColumns: [{
+          title: '序号',
+          type: 'index',
+          align: 'center',
+          width: 100,
+          fixed: 'left',
+        },
+        {
+          title: this.columns[1].title,
+          key: this.columns[1].key,
+          align: 'center',
+          width: 180,
+          render: (h, params) => {
+            return h('div', this.common.formatDate(params.row.time));
+          }
+        },
+        {
+          title: this.columns[2].title,
+          key: this.columns[2].key,
+          align: 'center',
+          width: 150,
+          render: (h, params) => {
+            // console.log(params.row, 'params.row');
+            return h('div', params.row.amountFloat);
+          }
+        },
+        { //交易
+          title: this.columns[3].title,
+          key: this.columns[3].key,
+          align: 'center',
+          width: 500,
+          render: (h, params) => {
+            return h('div', params.row.txid);
+          }
+        },
+        {
+          title: this.columns[4].title,
+          key: this.columns[4].key,
+          align: 'center',
+          width: 230,
+          render: (h, params) => {
+            const row = params.row;
+            // const color = row.status === 1 ? 'primary' : row.status === 2 ? 'success' : 'error';
+            // const text = row.status === 1 ? 'Working' : row.status === 2 ? 'Success' : 'Fail';
+            return h('Tag', {
+              props: {
+                type: 'dot',
+                color: 'success'
+              }
+            }, "交易正常");
+          }
+        }
       ]
     }
   },
-  props: ['columns', 'data', 'current'],
+  props: ['columns', 'data'],
   methods: {
     changePage(val) {
       //获取数据
-      this.$emit('chengepage', '选择了第' + val + '页')
       this.tableData = this.data;
       console.log(this.data);
       console.log(val);

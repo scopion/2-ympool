@@ -39,11 +39,24 @@
     <section id="mill">
       <Content class="mill">
         <Tabs value="name1" v-if="dataTables">
-          <TabPane :label="'在线矿机' +  '(' + OnlineDataTables.length + ')' " name="name1">
-            <Table :columns="columnsMills" size="small" :data="OnlineDataTables" v-if="dataTables.length" @chengepage="chengepage" :current="current"></Table>
+          <TabPane :label="'在线矿机' +  '(' + OnlineData.length + ')' " name="name1">
+            <Table :columns="columnsMills" size="small" :data="OnlineDataTables" v-if="dataTables.length"></Table>
+            <div style="margin: 10px;overflow: hidden">
+              <div style="float: right;">
+                <Page :total="OnlineData.length" :current="current" @on-change="changePage"></Page>
+              </div>
+            </div>
           </TabPane>
-          <TabPane :label="'离线矿机' + '(' + OfflineDataTables.length + ')'  " name="name2">
-            <Table :columns="columnsMills" size="small" :data="OfflineDataTables" v-if="dataTables.length" @chengepage="chengepage" :current="current"></Table>
+          <!-- <TabPane :label="'离线矿机' + '(' + OfflineDataTables.length + ')'  " name="name2">
+            <Table :columns="columnsMills" size="small" :data="OfflineDataTables" v-if="dataTables.length" @chengepage="chengepage" :current="current" :total="OfflineData.length"></Table>
+          </TabPane> -->
+          <TabPane :label="'离线矿机' +  '(' + OfflineData.length + ')' " name="name2">
+            <Table :columns="columnsMills" size="small" :data="OfflineDataTables" v-if="dataTables.length"></Table>
+            <div style="margin: 10px;overflow: hidden">
+              <div style="float: right;">
+                <Page :total="OfflineData.length" :current="current1" @on-change="changePage1"></Page>
+              </div>
+            </div>
           </TabPane>
         </Tabs>
       </Content>
@@ -52,7 +65,12 @@
       <Content class="payRecord">
         <h2>支付记录</h2>
         <div class="shape"></div>
-        <Table :columns="columnsPayments" size="small" :data="payments" v-if="dataTables.length" @chengepage="chengepage" :current="current"></Table>
+        <Table :columns="columnsPayments" size="small" :data="payments" v-if="dataTables.length"></Table>
+        <div style="margin: 10px;overflow: hidden">
+          <div style="float: right;">
+            <Page :total="payments.length" :current="current2" @on-change="changePage2"></Page>
+          </div>
+        </div>
       </Content>
     </section>
   </Layout>
@@ -158,15 +176,15 @@ export default {
           key: 'address'
         }, {
           title: '时间',
-          key: 'mill',
+          key: 'time',
         },
         {
           title: '总量',
-          key: 'name'
+          key: 'amountFloat'
         },
         {
           title: '交易',
-          key: 'age',
+          key: 'txid',
         },
         {
           title: '状态',
@@ -174,10 +192,15 @@ export default {
         },
       ],
       dataTables: [],
+      OnlineData: [],
+      OfflineData: [],
       OnlineDataTables: [], //在线矿机
       OfflineDataTables: [], //离线矿机
       payments: [], //支付记录
       current: 1,
+      current1: 1,
+      current2: 1,
+      total: 0,
     }
   },
   components: {
@@ -220,37 +243,54 @@ export default {
       this.earnings[3].value = this.userinfo.balance
       this.machine[0].value = this.userinfo.online + this.userinfo.offline
       this.machine[1].value = this.userinfo.online
-      // this.machine[2].value = this.userinfo.offline
-      // this.machine[3].value = this.userinfo.hr1
-      let datas = []
       for (let key in this.userinfo.workers) {
         this.userinfo.workers[key].mill = key
-        datas.push(this.userinfo.workers[key])
+        this.dataTables.push(this.userinfo.workers[key])
       }
-      this.checkData(datas)
-      this.dataTables = datas //矿机列表
-      console.log(this.dataTables, '矿机列表')
-      console.log(this.OnlineDataTables, '在线列表')
-      console.log(this.OfflineDataTables, '离线列表')
-    },
-    checkData(val) {
-      let OnlineData = [];
-      let OfflineData = [];
-      val.map((item) => {
+      this.dataTables.map((item) => {
         if (item.isOnline == 1) {
-          OnlineData.push(item)
+          this.OnlineData.push(item)
         } else {
-          OfflineData.push(item)
+          this.OfflineData.push(item)
         }
       })
+      //初始化在线矿机的列表
       for (var i = 0; i < 10; i++) {
-        this.OnlineDataTables.push(OnlineData[i])
-        this.OfflineDataTables.push(OfflineData[i])
+        this.OnlineDataTables.push(this.OnlineData[i])
+        this.OfflineDataTables.push(this.OfflineData[i])
       }
     },
-    chengepage(a) {
-      this.name = a
-      alert(this.name)
+    changePage(val) {
+      console.log(val, "当前" + val + "页数");
+      this.current = val
+    },
+    changePage1(val) {
+      console.log(val, "当前" + val + "页数");
+      this.current1 = val
+    },
+    changePage2(val) {
+      console.log(val, "当前" + val + "页数");
+      this.current1 = val
+    },
+    checkDataMax(a, b, c) {
+      a.splice(0, a.length) //清空当前的显示数据
+      for (var i = 10 * (c - 1) + 1; i <= ((b.length > 10 * c) ? (10 * c) : (b.length)); i++) {
+        a.push(b[i - 1]);
+      }
+      console.log(a);
+    },
+  },
+  watch: {
+    current: function() {
+      this.checkDataMax(this.OnlineDataTables, this.OnlineData, this.current)
+    },
+    current1: function() {
+      this.checkDataMax(this.OfflineDataTables, this.OfflineData, this.current1)
+
+    },
+    current2: function() {
+      this.checkData2(this.current2)
+      this.checkDataMax(this.payments, this.payments, this.current2)
     }
   },
   created() {},
@@ -258,9 +298,7 @@ export default {
   mounted() {
     // this.drawLine()
     this.GLOBAL.userAddress = this.$route.query.address
-    console.log(this.$route.query);
     this.getUserInfo()
-    console.log(this.GLOBAL.userAddress);
   },
 }
 </script>

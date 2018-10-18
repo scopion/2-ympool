@@ -172,6 +172,7 @@ export default {
       poolinfo: {},
       map1: [],
       map2: [],
+      timer: null,
     }
   },
   components: {
@@ -179,21 +180,16 @@ export default {
     Footer: Footer
   },
   methods: {
-    init() { //初始化
-      this.getPoolInfo()
-      setInterval(() => {
-        this.getPoolInfo() //矿池信息 绘制曲线
-      }, 5000)
-      // this.poolratechart() //全网版图
-    },
     inputChange(e) {
       console.log(e.target.value);
       console.log(this.searchInput)
     },
     async search() { //查询
       if (this.searchInput.length == 42) { //判断钱包格式
-        let query = this.searchInput
-        this.GLOBAL.userAddress = query
+        this.GLOBAL.userAddress = this.searchInput
+        let query = {
+          address: this.GLOBAL.userAddress
+        }
         this.$router.push({
           name: 'search',
           query: query,
@@ -267,13 +263,22 @@ export default {
     }
   },
   mounted() { // 组件初始化后执行
-    this.init()
     this.common.msg()
     // this.$Message.error(this.common.msg(1, 1, true));
     console.log(this.$md5('holle'));
   },
-  created() {},
-  beforeUpdate() {}
+  created() {
+    this.getPoolInfo()
+    this.timer = setInterval(() => {
+      this.getPoolInfo()
+    }, 5000)
+  },
+  beforeUpdate() {},
+  beforeDestroy() {
+    if (this.timer) { //如果定时器还在运行 或者直接关闭，不用判断
+      clearInterval(this.timer); //关闭
+    }
+  }
 }
 </script>
 <style lang='less' scoped>

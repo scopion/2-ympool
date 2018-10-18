@@ -43,7 +43,7 @@
             <Table :columns="columnsMills" size="small" :data="OnlineDataTables" v-if="dataTables.length"></Table>
           </TabPane>
           <TabPane :label="'离线矿机' + '(' + OfflineDataTables.length + ')'  " name="name2">
-            <Table :columns="columnsMills" size="small" :data="OfflineDataTables" v-if="dataTables.length"></Table>
+            <Table :columns="columnsMills" size="small" :data="OfflineDataTables" v-if="dataTables.length" @con="haha"></Table>
           </TabPane>
         </Tabs>
       </Content>
@@ -226,28 +226,34 @@ export default {
         this.userinfo.workers[key].mill = key
         datas.push(this.userinfo.workers[key])
       }
-      datas.map((item) => {
+      this.checkData(datas)
+      this.dataTables = datas //矿机列表
+      console.log(this.dataTables, '矿机列表')
+      console.log(this.OnlineDataTables, '在线列表')
+      console.log(this.OfflineDataTables, '离线列表')
+    },
+    checkData(val) {
+      val.map((item) => {
         if (item.isOnline == 1) {
           this.OnlineDataTables.push(item)
         } else {
           this.OfflineDataTables.push(item)
         }
       })
-
-      this.dataTables = datas //矿机列表
-      console.log(this.dataTables, '矿机列表')
-      console.log(this.OnlineDataTables, '在线列表')
-      console.log(this.OfflineDataTables, '离线列表')
+    },
+    haha(a) {
+      this.name = a
+      alert(this.name)
     }
   },
-  greated() {
-
-  },
+  created() {},
   beforeMount() {},
   mounted() {
     // this.drawLine()
-    this.getUserInfo()
+    this.GLOBAL.userAddress = this.$route.query.address
     console.log(this.$route.query);
+    this.getUserInfo()
+    console.log(this.GLOBAL.userAddress);
   },
 }
 </script>

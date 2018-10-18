@@ -22,7 +22,7 @@
         <content class="card">
           <Row :gutter="16">
             <Col span="8" class="num num1">
-            <Card>
+            <Card dis-hover>
               <p></p>
               <h1>安全</h1>
               <p>拥有最专业的解决方案，最专业的团队，为您实时监控数据，保证账户的安全信息，免去您的后顾之忧。。护。 </p>

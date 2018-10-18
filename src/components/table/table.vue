@@ -26,57 +26,9 @@ export default {
           align: 'center',
           width: 230,
           render: (h, params) => {
-            // console.log(params.row, 'params.row');
             return h('div', params.row.hr1s);
           }
         },
-        // {
-        //   title: this.columns[1].title,
-        //   key: 'hr1',
-        //   align: 'center',
-        //   width: 230,
-        //   render: (h, params) => {
-        //     const row = params.row;
-        //     const color = row.hr1 === 1 ? 'primary' : row.hr1 === 2 ? 'success' : 'error';
-        //     const text = row.hr1 === 1 ? 'Working' : row.hr1 === 2 ? 'Success' : 'Fail';
-        //
-        //     return h('Tag', {
-        //       props: {
-        //         type: 'dot',
-        //         color: color
-        //       }
-        //     }, text);
-        //   }
-        // },
-        // {
-        //   title: this.columns[3].title,
-        //   key: 'age',
-        //   align: 'center',
-        //   width: 230,
-        //   render: (h, params) => {
-        //     return h('Poptip', {
-        //       props: {
-        //         trigger: 'hover',
-        //         title: params.row.age.length + 'customers',
-        //         placement: 'bottom'
-        //       }
-        //     }, [
-        //       h('Tag', params.row.age.length),
-        //       h('div', {
-        //         slot: 'content'
-        //       }, [
-        //         h('ul', this.tableData[params.index].age.map(item => {
-        //           return h('li', {
-        //             style: {
-        //               textAlign: 'center',
-        //               padding: '4px'
-        //             }
-        //           }, item.n + '：' + item.c + 'People')
-        //         }))
-        //       ])
-        //     ]);
-        //   }
-        // },
         {
           title: this.columns[2].title,
           key: this.columns[2].key,
@@ -112,6 +64,7 @@ export default {
   methods: {
     changePage(val) {
       //获取数据
+      this.$emit('con','傻逼弄东西')
       this.tableData = this.data;
       console.log(this.data);
       console.log(val);

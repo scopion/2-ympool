@@ -17,7 +17,8 @@
     .layout-nav {
         height: 100%;
         .ivu-menu-item {
-            // top: 1.5vh;
+            padding: 0 10px;
+            margin: 0 10px;
         }
     }
     .layout-logo {

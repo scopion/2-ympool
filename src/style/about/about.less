@@ -8,7 +8,6 @@
 #main {
   background: url("@{img}/aboutBackgroud.png") no-repeat;
   background-size: cover;
-  background-position: 30% 30%;
   height: 75rem;
   min-height: 75rem;
   margin-top: 10vh;
@@ -46,7 +45,8 @@
 
     p {
       font-weight: 100;
-      letter-spacing: 2px;
+      letter-spacing: 0;
+      font-weight: 500;
       font-size: 1rem;
       color: white;
     }
@@ -147,18 +147,6 @@
     }
   }
 
-  .search {
-    text-align: center;
-    padding: 0 10rem;
-    margin: 5rem 0;
-
-    .searchBar {
-      // position: absolute;
-      height: 2rem;
-      position: relative;
-    }
-  }
-
   .ivu-card-shadow {
     box-shadow: 0 1px 1px 0 transparent;
   }
@@ -189,6 +177,15 @@
 
       .ivu-col:last-of-type {
         font-size: 1.5rem;
+      }
+    }
+
+    .ivu-row:last-of-type {
+      display: flex;
+
+      .ivu-col {
+        font-size: 14px;
+        text-align: center;
       }
     }
   }
@@ -257,30 +254,132 @@
 @media (max-width:520px) {
   #main {
     background-size: 160%;
-    height: 90vh;
-    min-height: 90vh;
+    height: 60vh;
+    min-height: 60vh;
 
-    .dataItem {
-      height: 4rem;
-      width: 3rem;
-      margin: 0 auto;
-      background-size: 100%;
-      background-position: center;
-    }
-
-    .data {
+    .card {
+      border-top: 1px solid white;
       width: 100%;
-      height: 25rem;
+      margin-top: 5vh;
 
-      .ivu-row-flex {
-        padding-top: 2vh;
-      }
+      .ivu-row {
+        .ivu-col {
+          .ivu-card {
+            height: 12rem;
+            padding: 0;
+            background: transparent;
+            border: transparent;
+            color: white;
+          }
+        }
 
-      .details {
-        margin-top: 0;
-        margin-bottom: 0;
-        font-size: 12px;
-        color: #FFD8DC;
+        .num {
+          text-align: center;
+        }
+
+        .num1 {
+          p {
+            font-size: 12px;
+          }
+
+          p:first-of-type {
+            margin: 0 auto;
+            height: 2.5rem;
+            width: 2.5rem;
+            background: url("@{img}/num1.png") no-repeat center;
+            background-size: contain;
+          }
+
+          h1 {
+            font-size: 1.5rem;
+            font-weight: lighter;
+            font-weight: 400;
+            margin: 1rem 0;
+          }
+        }
+
+        .num2 {
+          .ivu-card-body {
+            padding: 0;
+
+            p {
+              font-size: 12px;
+            }
+
+            p:first-of-type {
+              margin: 0 auto;
+              height: 2.5rem;
+              width: 2.5rem;
+              background: url("@{img}/num2.png") no-repeat center;
+              background-size: contain;
+            }
+
+            h1 {
+              font-size: 1.5rem;
+              font-weight: lighter;
+              margin: 1rem 0;
+              font-weight: 400;
+            }
+          }
+        }
+
+        .num3 {
+          p {
+            font-size: 12px;
+          }
+
+          p:first-of-type {
+            margin: 0 auto;
+            height: 2.5rem;
+            width: 2.5rem;
+            background: url("@{img}/num3.png") no-repeat center;
+            background-size: contain;
+          }
+
+          h1 {
+            font-size: 1.5rem;
+            font-weight: lighter;
+            margin: 1rem 0;
+            font-weight: 400;
+          }
+        }
+
+        .num:hover {
+          transition: all 0.5s;
+          background: white;
+          background-image: url("@{img}/cardBackground.png");
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+          border-radius: 0;
+          box-shadow: 1px 1px 5px #ccc;
+
+          p {
+            color: #515a6e;
+          }
+
+          h1 {
+            color: #515a6e;
+          }
+        }
+
+        .num1:hover {
+          p:first-of-type {
+            background: url("@{img}/num1-active.png") no-repeat center;
+          }
+        }
+
+        .num2:hover {
+          p:first-of-type {
+            background: url("@{img}/num2-active.png") no-repeat center;
+          }
+        }
+
+        .num3:hover {
+          p:first-of-type {
+            background: url("@{img}/num3-active.png") no-repeat center;
+          }
+        }
       }
     }
   }
@@ -306,15 +405,21 @@
   }
 
   .background {
-    padding: 0;
+    padding: 10px;
 
     .mianTitle {
       line-height: 3rem;
       margin-top: 2rem;
-      padding: 0 2rem;
+      padding: 0 1rem;
 
       h1 {
         font-size: 2rem;
+      }
+
+      p {
+        font-size: 10px;
+        line-height: 1rem;
+        word-spacing: 0;
       }
     }
 

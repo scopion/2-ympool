@@ -150,6 +150,7 @@ export default {
       columnsMills: [{
           title: '矿机',
           key: 'mill',
+          sortable: true,
         },
         {
           title: '当前算力',
@@ -170,7 +171,7 @@ export default {
       ],
       columnsPayments: [{
           title: '序号',
-          key: 'address'
+          key: 'index'
         }, {
           title: '时间',
           key: 'time',
@@ -185,7 +186,7 @@ export default {
         },
         {
           title: '状态',
-          key: 'address'
+          key: 'index'
         },
       ],
       dataTables: [],
@@ -252,10 +253,18 @@ export default {
         }
       })
       //初始化在线矿机的列表
-      for (var i = 0; i < 10; i++) {
-        this.OnlineDataTables.push(this.OnlineData[i])
-        this.OfflineDataTables.push(this.OfflineData[i])
+      if (this.OnlineData.length > 0) {
+        for (var i = 0; i < 10; i++) {
+          this.OnlineDataTables.push(this.OnlineData[i])
+        }
       }
+      if (this.OfflineData.length > 0) {
+        for (var i = 0; i < 10; i++) {
+          this.OfflineDataTables.push(this.OfflineData[i])
+        }
+      }
+      // this.OnlineDataTables = []
+      // this.OfflineDataTables = []
     },
     changePage(val) {
       console.log(val, "当前" + val + "页数");

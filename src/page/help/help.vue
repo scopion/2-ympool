@@ -7,37 +7,23 @@
         <div class="layout">
           <Layout>
             <Layout v-show="clintWidth<520" class="menu">
-              <Dropdown style="margin-left: 20px">
-                <Button type="primary">
-                     下拉菜单
-                     <Icon type="ios-arrow-down"></Icon>
-                 </Button>
+              <Dropdown trigger="click" active-name="1" @on-click="zhangguo()">
+                <a href="javascript:void(0)">
+                    菜单(左)
+                    <Icon type="ios-arrow-down"></Icon>
+                </a>
                 <DropdownMenu slot="list">
-                  <Menu theme="light" active-name="1" width="auto" @on-select="select">
-                    <MenuGroup>
-                      <MenuItem name="1">
-                      <Icon type="md-document" /> ETH挖矿教程
-                      </MenuItem>
-                      <MenuItem name="2">
-                      <Icon type="md-chatbubbles" /> 如何查看收益
-                      </MenuItem>
-                      <MenuItem name="3">
-                      <Icon type="md-leaf" /> 什么是挖矿软件
-                      </MenuItem>
-                      <MenuItem name="4">
-                      <Icon type="md-leaf" /> 什么是算力
-                      </MenuItem>
-                      <MenuItem name="5">
-                      <Icon type="md-leaf" /> 新手教程
-                      </MenuItem>
-                    </MenuGroup>
-                  </Menu>
+                  <DropdownItem name="1" divided selected>ETH挖矿教程</DropdownItem>
+                  <DropdownItem name="2" divided>如何查看收益</DropdownItem>
+                  <DropdownItem name="3" divided>什么是挖矿软件</DropdownItem>
+                  <DropdownItem name="4" divided>什么是算力</DropdownItem>
+                  <DropdownItem name="5" divided>新手教程</DropdownItem>
                 </DropdownMenu>
               </Dropdown>
             </Layout>
             <Layout>
               <Sider v-show="clintWidth>520">
-                <Menu theme="light" active-name="1" width="auto" @on-select="select">
+                <Menu theme="light" active-name="1" width="auto" @on-select="select" placement="bottom-end">
                   <MenuGroup>
                     <MenuItem name="1">
                     <Icon type="md-document" /> ETH挖矿教程
@@ -177,6 +163,9 @@ export default {
   methods: {
     select: function(val) {
       this.show = val
+    },
+    zhangguo: function(val) {
+      console.log(val);
     },
     shenqing: function() {
       window.open("http://baijiahao.baidu.com/s?id=1593334868404805446&wfr=spider&for=pc&qq-pf-to=pcqq.discussion");

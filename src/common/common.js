@@ -18,7 +18,6 @@ export default {
     const h = data.getHours() + ':';
     const m = data.getMinutes() + ':'
     const s = data.getSeconds()
-    console.log(Y, M, D, h, m, s);
     return Y + M + D + h + m + s
   },
   msg(a, b, c) {

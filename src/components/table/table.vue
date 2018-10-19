@@ -1,6 +1,6 @@
 <template>
 <div>
-  <Table :data="tableData" :loading="loading" highlight-row size="small" :columns="data[0].address? paymentColumns:tableColumns" stripe border ellipsis></Table>
+  <Table :data="tableData" :loading="loading" highlight-row size="small" :columns="data[0].amountFloat? paymentColumns:tableColumns" stripe border ellipsis></Table>
 </div>
 </template>
 <script>
@@ -96,8 +96,6 @@ export default {
           width: 230,
           render: (h, params) => {
             const row = params.row;
-            // const color = row.status === 1 ? 'primary' : row.status === 2 ? 'success' : 'error';
-            // const text = row.status === 1 ? 'Working' : row.status === 2 ? 'Success' : 'Fail';
             return h('Tag', {
               props: {
                 type: 'dot',

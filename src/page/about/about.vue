@@ -58,6 +58,7 @@
         </Row>
       </Content>
     </section>
+    <Slogan></Slogan>
     <section id="introduce">
       <Content class="introduce">
         <h2>领先的矿池服务平台</h2>
@@ -98,6 +99,7 @@
 <script>
 import Header from '../../components/header/header.vue' //公共头
 import Footer from '../../components/footer/footer.vue' //公共尾
+import Slogan from '../../components/slogan/slogan.vue' //公共尾
 export default {
   data() {
     return {
@@ -106,7 +108,8 @@ export default {
   },
   components: {
     Header: Header,
-    Footer: Footer
+    Footer: Footer,
+    Slogan: Slogan,
   },
   methods: {},
   computed: {},

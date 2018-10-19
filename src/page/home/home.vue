@@ -122,39 +122,7 @@
   </Content>
 </section> -->
     <Slogan></Slogan>
-    <section id="introduce">
-      <Content class="introduce">
-        <h2>领先的矿池服务平台</h2>
-        <div class="shape"></div>
-        <Row type="flex" justify="space-between" class="code-row-bg">
-          <Col :sm="4" :md="6" :lg="6">
-          <div class="introduceItem introduce-1">
-          </div>
-          <p>用户视角</p>
-          <p>稳定服务,解决用户需求</p>
-          </Col>
-          <Col :sm="4" :md="6" :lg="6">
-          <div class="introduceItem introduce-2">
-          </div>
-          <p>小金库</p>
-          <p>收益及时到您钱包里</p>
-          </Col>
-          <Col :sm="4" :md="6" :lg="6">
-          <div class="introduceItem introduce-3">
-          </div>
-          <p>轻松支付</p>
-          <p>每日结算,便捷式支付</p>
-          </Col>
-          <Col :sm="4" :md="6" :lg="6">
-          <div class="introduceItem introduce-4">
-          </div>
-          <p>安全监控</p>
-          <p>监控账户状态,防止攻克</p>
-          </Col>
-        </Row>
-        <h1>焱猫矿池，留下一段挖矿的光辉岁月史</h1>
-      </Content>
-    </section>
+    <Introduce></Introduce>
     <Footer></Footer>
   </Layout>
 </div>
@@ -163,6 +131,7 @@
 import Header from '../../components/header/header.vue' //公共头
 import Footer from '../../components/footer/footer.vue' //公共尾
 import Slogan from '../../components/slogan/slogan.vue' //公共尾
+import Introduce from '../../components/introduce/introduce.vue' //公共尾
 export default {
   data() {
     return {
@@ -181,6 +150,7 @@ export default {
     Header: Header,
     Footer: Footer,
     Slogan: Slogan,
+    Introduce: Introduce,
   },
   methods: {
     inputChange(e) {

@@ -1,6 +1,9 @@
 <style lang="less" scoped>
 @img: '../../images';
 .ivu-layout-header {
+    .ivu-layout-content {
+      max-width: 1350px;
+    }
     background: #000;
     height: 10vh;
     line-height: 10vh;

@@ -1,0 +1,337 @@
+.layout {
+  position: relative;
+  overflow: hidden;
+}
+
+#main {
+  background: url("../images/background.png") no-repeat;
+  background-size: cover;
+  height: 40rem;
+  min-height: 40rem;
+  margin-top: 10vh;
+}
+
+.shape {
+  margin-top: 1rem;
+  height: 5px;
+  border-radius: 5px;
+  width: 100px;
+  background: #24d39b;
+}
+
+.code-row-bg {
+  margin-top: 10rem;
+}
+
+.background {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .mianTitle {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 5rem;
+    margin-top: 5rem;
+
+    h1 {
+      color: white;
+      font-size: 4rem;
+    }
+
+    p {
+      font-weight: 900;
+      letter-spacing: 5px;
+      font-size: 2rem;
+      color: white;
+    }
+  }
+
+  .search {
+    text-align: center;
+    padding: 0 10rem;
+    margin: 5rem 0;
+
+    .searchBar {
+      // position: absolute;
+      height: 2rem;
+      position: relative;
+    }
+  }
+
+  .ivu-card-shadow {
+    box-shadow: 0 1px 1px 0 transparent;
+  }
+
+  .data {
+    width: 90%;
+    height: 8rem;
+    margin-top: 10vh;
+    border: transparent;
+    border-radius: 0;
+    background: #060f29;
+    box-shadow: 0 0 30px #060f29;
+
+    .ivu-row-flex:last-of-type {
+      margin-top: -5vh;
+    }
+
+    .ivu-card-body {
+      height: 35rem;
+
+      .ivu-col {
+        transition: all 0.3s;
+
+        .details {
+          font-size: 1rem;
+          color: #FFD8DC;
+          margin-top: -4vh;
+          margin-bottom: 6vh;
+        }
+
+        p {
+          margin: 0.5rem 0;
+          font-size: 1rem;
+          font-weight: 900;
+          color: white;
+        }
+
+        .dataItem {
+          height: 4.5rem;
+          width: 4.5rem;
+          margin: 0 auto;
+          background-size: contain;
+          background-position: center;
+        }
+
+        .dataItem-1 {
+          background: url("../images/dataItem-1.png") no-repeat center;
+          background-size: 80%;
+        }
+
+        .dataItem-2 {
+          background: url("../images/dataItem-2.png") no-repeat center;
+          background-size: 80%;
+        }
+
+        .dataItem-3 {
+          background: url("../images/dataItem-3.png") no-repeat center;
+          background-size: 80%;
+        }
+
+        .dataItem-4 {
+          background: url("../images/dataItem-4.png") no-repeat center;
+          background-size: 80%;
+        }
+
+        .dataItem-5 {
+          background: url("../images/dataItem-5.png") no-repeat center;
+          background-size: 80%;
+        }
+
+        .dataItem-6 {
+          background: url("../images/dataItem-6.png") no-repeat center;
+          background-size: 90%;
+        }
+      }
+
+      .ivu-col:hover {
+        background: #5599ff33;
+        margin-top: -2rem;
+      }
+    }
+  }
+}
+
+.domain {
+  margin-top: 2rem;
+  text-align: center;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: normal;
+  }
+
+  .shape {
+    margin: 1rem auto;
+    width: 4rem;
+  }
+
+  .domainIcon {
+    text-align: right;
+
+    span {
+      width: 1.5rem;
+      height: 1.5rem;
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0 0.5rem;
+      background: url("../images/Ellipse.png");
+      background-size: 100%;
+    }
+  }
+
+  #myChart {
+    margin-top: 1rem;
+  }
+}
+
+#introduce {
+  height: 70rem;
+  padding: 10rem 0 30rem;
+  position: relative;
+  text-align: center;
+  background: url("../images/MiningArt@2x.png") no-repeat;
+  background-size: 100%;
+  background-position: bottom;
+
+  h1 {
+    position: absolute;
+    bottom: 10rem;
+    left: 0;
+    right: 0;
+    font-size: 3rem;
+    text-align: center;
+    color: white;
+  }
+
+  h2 {
+    font-size: 2rem;
+    font-weight: normal;
+  }
+
+  p {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1b234d;
+  }
+
+  .shape {
+    margin: 1rem auto;
+    width: 10rem;
+  }
+
+  .introduceItem {
+    height: 5rem;
+    width: 4rem;
+    background-size: 100%;
+    background-position: center;
+    margin: 1rem auto;
+  }
+
+  .introduce-1 {
+    background: url("../images/introduce-1.png") no-repeat center;
+  }
+
+  .introduce-2 {
+    background: url("../images/introduce-2.png") no-repeat center;
+  }
+
+  .introduce-3 {
+    background: url("../images/introduce-3.png") no-repeat center;
+  }
+
+  .introduce-4 {
+    background: url("../images/introduce-4.png") no-repeat center;
+  }
+}
+/* MOBILE */
+@media (max-width:520px) {
+  #main {
+    background-size: 160%;
+    height: 90vh;
+    min-height: 90vh;
+
+    .dataItem {
+      height: 4rem;
+      width: 3rem;
+      margin: 0 auto;
+      background-size: 100%;
+      background-position: center;
+    }
+
+    .data {
+      width: 100%;
+      height: 25rem;
+
+      .ivu-row-flex {
+        padding-top: 2vh;
+      }
+
+      .details {
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size: 12px;
+        color: #FFD8DC;
+      }
+    }
+  }
+
+  #introduce {
+    height: 45rem;
+    min-height: 45rem;
+    padding: 13rem 0 30rem;
+
+    h1 {
+      font-size: 1rem;
+      bottom: 2rem;
+    }
+
+    .code-row-bg {
+      margin-top: 3rem;
+    }
+
+    .introduceItem {
+      height: 4rem;
+      width: 4rem;
+    }
+  }
+
+  .background {
+    padding: 0;
+
+    .mianTitle {
+      line-height: 3rem;
+      margin-top: 2rem;
+      padding: 0 2rem;
+
+      h1 {
+        font-size: 2rem;
+      }
+    }
+
+    .search {
+      margin: 2rem 0 0;
+      padding: 0 2rem;
+    }
+
+    .data {
+      padding-top: 0;
+      margin-top: 0;
+      background: transparent;
+      box-shadow: 0 0 0 transparent;
+
+      .ivu-row-flex {
+        .ivu-col {
+          padding: 1rem;
+          width: 40%;
+          background: #060f29;
+          box-shadow: 0 10px 10px #060f2973;
+        }
+      }
+
+      .ivu-row-flex:last-of-type {
+        margin-top: 0;
+      }
+    }
+  }
+}
+/* MOBILE */
+/* PC */
+@media (min-width:320px) {}
+@media (min-width: 768px) {}
+@media (min-width: 992px) {}
+@media (min-width:1200px) {}
+/* PC */

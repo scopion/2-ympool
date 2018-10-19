@@ -7,19 +7,9 @@
         <div class="layout">
           <Layout>
             <Layout v-show="clintWidth<520" class="menu">
-              <Dropdown trigger="click" active-name="1" @on-click="zhangguo()">
-                <a href="javascript:void(0)">
-                    菜单(左)
-                    <Icon type="ios-arrow-down"></Icon>
-                </a>
-                <DropdownMenu slot="list">
-                  <DropdownItem name="1" divided selected>ETH挖矿教程</DropdownItem>
-                  <DropdownItem name="2" divided>如何查看收益</DropdownItem>
-                  <DropdownItem name="3" divided>什么是挖矿软件</DropdownItem>
-                  <DropdownItem name="4" divided>什么是算力</DropdownItem>
-                  <DropdownItem name="5" divided>新手教程</DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
+              <Select v-model="model" size="large" @on-change="listChange()">
+                     <Option v-for="item in list" :value="item.value" :key="item.value">{{ item.label }}</Option>
+              </Select>
             </Layout>
             <Layout>
               <Sider v-show="clintWidth>520">
@@ -154,6 +144,28 @@ export default {
       name: 'help',
       show: 5,
       clintWidth: document.body.clientWidth,
+      model: '1',
+      list: [{
+          value: '1',
+          label: 'ETH挖矿教程'
+        },
+        {
+          value: '2',
+          label: '如何查看收益'
+        },
+        {
+          value: '3',
+          label: '什么是挖矿软件'
+        },
+        {
+          value: '4',
+          label: '什么是算力'
+        },
+        {
+          value: '5',
+          label: '新手教程'
+        },
+      ],
     }
   },
   components: {
@@ -172,6 +184,9 @@ export default {
     },
     wakuang: function() {
       window.open("http://www.ymminer.com/");
+    },
+    listChange: function(val) {
+      this.show = this.model
     }
   },
   mounted() { // 组件初始化后执行

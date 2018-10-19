@@ -105,8 +105,8 @@ export default {}
 /* MOBILE */
 @media (max-width:520px) {
     #introduce {
-        height: 50rem;
-        min-height: 50rem;
+        height: 40rem;
+        min-height: 40rem;
         margin: 5rem 0 0;
 
         h1 {

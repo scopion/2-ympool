@@ -1,8 +1,8 @@
 @img: '../../images';
 
 #help {
-  height: 65rem;
-  min-height: 65rem;
+  height: 70rem;
+  min-height: 70rem;
   margin-top: 10vh;
   background: #f3f6fd;
   position: relative;
@@ -13,6 +13,36 @@
 
   .ivu-layout-content {
     margin-top: 5rem;
+
+    .menu {
+      margin-bottom: 1rem;
+
+      .ivu-dropdown {
+        margin-left: 0!important;
+
+        .ivu-btn-primary {
+          background: white;
+          height: 3rem;
+          width: 100%;
+          color: #515a6e;
+        }
+
+        .ivu-select-dropdown {
+          max-height: 200px;
+          overflow: auto;
+          margin: 5px 0;
+          width: 90%;
+          left: 5%!important;
+          padding: 16px;
+          background-color: #fff;
+          box-sizing: border-box;
+          border-radius: 4px;
+          box-shadow: 0 1px 6px rgba(0,0,0,.2);
+          position: absolute;
+          z-index: 900;
+        }
+      }
+    }
 
     .ivu-layout {
       background: transparent;
@@ -26,9 +56,9 @@
       }
 
       .content {
-        margin-left: .6rem;
         line-height: 2rem;
-        height: 55rem;
+        margin-left: 10px;
+        height: 60rem;
         background: white;
         text-align: left;
 
@@ -37,6 +67,10 @@
             margin-top: 1rem;
             text-align: left;
             font-size: 1rem;
+
+            .link {
+              color: blue;
+            }
           }
         }
       }
@@ -64,3 +98,58 @@
   left: 0;
   z-index: -1;
 }
+/* MOBILE */
+@media (max-width:520px) {
+  .ivu-layout-content {
+    margin-top: 2rem!important;
+
+    .menu {
+      margin-bottom: 1rem;
+    }
+
+    .ivu-layout {
+      background: transparent;
+      margin-left: 0!important;
+
+      .ivu-layout-sider {
+        background: white;
+
+        .ivu-menu-item-group li {
+          text-align: left;
+        }
+      }
+
+      .content {
+        line-height: 2rem;
+        margin-left: 0;
+        height: 60rem;
+        background: white;
+        text-align: left;
+
+        .ivu-layout-content {
+          .text {
+            margin-top: 1rem;
+            text-align: left;
+            font-size: 1rem;
+
+            .link {
+              color: blue;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+/* MOBILE */
+/* PC */
+@media (min-width:320px) {}
+@media (min-width: 768px) {}
+@media (min-width: 992px) {}
+@media (min-width:1200px) {
+  .ivu-col:hover {
+    background: #5599ff33;
+    margin-top: -2rem;
+  }
+}
+/* PC */

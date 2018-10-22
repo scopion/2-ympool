@@ -1,6 +1,6 @@
 <template>
 <div>
-  <Table :data="tableData" :loading="loading" highlight-row size="small" :columns="data[0].amountFloat? paymentColumns:tableColumns" stripe border ellipsis></Table>
+  <Table :data="tableData" :loading="loading" highlight-row size="small" :columns="columns[0].title=='序号' ? paymentColumns:tableColumns" stripe border ellipsis></Table>
 </div>
 </template>
 <script>
@@ -125,7 +125,7 @@ export default {
       this.loading = false
     }
     console.log(this.data);
-    console.log(this.columns);
+    console.log(this.columns[0].title);
   }
 }
 </script>

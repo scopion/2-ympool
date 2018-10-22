@@ -106,6 +106,11 @@ export default {
           icon: 'icon-4',
           value: ''
         },
+        {
+          name: '24H平均算力',
+          icon: 'icon-3',
+          value: ''
+        },
         // {
         //   name: '在线矿机',
         //   icon: 'icon-4',
@@ -241,6 +246,7 @@ export default {
       this.earnings[3].value = this.userinfo.balance
       this.machine[0].value = this.userinfo.online + this.userinfo.offline
       this.machine[1].value = this.userinfo.hr1
+      this.machine[2].value = this.userinfo.hr2
       for (let key in this.userinfo.workers) {
         this.userinfo.workers[key].mill = key
         this.dataTables.push(this.userinfo.workers[key])
@@ -252,19 +258,19 @@ export default {
           this.OfflineData.push(item)
         }
       })
+
       //初始化在线矿机的列表
       if (this.OnlineData.length > 0) {
-        for (var i = 0; i < 10; i++) {
+        for (var i = 0; i < (this.OnlineData.length >= 10 ? 10 : this.OnlineData.length); i++) {
           this.OnlineDataTables.push(this.OnlineData[i])
         }
       }
       if (this.OfflineData.length > 0) {
-        for (var i = 0; i < 10; i++) {
+        for (var i = 0; i < (this.OfflineData.length >= 10 ? 10 : this.OfflineData.length); i++) {
           this.OfflineDataTables.push(this.OfflineData[i])
         }
       }
-      // this.OnlineDataTables = []
-      // this.OfflineDataTables = []
+      console.log(this.OfflineDataTables, "哈哈");
     },
     changePage(val) {
       console.log(val, "当前" + val + "页数");
@@ -292,7 +298,6 @@ export default {
     },
     current1: function() {
       this.checkDataMax(this.OfflineDataTables, this.OfflineData, this.current1)
-
     },
     current2: function() {
       this.checkDataMax(this.payments, this.payments, this.current2)

@@ -200,6 +200,7 @@ export default {
       OnlineDataTables: [], //在线矿机
       OfflineDataTables: [], //离线矿机
       payments: [], //支付记录
+      payment: [], //显示支付记录
       current: 1,
       current1: 1,
       current2: 1,
@@ -270,6 +271,11 @@ export default {
           this.OfflineDataTables.push(this.OfflineData[i])
         }
       }
+      if (this.payments.length > 0) {
+        for (var i = 0; i < (this.payments.length >= 10 ? 10 : this.payments.length); i++) {
+          this.payment.push(this.payments[i])
+        }
+      }
       console.log(this.OfflineDataTables, "哈哈");
     },
     changePage(val) {
@@ -282,7 +288,7 @@ export default {
     },
     changePage2(val) {
       console.log(val, "当前" + val + "页数");
-      this.current1 = val
+      this.current2 = val
     },
     checkDataMax(a, b, c) {
       a.splice(0, a.length) //清空当前的显示数据
@@ -300,7 +306,7 @@ export default {
       this.checkDataMax(this.OfflineDataTables, this.OfflineData, this.current1)
     },
     current2: function() {
-      this.checkDataMax(this.payments, this.payments, this.current2)
+      this.checkDataMax(this.payment, this.payments, this.current2)
     }
   },
   created() {},

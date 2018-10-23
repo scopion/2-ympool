@@ -70,8 +70,10 @@
                 <Content v-show="show==2">
                   <Divider orientation="center">如何查看收益</Divider>
                   <Content class="text">
-                    一、查看矿机状态和收益</br>
-                    2.下载挖矿软件</br>
+                    <b>查看矿机状态和收益</b>
+                    <img src="../../images/course1.png" width="100%"> <b>输入钱包地址后跳转到详情页</b>
+                    <img src="../../images/course2.png" width="100%"> <b>展示矿机的信息</b>
+                    <img src="../../images/course3.png" width="100%">
                   </Content>
                 </Content>
                 <Content v-show="show==3">

@@ -35,7 +35,6 @@
         </div>
       </div>
 
-
       <div class="footerBoxM" v-show="width<520">
         <div class="img">
           <div class="">

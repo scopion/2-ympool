@@ -38,16 +38,19 @@
                   <Divider orientation="center">ETH挖矿教程</Divider>
                   <Content class="text">
                     一.生成钱包地址</br>
-                    a.申请流程</br>
                     <p @click="shenqing()" class="link">
-                      点击查看申请流程链接
-                    </p>
-                    二.下载挖矿软件</br>
-                    <p @click="wakuang()" class="link">
-                      点击下载挖矿软件
+                      a.点击查看申请流程链接
                     </p>
                     <Divider dashed />
-                    <b>焱猫矿工客户端功能介绍</b> </br>
+                    二.下载挖矿软件</br>
+                    <p @click="wakuang()" class="link">
+                      b.点击下载挖矿软件
+                    </p>
+                    <p class="link">
+                      c.详情可查看挖矿软件使用教程
+                    </p>
+                    <Divider dashed />
+                    <b>三.焱猫矿池挖矿介绍</b> </br>
                     挖矿模式：</br>
                     1.可支持单挖模式和双挖模式。</br>
                     2.主挖支持ETH和ETC，支持多种版本内核并保持更新。</br>
@@ -58,6 +61,7 @@
                     7.可更具需要灵活决定挖矿时长（挖矿一定时间后自动重启电脑，无盘环境下可缓解服务器回写盘压力）。</br>
                     8.出行异常状态时可更具预定方式自行处理。</br>
                     9.挖矿模式监控模式一键切换无需分开安装。</br>
+                    <Divider dashed />
                     监控模式：</br>
                     1.实时监控客户机在线状态以及统计算力。</br>
                     2.可更具需要调整需要显示的数据（钱包、矿池、算力、显卡数、显卡温度等）。</br>
@@ -163,7 +167,7 @@ export default {
   data() {
     return {
       name: 'help',
-      show: 5,
+      show: 1,
       clintWidth: document.body.clientWidth,
       model: '1',
       list: [{

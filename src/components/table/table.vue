@@ -13,14 +13,14 @@ export default {
           title: this.columns[0].title,
           key: this.columns[0].key,
           align: 'center',
-          width: 230,
+          width: 130,
           fixed: 'left',
         },
         {
           title: this.columns[1].title,
           key: this.columns[1].key,
           align: 'center',
-          width: 230,
+          width: 130,
           render: (h, params) => {
             return h('div', params.row.hr1s);
           }
@@ -29,7 +29,7 @@ export default {
           title: this.columns[2].title,
           key: this.columns[2].key,
           align: 'center',
-          width: 230,
+          width: 130,
           render: (h, params) => {
             // console.log(params.row, 'params.row');
             return h('div', params.row.hr2s);
@@ -39,7 +39,7 @@ export default {
           title: this.columns[3].title,
           key: this.columns[3].key,
           align: 'center',
-          width: 230,
+          width: 100,
           render: (h, params) => {
             return h('div', params.row.rejects);
           }
@@ -48,7 +48,7 @@ export default {
           title: this.columns[4].title,
           key: this.columns[4].key,
           align: 'center',
-          width: 230,
+          width: 700,
           render: (h, params) => {
             return h('div', this.common.formatDate(params.row.lastShare));
           }

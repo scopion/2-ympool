@@ -10,6 +10,12 @@ export default {
       loading: true,
       tableData: this.data,
       tableColumns: [{
+          title: '序号',
+          type: 'index',
+          align: 'center',
+          width: 80,
+          fixed: 'left',
+        }, {
           title: this.columns[0].title,
           key: this.columns[0].key,
           align: 'center',
@@ -48,7 +54,7 @@ export default {
           title: this.columns[4].title,
           key: this.columns[4].key,
           align: 'center',
-          width: 700,
+          width: 600,
           render: (h, params) => {
             return h('div', this.common.formatDate(params.row.lastShare));
           }

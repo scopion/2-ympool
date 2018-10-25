@@ -43,7 +43,7 @@
             <Table :columns="columnsMills" size="small" :data="OnlineDataTables" v-if="dataTables.length"></Table>
             <div style="margin: 10px;overflow: hidden">
               <div style="float: right;">
-                <Page :total="OnlineData.length" :current="current" @on-change="changePage"></Page>
+                <Page :total="OnlineData.length" :current="current" :page-size-opts="[10,50,100]" placement="top" @on-change="changePage" show-sizer :page-size="pageSize" @on-page-size-change="changeSize"></Page>
               </div>
             </div>
           </TabPane>
@@ -51,7 +51,7 @@
             <Table :columns="columnsMills" size="small" :data="OfflineDataTables" v-if="dataTables.length"></Table>
             <div style="margin: 10px;overflow: hidden">
               <div style="float: right;">
-                <Page :total="OfflineData.length" :current="current1" @on-change="changePage1"></Page>
+                <Page :total="OfflineData.length" :current="current1" :page-size-opts="[10,50,100]" placement="top" @on-change="changePage1" show-sizer :page-size="pageSize1" @on-page-size-change="changeSize1"></Page>
               </div>
             </div>
           </TabPane>
@@ -65,7 +65,7 @@
         <Table :columns="columnsPayments" size="small" :data="payments" v-if="dataTables.length"></Table>
         <div style="margin: 10px;overflow: hidden">
           <div style="float: right;">
-            <Page :total="payments.length" :current="current2" @on-change="changePage2"></Page>
+            <Page :total="payments.length" :current="current2" :page-size-opts="[10,50,100]" placement="top" @on-change="changePage2" show-sizer :page-size="pageSize2" @on-page-size-change="changeSize2"></Page>
           </div>
         </div>
       </Content>
@@ -201,9 +201,12 @@ export default {
       OfflineDataTables: [], //离线矿机
       payments: [], //支付记录
       payment: [], //显示支付记录
-      current: 1,
-      current1: 1,
-      current2: 1,
+      current: 1, //当前页数
+      current1: 1, //当前页数
+      current2: 1, //当前页数
+      pageSize: 10, //当前每页展示数量
+      pageSize1: 10, //当前每页展示数量
+      pageSize2: 10, //当前每页展示数量
       total: 0,
     }
   },
@@ -242,7 +245,7 @@ export default {
       console.log(this.userinfo, 'userinfo')
       this.payments = res.data.data.payments
       this.earnings[0].value = this.userinfo.balance24
-      this.earnings[1].value = (this.userinfo.paid + this.userinfo.balance)
+      this.earnings[1].value = (this.userinfo.paid + this.userinfo.balance).toFixed(8)
       this.earnings[2].value = this.userinfo.paid
       this.earnings[3].value = this.userinfo.balance
       this.machine[0].value = this.userinfo.online + this.userinfo.offline
@@ -262,17 +265,17 @@ export default {
 
       //初始化在线矿机的列表
       if (this.OnlineData.length > 0) {
-        for (var i = 0; i < (this.OnlineData.length >= 10 ? 10 : this.OnlineData.length); i++) {
+        for (var i = 0; i < (this.OnlineData.length >= this.pageSize ? this.pageSize : this.OnlineData.length); i++) {
           this.OnlineDataTables.push(this.OnlineData[i])
         }
       }
       if (this.OfflineData.length > 0) {
-        for (var i = 0; i < (this.OfflineData.length >= 10 ? 10 : this.OfflineData.length); i++) {
+        for (var i = 0; i < (this.OfflineData.length >= this.pageSize ? this.pageSize : this.OfflineData.length); i++) {
           this.OfflineDataTables.push(this.OfflineData[i])
         }
       }
       if (this.payments.length > 0) {
-        for (var i = 0; i < (this.payments.length >= 10 ? 10 : this.payments.length); i++) {
+        for (var i = 0; i < (this.payments.length >= this.pageSize ? this.pageSize : this.payments.length); i++) {
           this.payment.push(this.payments[i])
         }
       }
@@ -290,9 +293,21 @@ export default {
       console.log(val, "当前" + val + "页数");
       this.current2 = val
     },
-    checkDataMax(a, b, c) {
+    changeSize(val) {
+      console.log(val, "当前" + val + "页");
+      this.pageSize = val
+    },
+    changeSize1(val) {
+      console.log(val, "当前" + val + "页");
+      this.pageSize1 = val
+    },
+    changeSize2(val) {
+      console.log(val, "当前" + val + "页");
+      this.pageSize2 = val
+    },
+    checkDataMax(a, b, c, d) { //a:当前显示的表格信息b:当前表格对应的所有信息c:当前的页数d:当前的每页显示数量
       a.splice(0, a.length) //清空当前的显示数据
-      for (var i = 10 * (c - 1) + 1; i <= ((b.length > 10 * c) ? (10 * c) : (b.length)); i++) {
+      for (var i = d * (c - 1) + 1; i <= ((b.length > d * c) ? (d * c) : (b.length)); i++) {
         a.push(b[i - 1]);
       }
       console.log(a);
@@ -300,14 +315,24 @@ export default {
   },
   watch: {
     current: function() {
-      this.checkDataMax(this.OnlineDataTables, this.OnlineData, this.current)
+      this.checkDataMax(this.OnlineDataTables, this.OnlineData, this.current, this.pageSize)
     },
     current1: function() {
-      this.checkDataMax(this.OfflineDataTables, this.OfflineData, this.current1)
+      this.checkDataMax(this.OfflineDataTables, this.OfflineData, this.current1, this.pageSize1)
     },
     current2: function() {
-      this.checkDataMax(this.payment, this.payments, this.current2)
+      this.checkDataMax(this.payment, this.payments, this.current2, this.pageSize2)
+    },
+    pageSize: function() {
+      this.checkDataMax(this.OnlineDataTables, this.OnlineData, this.current, this.pageSize)
+    },
+    pageSize1: function() {
+      this.checkDataMax(this.OfflineDataTables, this.OfflineData, this.current1, this.pageSize1)
+    },
+    pageSize2: function() {
+      this.checkDataMax(this.payment, this.payments, this.current2, this.pageSize2)
     }
+
   },
   created() {},
   beforeMount() {},

@@ -13,14 +13,13 @@ export default {
           title: '序号',
           type: 'index',
           align: 'center',
-          width: 80,
+          width: 65,
           fixed: 'left',
         }, {
           title: this.columns[0].title,
           key: this.columns[0].key,
           align: 'center',
           width: 130,
-          fixed: 'left',
         },
         {
           title: this.columns[1].title,
@@ -64,7 +63,7 @@ export default {
           title: '序号',
           type: 'index',
           align: 'center',
-          width: 100,
+          width: 65,
           fixed: 'left',
         },
         {

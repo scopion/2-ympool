@@ -62,7 +62,7 @@
       <Content class="payRecord">
         <h2>支付记录</h2>
         <div class="shape"></div>
-        <Table :columns="columnsPayments" size="small" :data="payments" v-if="dataTables.length"></Table>
+        <Table :columns="columnsPayments" size="small" :data="payment" v-if="dataTables.length"></Table>
         <div style="margin: 10px;overflow: hidden">
           <div style="float: right;">
             <Page :total="payments.length" :current="current2" :page-size-opts="[10,50,100]" placement="top" @on-change="changePage2" show-sizer :page-size="pageSize2" @on-page-size-change="changeSize2"></Page>
@@ -270,12 +270,12 @@ export default {
         }
       }
       if (this.OfflineData.length > 0) {
-        for (var i = 0; i < (this.OfflineData.length >= this.pageSize ? this.pageSize : this.OfflineData.length); i++) {
+        for (var i = 0; i < (this.OfflineData.length >= this.pageSize1 ? this.pageSize1 : this.OfflineData.length); i++) {
           this.OfflineDataTables.push(this.OfflineData[i])
         }
       }
       if (this.payments.length > 0) {
-        for (var i = 0; i < (this.payments.length >= this.pageSize ? this.pageSize : this.payments.length); i++) {
+        for (var i = 0; i < (this.payments.length >= this.pageSize2 ? this.pageSize2 : this.payments.length); i++) {
           this.payment.push(this.payments[i])
         }
       }
@@ -310,7 +310,6 @@ export default {
       for (var i = d * (c - 1) + 1; i <= ((b.length > d * c) ? (d * c) : (b.length)); i++) {
         a.push(b[i - 1]);
       }
-      console.log(a);
     },
   },
   watch: {

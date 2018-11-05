@@ -63,7 +63,7 @@
 }
 
 .layout-nav {
-    width: 350px;
+    width: 400px;
     float: right;
     display: flex;
     align-items: center;
@@ -153,6 +153,7 @@ a.ivu-menu-item {
       <div class="layout-nav" v-if="clintWidth>520">
         <MenuItem name="index" v-for="(item,index) in pages" :to="{ name: item.path, params: {} }" :key="item.name" :class="item.path==name?'pcActive':''">{{item.name}}
         </MenuItem>
+        <MenuItem name="3" target="_blank" to="http://ympool.com/YMadmin/index.html#/login">矿池后台</MenuItem>
       </div>
       <div class="mobileMenu" v-else>
         <Button @click="value = true" type="primary"></Button>

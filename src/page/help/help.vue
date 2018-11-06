@@ -27,9 +27,6 @@
                     <MenuItem name="4">
                     <Icon type="md-leaf" /> 什么是算力
                     </MenuItem>
-                    <MenuItem name="5">
-                    <Icon type="md-leaf" /> 新手教程
-                    </MenuItem>
                   </MenuGroup>
                 </Menu>
               </Sider>
@@ -108,7 +105,7 @@
                     </br>
                     <Divider dashed />
                     <b>算力单位</b>
-                    </br>算力每隔千位划为一个单位，最小单位 H=1次   1000H = 1K 1000K = 1G 1000G = 1T 1000T = 1P 1000P=1E
+                    </br>1K=1024h  1G=1024K  1T=1024G
                     </br>
                     <Divider dashed /> <b>不同币种的算力</b></br>
                     1.不同的币种的挖矿算法可能会不一样，比如比特币是sha256算法，莱特币是scrypt算法， 以太坊是Ethash算法，这就像 手机1的密码4位随便输入， 手机2的密码6位， 输一 次后 隔1s才能再次输入， 实际比这个要复杂的多。

@@ -22,9 +22,9 @@ const router =  new Router({
     },
     //查询细节
     {
-      path: '/search',
-      name: 'search',
-      component: (resolve) => require(['../page/search/search.vue'], resolve),
+      path: '/wallet.html',
+      name: 'wallet.html',
+      component: (resolve) => require(['../page/wallet/wallet.vue'], resolve),
       meta: {
         title: '矿池收益-焱猫矿池',
       }

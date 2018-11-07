@@ -165,7 +165,7 @@ export default {
           eth: this.GLOBAL.userAddress
         }
         this.$router.push({
-          name: 'search',
+          name: 'wallet.html',
           query: query,
         })
       } else {

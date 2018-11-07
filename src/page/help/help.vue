@@ -43,10 +43,10 @@
                     <p @click="wakuang()" class="link">
                       b.点击下载挖矿软件
                     </p>
-                    <p class="link">
+                    <p>
                       c.详情可查看挖矿软件使用教程
                     </p>
-                    <p class="link">
+                    <p>
                       d.连接矿池（客户端挖矿地址 eth.ympool.com:8008）</p>
                     <Divider dashed />
                     <b>三.焱猫矿池挖矿介绍</b> </br>

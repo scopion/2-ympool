@@ -162,7 +162,7 @@ export default {
       if (this.searchInput.length == 42) { //判断钱包格式
         this.GLOBAL.userAddress = this.searchInput
         let query = {
-          address: this.GLOBAL.userAddress
+          eth: this.GLOBAL.userAddress
         }
         this.$router.push({
           name: 'search',

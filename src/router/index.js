@@ -9,7 +9,7 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 const router =  new Router({
-  // mode: 'history',
+  mode: 'history',
   routes: [
     //首页展示
     {

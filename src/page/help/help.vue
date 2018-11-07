@@ -46,6 +46,8 @@
                     <p class="link">
                       c.详情可查看挖矿软件使用教程
                     </p>
+                    <p class="link">
+                      d.连接矿池（客户端挖矿地址 eth.ympool.com:8008）</p>
                     <Divider dashed />
                     <b>三.焱猫矿池挖矿介绍</b> </br>
                     挖矿模式：</br>

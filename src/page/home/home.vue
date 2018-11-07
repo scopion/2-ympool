@@ -19,6 +19,7 @@
         <Content class="search">
           <Input class="input" v-model="searchInput" search @on-change="inputChange($event)" @on-search="search()" placeholder="输入钱包地址......" size="large" autofocus>
           </Input>
+          <p>挖矿地址：eth.ympool.com:8008</p>
           <!--           <div class="searchBar"><span @click="search()"></span>
 </div> -->
         </Content>

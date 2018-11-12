@@ -331,7 +331,6 @@ export default {
     pageSize2: function() {
       this.checkDataMax(this.payment, this.payments, this.current2, this.pageSize2)
     }
-
   },
   created() {},
   beforeMount() {},

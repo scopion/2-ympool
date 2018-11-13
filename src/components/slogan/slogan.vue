@@ -25,7 +25,7 @@ export default {}
     color: white;
     position: relative;
     height: 20rem;
-    margin-top: 10vh;
+    margin-top: 15vh;
     .slogan {
         padding: 2rem 0;
         background: url("@{img}/slogan.png") no-repeat center;

@@ -59,11 +59,10 @@
             <p class="details">24H百兆收益</p>
             <div class="dataItem dataItem-6">
             </div>
-            <p>{{poolinfo.estReward | fixed(4) }}</p>
+            <p>{{poolinfo.estReward | fixed(4) }} ETH</p>
             </Col>
           </Row>
         </Card>
-
         <Card class="data" dis-hover v-show="clintWidth<520">
           <Row type="flex" justify="space-around">
             <Col :span="4">
@@ -103,7 +102,7 @@
             <Col :span="4">
             <div class="dataItem dataItem-6">
             </div>
-            <p>{{poolinfo.estReward | fixed(4) }}</p>
+            <p>{{poolinfo.estReward | fixed(4) }} ETH</p>
             <p class="details">24H百兆收益</p>
             </Col>
           </Row>

@@ -38,7 +38,7 @@
     </section> -->
     <section id="mill">
       <Content class="mill">
-        <Tabs value="name1" v-if="dataTables">
+        <Tabs value="name1" v-if="dataTables" @on-click="tabClick">
           <TabPane :label="'在线矿机' +  '(' + OnlineData.length + ')' " name="name1">
             <Table :columns="columnsMills" size="small" :data="OnlineDataTables" v-if="dataTables.length"></Table>
             <div style="margin: 10px;overflow: hidden">
@@ -311,6 +311,12 @@ export default {
         a.push(b[i - 1]);
       }
     },
+    tabClick(name) {
+      console.log(name);
+      this.pageSize = 10
+      this.pageSize1 = 10
+      this.pageSize2 = 10
+    }
   },
   watch: {
     current: function() {

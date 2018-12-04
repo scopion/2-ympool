@@ -170,6 +170,10 @@ export default {
           key: 'rejects'
         },
         {
+          title: '更新时间',
+          key: 'lastShares'
+        },
+        {
           title: '最后更新',
           key: 'lastShare'
         },
@@ -188,6 +192,10 @@ export default {
         {
           title: '交易',
           key: 'txid',
+        },
+        {
+          title: '状态',
+          key: 'index'
         },
         {
           title: '状态',

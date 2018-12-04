@@ -7,7 +7,8 @@
         <div class="mianTitle">
           <Row>
             <Col span="24">
-            <h1>焱猫矿池服务平台</h1></Col>
+            <h1>焱猫矿池服务平台</h1>
+            </Col>
           </Row>
           <Row>
             <Col span="24">

@@ -12,20 +12,20 @@ export default {
       tableColumns: [{
           title: '序号',
           type: 'index',
-          align: 'center',
+          align: 'left',
           width: 65,
           fixed: 'left',
         }, {
           title: this.columns[0].title,
           key: this.columns[0].key,
-          align: 'center',
-          width: 130,
+          align: 'left',
+          width: 110,
         },
         {
           title: this.columns[1].title,
           key: this.columns[1].key,
-          align: 'center',
-          width: 130,
+          align: 'left',
+          width: 110,
           render: (h, params) => {
             return h('div', params.row.hr1s);
           }
@@ -33,7 +33,7 @@ export default {
         {
           title: this.columns[2].title,
           key: this.columns[2].key,
-          align: 'center',
+          align: 'left',
           width: 130,
           render: (h, params) => {
             // console.log(params.row, 'params.row');
@@ -43,8 +43,8 @@ export default {
         {
           title: this.columns[3].title,
           key: this.columns[3].key,
-          align: 'center',
-          width: 100,
+          align: 'left',
+          width: 80,
           render: (h, params) => {
             return h('div', params.row.rejects);
           }
@@ -52,24 +52,38 @@ export default {
         {
           title: this.columns[4].title,
           key: this.columns[4].key,
-          align: 'center',
-          width: 600,
+          align: 'left',
+          width: 150,
+          render: (h, params) => {
+            return h('Tag', {
+              props: {
+                type: 'dot',
+                color: 'error',
+              }
+            }, params.row.lastshares)
+          }
+        },
+        {
+          title: this.columns[5].title,
+          key: this.columns[5].key,
+          align: 'left',
+          width: 150,
           render: (h, params) => {
             return h('div', this.common.formatDate(params.row.lastShare));
           }
-        }
+        },
       ],
       paymentColumns: [{
           title: '序号',
           type: 'index',
-          align: 'center',
+          align: 'left',
           width: 65,
           fixed: 'left',
         },
         {
           title: this.columns[1].title,
           key: this.columns[1].key,
-          align: 'center',
+          align: 'left',
           width: 180,
           render: (h, params) => {
             return h('div', this.common.formatDate(params.row.time));
@@ -78,7 +92,7 @@ export default {
         {
           title: this.columns[2].title,
           key: this.columns[2].key,
-          align: 'center',
+          align: 'left',
           width: 150,
           render: (h, params) => {
             // console.log(params.row, 'params.row');
@@ -88,7 +102,7 @@ export default {
         { //交易
           title: this.columns[3].title,
           key: this.columns[3].key,
-          align: 'center',
+          align: 'left',
           width: 500,
           render: (h, params) => {
             return h('div', params.row.txid);
@@ -97,7 +111,7 @@ export default {
         {
           title: this.columns[4].title,
           key: this.columns[4].key,
-          align: 'center',
+          align: 'left',
           width: 230,
           render: (h, params) => {
             const row = params.row;

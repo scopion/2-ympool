@@ -321,9 +321,7 @@ export default {
     },
     tabClick(name) {
       console.log(name);
-      this.pageSize = 10
-      this.pageSize1 = 10
-      this.pageSize2 = 10
+      [this.pageSize,this.pageSize1,this.pageSize2] = [10,10,10]
     }
   },
   watch: {

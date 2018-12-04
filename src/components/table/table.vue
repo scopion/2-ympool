@@ -19,7 +19,7 @@ export default {
           title: this.columns[0].title,
           key: this.columns[0].key,
           align: 'left',
-          width: 110,
+          width: 80,
         },
         {
           title: this.columns[1].title,
@@ -84,7 +84,7 @@ export default {
           title: this.columns[1].title,
           key: this.columns[1].key,
           align: 'left',
-          width: 180,
+          width: 160,
           render: (h, params) => {
             return h('div', this.common.formatDate(params.row.time));
           }
@@ -93,7 +93,7 @@ export default {
           title: this.columns[2].title,
           key: this.columns[2].key,
           align: 'left',
-          width: 150,
+          width: 120,
           render: (h, params) => {
             // console.log(params.row, 'params.row');
             return h('div', params.row.amountFloat);
@@ -112,7 +112,7 @@ export default {
           title: this.columns[4].title,
           key: this.columns[4].key,
           align: 'left',
-          width: 230,
+          width: 150,
           render: (h, params) => {
             const row = params.row;
             return h('Tag', {

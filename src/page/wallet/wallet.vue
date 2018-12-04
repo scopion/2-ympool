@@ -62,7 +62,7 @@
       <Content class="payRecord">
         <h2>支付记录</h2>
         <div class="shape"></div>
-        <Table :columns="columnsPayments" size="small" :data="payment" v-if="dataTables.length"></Table>
+        <Table :columns="columnsPayments" size="small" :data="payment" v-if="payments.length"></Table>
         <div style="margin: 10px;overflow: hidden">
           <div style="float: right;">
             <Page :total="payments.length" :current="current2" :page-size-opts="[10,50,100]" placement="top" @on-change="changePage2" show-sizer :page-size="pageSize2" @on-page-size-change="changeSize2"></Page>

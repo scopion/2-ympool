@@ -6,7 +6,10 @@
       <Content>
         <div class="banner">
         </div>
-        <p class="adress" v-show="clintWidth<520">{{this.GLOBAL.userAddress}}</br>余额: {{this.earnings[3].value}} ETH</p>
+        <p class="adress" v-show="clintWidth<520">{{this.GLOBAL.userAddress}}</p>
+        <p class="adressETH" v-show="clintWidth<520">
+          余额: {{this.earnings[3].value}} ETH
+        </p>
         <div class="machine" v-show="clintWidth>520">
           <Row type="flex" justify="center" v-if="machine.length">
             <Col :sm="4" :md="6" :lg="6" v-for="(item,index) in machine" :key="item.name">
@@ -70,7 +73,7 @@
                 <Col span="6">
                 <div class="icon"></div>
                 <p class="title">矿机总数</p>
-                <p class="details">{{(this.userinfo.paid + this.userinfo.balance).toFixed(8)}}</p>
+                <p class="details">{{this.userinfo.online + this.userinfo.offline}}</p>
                 </Col>
                 <Col span="6">
                 <div class="icon"></div>
@@ -89,7 +92,7 @@
             <Table :columns="columnsPayments" size="small" :data="payment" v-if="payments.length"></Table>
             <div style="margin: 10px;overflow: hidden">
               <div style="float: right;">
-                <Page :total="payments.length" :current="current2" :page-size-opts="[10,50,100]" placement="top" @on-change="changePage2" show-sizer :page-size="pageSize2" @on-page-size-change="changeSize2"></Page>
+                <Page size="small" :total="payments.length" :current="current2" :page-size-opts="[10,50,100]" placement="top" @on-change="changePage2" show-sizer :page-size="pageSize2" @on-page-size-change="changeSize2"></Page>
               </div>
             </div>
           </TabPane>
@@ -112,7 +115,7 @@
             <Table :columns="columnsMills" size="small" :data="OnlineDataTables" v-if="dataTables.length"></Table>
             <div style="margin: 10px;overflow: hidden">
               <div style="float: right;">
-                <Page :total="OnlineData.length" :current="current" :page-size-opts="[10,50,100]" placement="top" @on-change="changePage" show-sizer :page-size="pageSize" @on-page-size-change="changeSize"></Page>
+                <Page size="small" :total="OnlineData.length" :current="current" :page-size-opts="[10,50,100]" placement="top" @on-change="changePage" show-sizer :page-size="pageSize" @on-page-size-change="changeSize"></Page>
               </div>
             </div>
           </TabPane>
@@ -120,7 +123,7 @@
             <Table :columns="columnsMills" size="small" :data="OfflineDataTables" v-if="dataTables.length"></Table>
             <div style="margin: 10px;overflow: hidden">
               <div style="float: right;">
-                <Page :total="OfflineData.length" :current="current1" :page-size-opts="[10,50,100]" placement="top" @on-change="changePage1" show-sizer :page-size="pageSize1" @on-page-size-change="changeSize1"></Page>
+                <Page size="small" :total="OfflineData.length" :current="current1" :page-size-opts="[10,50,100]" placement="top" @on-change="changePage1" show-sizer :page-size="pageSize1" @on-page-size-change="changeSize1"></Page>
               </div>
             </div>
           </TabPane>

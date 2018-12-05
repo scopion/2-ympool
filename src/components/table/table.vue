@@ -1,6 +1,6 @@
 <template>
 <div>
-  <Table :data="tableData" :loading="loading" highlight-row size="small" :columns="columns[0].title=='序号' ? paymentColumns:tableColumns" stripe border ellipsis></Table>
+  <Table v-if="tableData" :data="tableData" :loading="loading" highlight-row size="small" :columns="columns[0].title=='序号' ? paymentColumns:tableColumns" stripe border ellipsis></Table>
 </div>
 </template>
 <script>
@@ -9,23 +9,21 @@ export default {
     return {
       loading: true,
       tableData: this.data,
+      clintWidth: document.body.clientWidth, //宽度
+      check: 1,
       tableColumns: [{
-          title: '序号',
-          type: 'index',
-          align: 'left',
-          width: 65,
-          fixed: 'left',
-        }, {
           title: this.columns[0].title,
           key: this.columns[0].key,
           align: 'left',
-          width: 80,
+          fixed: 'left',
+          width: 110,
         },
         {
           title: this.columns[1].title,
           key: this.columns[1].key,
           align: 'left',
-          width: 110,
+          fixed: 'left',
+          width: 100,
           render: (h, params) => {
             return h('div', params.row.hr1s);
           }
@@ -34,9 +32,9 @@ export default {
           title: this.columns[2].title,
           key: this.columns[2].key,
           align: 'left',
-          width: 130,
+          fixed: this.data[0].isOnline == 0 ? 'none' : 'left',
+          width: 170,
           render: (h, params) => {
-            // console.log(params.row, 'params.row');
             return h('div', params.row.hr2s);
           }
         },
@@ -53,7 +51,8 @@ export default {
           title: this.columns[4].title,
           key: this.columns[4].key,
           align: 'left',
-          width: 150,
+          fixed: this.data[0].isOnline == 1 ? 'none' : 'left',
+          width: 170,
           render: (h, params) => {
             return h('Tag', {
               props: {
@@ -103,7 +102,7 @@ export default {
           title: this.columns[3].title,
           key: this.columns[3].key,
           align: 'left',
-          width: 500,
+          width: 550,
           render: (h, params) => {
             return h('div', params.row.txid);
           }
@@ -143,8 +142,19 @@ export default {
     if (this.data) {
       this.loading = false
     }
-    console.log(this.data);
+    console.log(this.tableData, "data");
     console.log(this.columns[0].title);
+  },
+  beforeUpdate() {
+    if (this.tableData[0].isOnline == 1) {
+      console.log("在线");
+      this.check = 1
+    } else if (this.tableData[0].isOnline == 0) {
+      console.log("离线");
+      this.check = 0
+    } else {
+      console.log("支付");
+    }
   }
 }
 </script>

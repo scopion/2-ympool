@@ -6,8 +6,8 @@
       <Content>
         <div class="banner">
         </div>
-        <p class="adress" v-show="clintWidth<520">钱包地址: {{this.GLOBAL.userAddress}}</p>
-        <div class="machine">
+        <p class="adress" v-show="clintWidth<520">{{this.GLOBAL.userAddress}}</br>余额: {{this.earnings[3].value}} ETH</p>
+        <div class="machine" v-show="clintWidth>520">
           <Row type="flex" justify="center" v-if="machine.length">
             <Col :sm="4" :md="6" :lg="6" v-for="(item,index) in machine" :key="item.name">
             <div class="icon" :class="item.icon"></div>
@@ -16,7 +16,7 @@
             </Col>
           </Row>
         </div>
-        <div class="earnings">
+        <div class="earnings" v-show="clintWidth>520">
           <Row type="flex" justify="center" v-if="earnings.length">
             <Col class="icon" :sm="4" :md="6" :lg="6" v-for="(item,index) in earnings" :key="item.name">
             <p class="title">{{item.name}}</br>(ETH)</p>
@@ -25,6 +25,75 @@
           </Row>
         </div>
         <p class="adress" v-show="clintWidth>520">钱包地址: {{this.GLOBAL.userAddress}}</p>
+      </Content>
+    </section>
+    <section id="payRecord">
+      <Content class="mill">
+        <Tabs value="name2" v-if="dataTables" @on-click="tabClick">
+          <TabPane style="margin-top:2rem" label="数据" :name="clintWidth<520?'name2':'name1'" v-if="clintWidth<520">
+            <Card>
+              <p slot="title">主要信息</p>
+              <Row type="flex" justify="space-between" v-if="machine.length">
+                <Col span="6">
+                <div class="icon"></div>
+                <p class="title">当前算力</p>
+                <p class="details">{{this.userinfo.hr1}}</p>
+                </Col>
+                <Col span="6">
+                <div class="icon"></div>
+                <p class="title">24H平均算力</p>
+                <p class="details">{{this.userinfo.hr2}}</p>
+                </Col>
+                <Col span="6">
+                <div class="icon"></div>
+                <p class="title">24H收益</p>
+                <p class="details">{{this.userinfo.balance24}}</p>
+                </Col>
+              </Row>
+              <Row style="margin-top:1rem;" type="flex" justify="space-between" v-if="earnings.length">
+                <Col span="12">
+                <div class="icon"></div>
+                <p class="title">总支付</p>
+                <p class="details">{{this.userinfo.paid}}</p>
+                </Col>
+                <Col span="12">
+                <div class="icon"></div>
+                <p class="title">总收益</p>
+                <p class="details">{{this.userinfo.paid + this.userinfo.balance}}</p>
+                </Col>
+              </Row>
+            </Card>
+
+            <Card style="margin-top:2rem;">
+              <p slot="title">矿机信息</p>
+              <Row type="flex" justify="space-between" v-if="machine.length">
+                <Col span="6">
+                <div class="icon"></div>
+                <p class="title">矿机总数</p>
+                <p class="details">{{(this.userinfo.paid + this.userinfo.balance).toFixed(8)}}</p>
+                </Col>
+                <Col span="6">
+                <div class="icon"></div>
+                <p class="title">在线机器</p>
+                <p class="details">{{this.userinfo.online}}</p>
+                </Col>
+                <Col span="6">
+                <div class="icon"></div>
+                <p class="title">离线机器</p>
+                <p class="details">{{this.userinfo.offline}}</p>
+                </Col>
+              </Row>
+            </Card>
+          </TabPane>
+          <TabPane style="margin-top:2rem" label="支付记录" :name="clintWidth<520?'name1':'name2'">
+            <Table :columns="columnsPayments" size="small" :data="payment" v-if="payments.length"></Table>
+            <div style="margin: 10px;overflow: hidden">
+              <div style="float: right;">
+                <Page :total="payments.length" :current="current2" :page-size-opts="[10,50,100]" placement="top" @on-change="changePage2" show-sizer :page-size="pageSize2" @on-page-size-change="changeSize2"></Page>
+              </div>
+            </div>
+          </TabPane>
+        </Tabs>
       </Content>
     </section>
     <!-- <section id="domain">
@@ -56,18 +125,6 @@
             </div>
           </TabPane>
         </Tabs>
-      </Content>
-    </section>
-    <section id="payRecord">
-      <Content class="payRecord">
-        <h2>支付记录</h2>
-        <div class="shape"></div>
-        <Table :columns="columnsPayments" size="small" :data="payment" v-if="payments.length"></Table>
-        <div style="margin: 10px;overflow: hidden">
-          <div style="float: right;">
-            <Page :total="payments.length" :current="current2" :page-size-opts="[10,50,100]" placement="top" @on-change="changePage2" show-sizer :page-size="pageSize2" @on-page-size-change="changeSize2"></Page>
-          </div>
-        </div>
       </Content>
     </section>
   </Layout>
@@ -321,7 +378,7 @@ export default {
     },
     tabClick(name) {
       console.log(name);
-      [this.pageSize,this.pageSize1,this.pageSize2] = [10,10,10]
+      [this.pageSize, this.pageSize1, this.pageSize2] = [10, 10, 10]
     }
   },
   watch: {

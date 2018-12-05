@@ -93,7 +93,6 @@
       color: white;
       font-size: 2rem;
       margin: 1rem 0;
-      text-shadow: 1px 1px 8px white;
     }
 
     .banner {
@@ -145,7 +144,7 @@
 /* MOBILE */
 @media (max-width:520px) {
   #main {
-    margin-bottom: 30rem;
+    margin-bottom: 0;
     height: 15rem;
     min-height: 15rem;
 
@@ -182,6 +181,7 @@
             }
 
             .title {
+              color: #323747;
               font-size: 1rem;
               margin: 0.2rem 0;
             }
@@ -221,9 +221,8 @@
 
       .adress {
         font-weight: 900;
-        font-size: 12px;
+        font-size: 13px;
         margin: 2rem 0 0;
-        // margin: -15rem 0;
       }
     }
   }
@@ -243,6 +242,22 @@
       margin: 0.5rem auto;
       width: 2rem;
     }
+
+    .title {
+      color: #323747;
+      font-size: 12px;
+      margin: 0.2rem 0;
+    }
+
+    .details {
+      color: #868686;
+      font-size: 12px;
+    }
+
+    /deep/.ivu-card-head {
+      background: #EEEEEE;
+    }
+
   }
 }
 /* MOBILE */

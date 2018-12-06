@@ -110,18 +110,15 @@
         </Card>
       </Content>
     </section>
-    <!--     <section id="demain">
-  <Content class="domain">
-    <h2>全网版图</h2>
-    <div class="shape"></div>
-    <Card shadow>
-      <div class="domainIcon">
-        <span></span>ethereum (Mhash/s)
-      </div>
-      <div id="myChart" :style="{width: '100%', height: '60vh'}"></div>
-    </Card>
-  </Content>
-</section> -->
+    <section id="domain">
+      <Content class="domain">
+        <h2>算力曲线图</h2>
+        <div class="shape"></div>
+        <Card :style="{marginTop:'5vh'}">
+          <div id="myChart" :style="{width: '100%', height: '60vh'}"></div>
+        </Card>
+      </Content>
+    </section>
     <Slogan></Slogan>
     <Introduce></Introduce>
     <Footer></Footer>
@@ -142,6 +139,7 @@ export default {
       searchInput: '',
       value15: '',
       poolinfo: {},
+      hashrate: {},
       map1: [],
       map2: [],
       timer: null,
@@ -193,31 +191,148 @@ export default {
         });
       }
     },
-    async poolratechart() { //获取全网版块信息
-      let res = await this.axios.post(this.api.poolratechart, JSON.stringify({
-        token: "asd",
-        pool: this.pool,
-      }))
-      if (res.data.code == "2000") {
-        console.log(res)
-        this.poolratechart = res.data.data
-        this.map1 = this.poolratechart.map(function(item) {
-          return item.time
-        })
-        this.map2 = this.poolratechart.map(function(item) {
-          return item.hashrate
-        })
-        // 基于准备好的dom，初始化echarts实例
-        let myChart = this.$echarts.init(document.getElementById('myChart'))
-        myChart.setOption(this.common.map(this.map1, this.map2))
-        console.log(this.poolratechart, "全网版图");
-      } else {
-        this.$Message.error({
-          content: "数据请求失败!",
-          duration: 1,
-          closable: true
-        });
-      }
+    async drawLine() {
+      // 基于准备好的dom，初始化echarts实例
+      let res = await this.axios.get(this.api.pool_allsheet)
+      let timeArr = []
+      let workersArr = []
+      let powerArr = []
+      console.log(res, "算力曲线数据");
+      this.hashrate = res.data
+      this.hashrate.data.forEach((item) => {
+        timeArr.push(item.time)
+        workersArr.push(item.worker)
+        powerArr.push(item.power)
+      })
+
+      timeArr = timeArr.map(function(item) {
+        return item.substring(2).split('-').join('/')
+      })
+      console.log(timeArr, workersArr, powerArr);
+
+      app.title = '算力曲线图';
+
+      var colors = ['#4d74ff', '#ff4d4d', '#675bba'];
+      let myChart = this.$echarts.init(document.getElementById('myChart'))
+      // 绘制图表
+
+      myChart.setOption({
+        color: colors,
+
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'cross'
+          }
+        },
+        grid: {
+          right: '30%'
+        },
+        toolbox: {
+          feature: {
+            dataView: {
+              show: true,
+              readOnly: false
+            },
+            restore: {
+              show: true
+            },
+            saveAsImage: {
+              show: true
+            }
+          }
+        },
+        dataZoom: [{
+            type: 'slider', //图表下方的伸缩条
+            show: true, //是否显示
+            realtime: true, //
+            start: 0, //伸缩条开始位置（1-100），可以随时更改
+            end: 100, //伸缩条结束位置（1-100），可以随时更改
+          },
+          {
+            type: 'inside', //鼠标滚轮
+            realtime: true,
+            //还有很多属性可以设置，详见文档
+          },
+        ],
+        legend: {
+          data: ['算力', '在线矿工', '平均温度']
+        },
+        xAxis: [{
+          type: 'category',
+          axisTick: {
+            alignWithLabel: true
+          },
+          data: timeArr
+        }],
+        yAxis: [
+          {
+            type: 'value',
+            name: '算力',
+            min: 0,
+            max: Math.max(...powerArr)+10,
+            position: 'right',
+            axisLine: {
+              lineStyle: {
+                color: colors[0]
+              }
+            },
+            axisLabel: {
+              formatter: '{value} MH'
+            }
+          },
+          {
+            type: 'value',
+            name: '在线矿工',
+            min: 0,
+            max: Math.max(...workersArr)+30,
+            position: 'right',
+            offset: 80,
+            axisLine: {
+              lineStyle: {
+                color: colors[1]
+              }
+            },
+            axisLabel: {
+              formatter: '{value} 人'
+            }
+          },
+          // {
+          //   type: 'value',
+          //   name: '温度',
+          //   min: 0,
+          //   max: 25,
+          //   position: 'left',
+          //   axisLine: {
+          //     lineStyle: {
+          //       color: colors[2]
+          //     }
+          //   },
+          //   axisLabel: {
+          //     formatter: '{value} °C'
+          //   }
+          // }
+        ],
+        series: [{
+            name: '算力',
+            type: 'line',
+            data: powerArr
+          },
+          {
+            name: '在线矿工',
+            type: 'line',
+            yAxisIndex: 1,
+            data: workersArr
+          },
+          // {
+          //   name: '平均温度',
+          //   type: 'line',
+          //   yAxisIndex: 2,
+          //   data: [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
+          // }
+        ]
+
+      });
     },
   },
   computed: {
@@ -238,7 +353,8 @@ export default {
   },
   mounted() { // 组件初始化后执行
     this.common.msg()
-    // this.$Message.error(this.common.msg(1, 1, true));
+    this.drawLine()
+
     console.log(this.$md5('holle'));
   },
   created() {

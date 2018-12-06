@@ -87,6 +87,11 @@
                 </Col>
               </Row>
             </Card>
+
+            <Card style="margin-top:2rem;font-size:12px">
+              如果「本地算力 / 24H」和「平均算力 / 24H」的算力差别超过 5%，请检
+              查软件日志（网络和超频）和软件抽水。
+            </Card>
           </TabPane>
           <TabPane style="margin-top:2rem" label="支付记录" :name="clintWidth<520?'name1':'name2'">
             <Table :columns="columnsPayments" size="small" :data="payment" v-if="payments.length"></Table>
@@ -99,15 +104,15 @@
         </Tabs>
       </Content>
     </section>
-    <!-- <section id="domain">
+    <section id="domain">
       <Content class="domain">
-        <h2>收益概况图</h2>
+        <h2>算力曲线图</h2>
         <div class="shape"></div>
         <Card :style="{marginTop:'5vh'}">
           <div id="myChart" :style="{width: '100%', height: '60vh'}"></div>
         </Card>
       </Content>
-    </section> -->
+    </section>
     <section id="mill">
       <Content class="mill">
         <Tabs value="name1" v-if="dataTables" @on-click="tabClick">
@@ -156,6 +161,7 @@ export default {
       pool: this.GLOBAL.pool, //矿池代号
       clintWidth: document.body.clientWidth,
       userinfo: {},
+      hashrate: {},
       machine: [{
           name: '矿机数量',
           icon: 'icon-1',
@@ -284,23 +290,149 @@ export default {
     Table: Table
   },
   methods: {
-    drawLine() {
+    async drawLine() {
       // 基于准备好的dom，初始化echarts实例
+      let res = await this.axios.post(this.api.pool_sheet, JSON.stringify({
+        wallet: this.GLOBAL.userAddress
+      }))
+      let timeArr = []
+      let workersArr = []
+      let powerArr = []
+      console.log(res, "算力曲线数据");
+      this.hashrate = res.data
+      this.hashrate.data.forEach((item) => {
+        timeArr.push(item.time)
+        workersArr.push(item.workers)
+        powerArr.push(item.power)
+      })
+
+      timeArr = timeArr.map(function(item) {
+        return item.substring(2).split('-').join('/')
+      })
+      console.log(timeArr, workersArr, powerArr);
+
+      app.title = '算力曲线图';
+
+      var colors = ['#4d74ff', '#ff4d4d', '#675bba'];
       let myChart = this.$echarts.init(document.getElementById('myChart'))
       // 绘制图表
+
       myChart.setOption({
-        xAxis: {
+        color: colors,
+
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'cross'
+          }
+        },
+        grid: {
+          right: '30%'
+        },
+        toolbox: {
+          feature: {
+            dataView: {
+              show: true,
+              readOnly: false
+            },
+            restore: {
+              show: true
+            },
+            saveAsImage: {
+              show: true
+            }
+          }
+        },
+        dataZoom: [{
+            type: 'slider', //图表下方的伸缩条
+            show: true, //是否显示
+            realtime: true, //
+            start: 0, //伸缩条开始位置（1-100），可以随时更改
+            end: 100, //伸缩条结束位置（1-100），可以随时更改
+          },
+          {
+            type: 'inside', //鼠标滚轮
+            realtime: true,
+            //还有很多属性可以设置，详见文档
+          },
+        ],
+        legend: {
+          data: ['算力', '在线矿工', '平均温度']
+        },
+        xAxis: [{
           type: 'category',
-          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-        },
-        yAxis: {
-          type: 'value'
-        },
+          axisTick: {
+            alignWithLabel: true
+          },
+          data: timeArr
+        }],
+        yAxis: [
+          {
+            type: 'value',
+            name: '算力',
+            min: 0,
+            max: Math.max(...powerArr)+10,
+            position: 'right',
+            axisLine: {
+              lineStyle: {
+                color: colors[0]
+              }
+            },
+            axisLabel: {
+              formatter: '{value} MH'
+            }
+          },
+          {
+            type: 'value',
+            name: '在线矿工',
+            min: 0,
+            max: Math.max(...workersArr)+30,
+            position: 'right',
+            offset: 80,
+            axisLine: {
+              lineStyle: {
+                color: colors[1]
+              }
+            },
+            axisLabel: {
+              formatter: '{value} 人'
+            }
+          },
+          // {
+          //   type: 'value',
+          //   name: '温度',
+          //   min: 0,
+          //   max: 25,
+          //   position: 'left',
+          //   axisLine: {
+          //     lineStyle: {
+          //       color: colors[2]
+          //     }
+          //   },
+          //   axisLabel: {
+          //     formatter: '{value} °C'
+          //   }
+          // }
+        ],
         series: [{
-          data: [820, 932, 901, 934, 1290, 1330, 1320],
-          type: 'line',
-          smooth: true
-        }]
+            name: '算力',
+            type: 'line',
+            data: powerArr
+          },
+          {
+            name: '在线矿工',
+            type: 'line',
+            yAxisIndex: 1,
+            data: workersArr
+          },
+          // {
+          //   name: '平均温度',
+          //   type: 'line',
+          //   yAxisIndex: 2,
+          //   data: [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
+          // }
+        ]
+
       });
     },
     async getUserInfo() {
@@ -407,8 +539,8 @@ export default {
   created() {},
   beforeMount() {},
   mounted() {
-    // this.drawLine()
     this.GLOBAL.userAddress = this.$route.query.eth
+    this.drawLine()
     this.getUserInfo()
   },
 }

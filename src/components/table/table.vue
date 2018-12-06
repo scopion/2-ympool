@@ -4,26 +4,35 @@
 </div>
 </template>
 <script>
+Array.prototype.indexOf = function(val) {
+  for (var i = 0; i < this.length; i++) {
+    if (this[i] == val) return i;
+  }
+  return -1;
+};
+Array.prototype.remove = function(val) {
+  var index = this.indexOf(val);
+  if (index > -1) {
+    this.splice(index, 1);
+  }
+};
 export default {
   data() {
     return {
       loading: true,
       tableData: this.data,
       clintWidth: document.body.clientWidth, //宽度
-      check: 1,
       tableColumns: [{
           title: this.columns[0].title,
           key: this.columns[0].key,
           align: 'left',
-          fixed: 'left',
-          width: 110,
+          width: document.body.clientWidth > 575 ? 100 : 0,
         },
         {
           title: this.columns[1].title,
           key: this.columns[1].key,
           align: 'left',
-          fixed: 'left',
-          width: 100,
+          width: 120,
           render: (h, params) => {
             return h('div', params.row.hr1s);
           }
@@ -32,8 +41,7 @@ export default {
           title: this.columns[2].title,
           key: this.columns[2].key,
           align: 'left',
-          fixed: this.data[0].isOnline == 0 ? 'none' : 'left',
-          width: 170,
+          width: 120,
           render: (h, params) => {
             return h('div', params.row.hr2s);
           }
@@ -51,15 +59,9 @@ export default {
           title: this.columns[4].title,
           key: this.columns[4].key,
           align: 'left',
-          fixed: this.data[0].isOnline == 1 ? 'none' : 'left',
-          width: 170,
+          width: 120,
           render: (h, params) => {
-            return h('Tag', {
-              props: {
-                type: 'dot',
-                color: 'error',
-              }
-            }, params.row.lastshares)
+            return h('div',params.row.lastshares)
           }
         },
         {
@@ -142,19 +144,26 @@ export default {
     if (this.data) {
       this.loading = false
     }
-    console.log(this.tableData, "data");
-    console.log(this.columns[0].title);
-  },
-  beforeUpdate() {
-    if (this.tableData[0].isOnline == 1) {
-      console.log("在线");
-      this.check = 1
-    } else if (this.tableData[0].isOnline == 0) {
-      console.log("离线");
-      this.check = 0
-    } else {
-      console.log("支付");
+
+    if (this.clintWidth < 575) {
+      if (this.data[0].isOnline == 1) { //在线
+        this.tableColumns.remove(this.tableColumns[3])
+        this.tableColumns.remove(this.tableColumns[3])
+        this.tableColumns.remove(this.tableColumns[3])
+        console.log(this.tableColumns, 'tableColumns在线');
+
+      } else if (this.data[0].isOnline == 0) { //离线
+        this.tableColumns.remove(this.tableColumns[5])
+        this.tableColumns.remove(this.tableColumns[1])
+        this.tableColumns.remove(this.tableColumns[2])
+        console.log(this.tableColumns, 'tableColumns离线');
+
+      } else {
+
+      }
     }
-  }
+    console.log(this.tableData, "data");
+  },
+  beforeUpdate() {}
 }
 </script>

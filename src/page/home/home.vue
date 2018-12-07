@@ -21,7 +21,7 @@
           <Input class="input" v-model="searchInput" search @on-change="inputChange($event)" @on-search="search()" placeholder="输入钱包地址......" size="large" autofocus>
           </Input>
           <p>挖矿地址：eth.ympool.com:8008</p>
-          <!--           <div class="searchBar"><span @click="search()"></span>
+          <!-- <div class="searchBar"><span @click="search()"></span>
 </div> -->
         </Content>
         <Card class="data" dis-hover v-show="clintWidth>520">
@@ -114,8 +114,8 @@
       <Content class="domain">
         <h2>算力曲线图</h2>
         <div class="shape"></div>
-        <Card :style="{marginTop:'5vh'}">
-          <div id="myChart" :style="{width: '100%', height: '60vh'}"></div>
+        <Card :style="{marginTop:'5vh',padding:'16px 0'}">
+          <div id="myChart" :style="{width: '100%', height: '55vh'}"></div>
         </Card>
       </Content>
     </section>
@@ -218,7 +218,6 @@ export default {
 
       myChart.setOption({
         color: colors,
-
         tooltip: {
           trigger: 'axis',
           axisPointer: {
@@ -226,34 +225,44 @@ export default {
           }
         },
         grid: {
-          right: '30%'
+          right: this.clintWidth > 575 ? '20%' : 0,
         },
         toolbox: {
+          show: this.clintWidth > 575 ? true : false,
           feature: {
+            dataZoom: {
+              yAxisIndex: 'none'
+            },
             dataView: {
-              show: true,
               readOnly: false
             },
-            restore: {
-              show: true
+            magicType: {
+              type: ['line', 'bar']
             },
-            saveAsImage: {
-              show: true
-            }
+            restore: {},
+            saveAsImage: {}
           }
         },
         dataZoom: [{
-            type: 'slider', //图表下方的伸缩条
-            show: true, //是否显示
-            realtime: true, //
-            start: 0, //伸缩条开始位置（1-100），可以随时更改
-            end: 100, //伸缩条结束位置（1-100），可以随时更改
+            show: true,
+            start: 0,
+            end: 100
           },
           {
-            type: 'inside', //鼠标滚轮
-            realtime: true,
-            //还有很多属性可以设置，详见文档
+            show: this.clintWidth > 575 ? true : false,
+            type: 'inside',
+            start: 0,
+            end: 100
           },
+          {
+            show: this.clintWidth > 575 ? true : false,
+            yAxisIndex: 0,
+            filterMode: 'empty',
+            width: 30,
+            height: '80%',
+            showDataShadow: false,
+            left: '93%'
+          }
         ],
         legend: {
           data: ['算力', '在线矿工', '平均温度']
@@ -265,27 +274,28 @@ export default {
           },
           data: timeArr
         }],
-        yAxis: [
-          {
+        yAxis: [{
+            show: this.clintWidth > 575 ? true : false,
             type: 'value',
             name: '算力',
             min: 0,
-            max: Math.max(...powerArr)+10,
-            position: 'right',
+            max: Math.max(...powerArr) + 100,
+            position: 'left',
             axisLine: {
               lineStyle: {
                 color: colors[0]
               }
             },
             axisLabel: {
-              formatter: '{value} MH'
+              formatter: '{value} G'
             }
           },
           {
+            show: this.clintWidth > 575 ? true : false,
             type: 'value',
             name: '在线矿工',
             min: 0,
-            max: Math.max(...workersArr)+30,
+            max: Math.max(...workersArr) + 100,
             position: 'right',
             offset: 80,
             axisLine: {
@@ -297,41 +307,73 @@ export default {
               formatter: '{value} 人'
             }
           },
-          // {
-          //   type: 'value',
-          //   name: '温度',
-          //   min: 0,
-          //   max: 25,
-          //   position: 'left',
-          //   axisLine: {
-          //     lineStyle: {
-          //       color: colors[2]
-          //     }
-          //   },
-          //   axisLabel: {
-          //     formatter: '{value} °C'
-          //   }
-          // }
         ],
         series: [{
             name: '算力',
+            smooth: true,
+            sampling: 'average',
             type: 'line',
-            data: powerArr
+            data: powerArr,
+            markPoint: {
+              data: [{
+                  type: 'max',
+                  name: '最大值'
+                },
+                {
+                  type: 'min',
+                  name: '最小值'
+                }
+              ]
+            },
+            markLine: {
+              lineStyle: {
+                normal: {
+                  type: 'dashed'
+                }
+              },
+              data: [
+                [{
+                  type: 'min'
+                }, {
+                  type: 'max'
+                }]
+              ]
+            },
           },
           {
             name: '在线矿工',
+            smooth: true,
+            sampling: 'average',
             type: 'line',
             yAxisIndex: 1,
-            data: workersArr
+            data: workersArr,
+            markPoint: {
+              data: [{
+                  type: 'max',
+                  name: '最大值'
+                },
+                {
+                  type: 'min',
+                  name: '最小值'
+                }
+              ]
+            },
+            markLine: {
+              lineStyle: {
+                normal: {
+                  type: 'dashed'
+                }
+              },
+              data: [
+                [{
+                  type: 'min'
+                }, {
+                  type: 'max'
+                }]
+              ]
+            }
           },
-          // {
-          //   name: '平均温度',
-          //   type: 'line',
-          //   yAxisIndex: 2,
-          //   data: [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
-          // }
         ]
-
       });
     },
   },

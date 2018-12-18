@@ -208,8 +208,7 @@ export default {
       timeArr = timeArr.map(function(item) {
         return item.substring(2).split('-').join('/')
       })
-      console.log(timeArr, workersArr, powerArr);
-
+      console.log(Math.max(...powerArr));
       app.title = '算力曲线图';
 
       var colors = ['#4d74ff', '#ff4d4d', '#675bba'];
@@ -279,7 +278,6 @@ export default {
             type: 'value',
             name: '算力',
             min: 0,
-            max: Math.max(...powerArr) + 100,
             position: 'left',
             axisLine: {
               lineStyle: {
@@ -295,7 +293,6 @@ export default {
             type: 'value',
             name: '在线矿工',
             min: 0,
-            max: Math.max(...workersArr) + 100,
             position: 'right',
             offset: 80,
             axisLine: {
@@ -325,20 +322,6 @@ export default {
                 }
               ]
             },
-            markLine: {
-              lineStyle: {
-                normal: {
-                  type: 'dashed'
-                }
-              },
-              data: [
-                [{
-                  type: 'min'
-                }, {
-                  type: 'max'
-                }]
-              ]
-            },
           },
           {
             name: '在线矿工',
@@ -358,20 +341,6 @@ export default {
                 }
               ]
             },
-            markLine: {
-              lineStyle: {
-                normal: {
-                  type: 'dashed'
-                }
-              },
-              data: [
-                [{
-                  type: 'min'
-                }, {
-                  type: 'max'
-                }]
-              ]
-            }
           },
         ]
       });

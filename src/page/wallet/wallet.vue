@@ -381,7 +381,6 @@ export default {
             type: 'value',
             name: '算力',
             min: 0,
-            max: Math.max(...powerArr) + 10,
             position: 'left',
             axisLine: {
               lineStyle: {
@@ -397,7 +396,6 @@ export default {
             type: 'value',
             name: '在线矿工',
             min: 0,
-            max: Math.max(...workersArr) + 30,
             position: 'right',
             offset: 80,
             axisLine: {
@@ -425,20 +423,6 @@ export default {
                 }
               ]
             },
-            markLine: {
-              lineStyle: {
-                normal: {
-                  type: 'dashed'
-                }
-              },
-              data: [
-                [{
-                  type: 'min'
-                }, {
-                  type: 'max'
-                }]
-              ]
-            }
           },
           {
             name: '在线矿工',
@@ -456,20 +440,6 @@ export default {
                 }
               ]
             },
-            markLine: {
-              lineStyle: {
-                normal: {
-                  type: 'dashed'
-                }
-              },
-              data: [
-                [{
-                  type: 'min'
-                }, {
-                  type: 'max'
-                }]
-              ]
-            }
           },
         ]
 
